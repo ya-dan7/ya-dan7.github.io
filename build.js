@@ -103,6 +103,9 @@ function mdToHTML(md) {
     let inBlockquote = false;
     let bqBuf = [];
 
+    function isListMarker(str) {
+        return /^[\*\-\+]\s|^\d+\.\s/.test(str);
+    }
     function flush() {
         if (inBlockquote) {
             // End blockquote
@@ -121,6 +124,30 @@ function mdToHTML(md) {
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const trimmed = line.trim();
+
+        // Blank line → maybe flush paragraph
+        if (trimmed === '') {
+            // Check if current buf is a list context
+            const bufText = buf.join('\n').trim();
+            const bufIsList = isListMarker(bufText);
+            if (bufIsList) {
+                // Peek at next non-blank line
+                let peekLine = '', peekIdx = i + 1;
+                while (peekIdx < lines.length && lines[peekIdx].trim() === '') peekIdx++;
+                if (peekIdx < lines.length) {
+                    peekLine = lines[peekIdx];
+                    const peekTrimmed = peekLine.trim();
+                    // Indented continuation or another list item → keep in same block
+                    if (peekLine.startsWith('  ') || isListMarker(peekTrimmed)) {
+                        buf.push(line);
+                        continue;
+                    }
+                }
+            }
+            flush();
+            blocks.push({ type: 'blank' });
+            continue;
+        }
 
         // Code block placeholder
         if (/<!--CODEBLOCK_\d+-->/.test(trimmed)) {
@@ -168,13 +195,6 @@ function mdToHTML(md) {
             continue;
         } else if (inBlockquote) {
             flush(); // exits blockquote
-        }
-
-        // Blank line → flush paragraph
-        if (trimmed === '') {
-            flush();
-            blocks.push({ type: 'blank' });
-            continue;
         }
 
         // Accumulate

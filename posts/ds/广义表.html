@@ -37,10 +37,10 @@
         <h1>广义表（列表）</h1>
 <p>是n>=0个元素a<sub>0</sub>、a<sub>1</sub>、a<sub>2</sub>……a<sub>n-1</sub>的有限序列，其中每个a<sub>i</sub>是原子|广义表</p>
 <ul>
-<li>广义表通常记作：LS=(a<sub>1</sub>,a<sub>2</sub>,...,a<sub>n</sub>)</li>
+<li>广义表通常记作：LS=(a<sub>1</sub>,a<sub>2</sub>,...,a<sub>n</sub>)
+  LS为表名，n为表长，a<sub>i</sub>为表元素
+  大写:广义表 小写:原子</li>
 </ul>
-<p>LS为表名，n为表长，a<sub>i</sub>为表元素</p>
-<p>大写:广义表 小写:原子</p>
 <table>
 <thead><tr>
 <th style="text-align:left">表头</th>
@@ -66,31 +66,23 @@
 <h2>广义表的性质</h2>
 <ol>
 <li>数据元素有相对<strong>次序</strong>：一个直接前驱 一个直接后驱</li>
-<li><strong>长度</strong>：最外层所包含元素的个数</li>
-</ol>
-<p>> C=(a,(b,c))是长度为2的广义表</p>
-<ol>
-<li><strong>深度</strong>：展开后<strong>所含括号</strong>的重数</li>
-</ol>
-<p>> A=(b,c)深度为1，B=(A,d)深度为2，C=(f,B,h)深度为3<sup class="footnote-ref"><a href="#fn-(f,((b,c),d))" id="fnref-(f,((b,c),d))">[(f,((b,c),d))]</a></sup>
+<li><strong>长度</strong>：最外层所包含元素的个数
+   > C=(a,(b,c))是长度为2的广义表</li>
+<li><strong>深度</strong>：展开后<strong>所含括号</strong>的重数
+   > A=(b,c)深度为1，B=(A,d)深度为2，C=(f,B,h)深度为3<sup class="footnote-ref"><a href="#fn-(f,((b,c),d))" id="fnref-(f,((b,c),d))">[(f,((b,c),d))]</a></sup>
    >
-   > 原子的深度为<strong>0</strong>，空表的深度为<strong>1</strong>（空表有一个括号）</p>
-<ol>
-<li>广义表可以为其他广义表<strong>共享</strong>；</li>
-</ol>
-<p>> 广义表B就共享表A。在B中不必列出A的值，而是通过名称来引用，B=(A)</p>
-<ol>
-<li>广义表可以是一个<strong>递归</strong>的表</li>
-</ol>
-<p>> F=(a,F)=(a,(a,(a,...)))
+   > 原子的深度为<strong>0</strong>，空表的深度为<strong>1</strong>（空表有一个括号）</li>
+<li>广义表可以为其他广义表<strong>共享</strong>；
+   > 广义表B就共享表A。在B中不必列出A的值，而是通过名称来引用，B=(A)</li>
+<li>广义表可以是一个<strong>递归</strong>的表
+   > F=(a,F)=(a,(a,(a,...)))
    >
-   > 递归表的深度是无穷值，长度是有限值（2）</p>
-<ol>
-<li>广义表是<strong>多层次</strong>结构，广义表的元素可以单元素|子表，而子表的元素还可以是子表...</li>
-</ol>
-<p>> D=(E,F) E=(a,(b,c)) F=(d,(e))
+   > 递归表的深度是无穷值，长度是有限值（2）</li>
+<li>广义表是<strong>多层次</strong>结构，广义表的元素可以单元素|子表，而子表的元素还可以是子表...
+   > D=(E,F) E=(a,(b,c)) F=(d,(e))
    >
-   > <img src="广义表.assets/image-20260423103942693.png" alt="" loading="lazy"></p>
+   > <img src="广义表.assets/image-20260423103942693.png" alt="" loading="lazy"></li>
+</ol>
 <hr>
 <h2>广义表与线性表的区别</h2>
 <p>广义表是线性表的<strong>推广</strong>，线性表是广义表的<strong>特例</strong></p>
@@ -101,9 +93,8 @@
 <h2>广义表的基本运算</h2>
 <ol>
 <li>求表头 GetHead(L)<sup class="footnote-ref"><a href="#fn-非空广义表的第一个元素，可以是一个原子/一个子表" id="fnref-非空广义表的第一个元素，可以是一个原子/一个子表">[非空广义表的第一个元素，可以是一个原子/一个子表]</a></sup></li>
-<li>求表尾 GetTail(L)<sup class="footnote-ref"><a href="#fn-非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>" id="fnref-非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>">[非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>]</a></sup></li>
-</ol>
-<p>> D=(E,F)=((a,(b,c)),F)
+<li>求表尾 GetTail(L)<sup class="footnote-ref"><a href="#fn-非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>" id="fnref-非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>">[非空广义表除去表头元素以外其他元素所构成的表。表尾<strong>一定是一个表</strong>]</a></sup>
+   > D=(E,F)=((a,(b,c)),F)
    >
    > | GetHead(D)=E               | GetTail(D)=(F)       |
    > | -------------------------- | -------------------- |
@@ -112,7 +103,8 @@
    > | GetHead(<strong>(b,c)</strong>)=b       | GetTail(<strong>(c)</strong>)=(c) |
    > | GetHead((c))=c             | GetTal((c))=()       |
    >
-   >   表尾自带一个（）广义表本身也有一个（）</p>
+   >   表尾自带一个（）广义表本身也有一个（）</li>
+</ol>
 
       </div>
     </article>

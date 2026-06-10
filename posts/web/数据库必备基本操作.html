@@ -41,27 +41,19 @@
 <li>数据库：按照一定的<strong>数据结构</strong>（数据的组织形式/数据之间的联系）存放计算机数据的仓库，通过数据库提供的多种方法来管理其中的数据</li>
 <li>数据库管理系统（DBMS）：操纵和管理数据库的大型软件，用于<strong>建立、使用、维护数据库</strong>，如MySQL、Oracle、SQL Server</li>
 <li>数据库分类</li>
-<li>关系型数据库（SQL）</li>
-</ul>
-<ol>
-<li>采用<strong>关系模型</strong>来组织数据</li>
-<li>事务的<strong>一致性</strong><sup class="footnote-ref"><a href="#fn-可见性的约束，中间状态对其他事务不可见" id="fnref-可见性的约束，中间状态对其他事务不可见">[可见性的约束，中间状态对其他事务不可见]</a></sup></li>
-<li>关系模型：二维表格模型</li>
-</ol>
-<p>关系型数据库：二维表及其之间的联系所组成的数据组织</p>
-<p>优点：容易理解、使用方便、易于维护、支持SQL</p>
-<p>缺点：读写性能较差、表的结构固定</p>
-<ul>
-<li>非关系型数据库（NoSQL、Not Only SQL）</li>
-</ul>
-<ol>
-<li>采用<strong>键值</strong>存储数据（key、value）</li>
-<li>分布式<sup class="footnote-ref"><a href="#fn-工作内容分给很多人干" id="fnref-工作内容分给很多人干">[工作内容分给很多人干]</a></sup></li>
-<li>严格上不是数据库，而是数据结构化存储方法的集合</li>
-</ol>
-<p>优点：海量数据的维护和处理非常轻松</p>
-<p>缺点：数据之间没有关系，不能保证数据的完整性、安全性</p>
-<ul>
+<li>关系型数据库（SQL）
+    1. 采用<strong>关系模型</strong>来组织数据
+    2. 事务的<strong>一致性</strong><sup class="footnote-ref"><a href="#fn-可见性的约束，中间状态对其他事务不可见" id="fnref-可见性的约束，中间状态对其他事务不可见">[可见性的约束，中间状态对其他事务不可见]</a></sup>
+    3. 关系模型：二维表格模型
+       关系型数据库：二维表及其之间的联系所组成的数据组织
+    优点：容易理解、使用方便、易于维护、支持SQL
+    缺点：读写性能较差、表的结构固定</li>
+<li>非关系型数据库（NoSQL、Not Only SQL）
+    1. 采用<strong>键值</strong>存储数据（key、value）
+    2. 分布式<sup class="footnote-ref"><a href="#fn-工作内容分给很多人干" id="fnref-工作内容分给很多人干">[工作内容分给很多人干]</a></sup>
+    3. 严格上不是数据库，而是数据结构化存储方法的集合
+    优点：海量数据的维护和处理非常轻松
+    缺点：数据之间没有关系，不能保证数据的完整性、安全性</li>
 <li>常见数据库</li>
 </ul>
 <table>
@@ -97,14 +89,12 @@
 <li>选择数据库：use 数据库名<mark>;</mark></li>
 <li>查询系统数据库：show databases<mark>;</mark></li>
 <li>查看数据库本地存放位置：show variables like '%datadir%'<mark>;</mark></li>
-<li>数据类型</li>
-</ul>
-<p>数值类型：</p>
-<p><img src="数据库必备基本操作.assets/image-20260505174901897.png" alt="image-20260505174901897" loading="lazy"></p>
-<p>日期和时间类型：<img src="数据库必备基本操作.assets/image-20260505175047421.png" alt="image-20260505175047421" loading="lazy"></p>
-<p>字符串类型：</p>
-<p><img src="数据库必备基本操作.assets/image-20260505175246991.png" alt="image-20260505175246991" loading="lazy"></p>
-<ul>
+<li>数据类型
+  数值类型：
+  <img src="数据库必备基本操作.assets/image-20260505174901897.png" alt="image-20260505174901897" loading="lazy">
+  日期和时间类型：<img src="数据库必备基本操作.assets/image-20260505175047421.png" alt="image-20260505175047421" loading="lazy">
+   字符串类型：
+  <img src="数据库必备基本操作.assets/image-20260505175246991.png" alt="image-20260505175246991" loading="lazy"></li>
 <li>数据表</li>
 <li>创建数据表：create table 表名（字段名 字段的数据类型）；</li>
 <li>添加字段：alter table 表名 add column 字段名 varchar（1）；</li>
@@ -116,101 +106,77 @@
 <li>查看表结构：desc 表名；</li>
 <li>删除数据表：drop table 表名；</li>
 <li>数据增删改查</li>
-<li>增（insert）</li>
-</ul>
-<p>SQL语法：</p>
-<p>insert into table_name(field1,field2...) values(value1,value2...);</p>
-<p>向User表中插入数据：</p>
-<p>insert into user values(2,'李四','123456',18);</p>
-<p>向User表中指定列中插入数据：</p>
-<p>insert into user(id,name) values(1,'张三');</p>
-<ul>
-<li>删（delete from）</li>
-</ul>
-<p>SQL语法：</p>
-<p>drop table table_name;</p>
-<p>全表数据删除：</p>
-<p>delete from student;</p>
-<p>按条件删除数据</p>
-<p>delete from student where id=2;</p>
-<ul>
-<li>改（update）</li>
-</ul>
-<p>SQL语法：</p>
-<p>update table_name set field=new-value1,field2=new-value2 where</p>
-<p>不按条件，修改整个字段</p>
-<p>update users set uname='张三';</p>
-<p>按条件修改 一个字段</p>
-<p>update users set uname='李四' where id=2;</p>
-<p>修改多个字段</p>
-<p>update users set uname='王五',age=40 where id=1;</p>
-<ul>
-<li>查（select）</li>
-</ul>
-<p>SQL语法：</p>
-<p>select column_name,column_name from</p>
-<p>查询所有字段</p>
-<p>select * from 表名;</p>
-<p>查询指定的字段</p>
-<p>select 字段名1,字段名2 from 表名；</p>
-<p>查询时指定别名（as可省略）重命名</p>
-<p>select 字段名1 as ‘编号1’，字段名1 as ‘编号’</p>
-<p>查询去除重复记录</p>
-<p>select distinct 字段名 from 表名；</p>
-<ul>
-<li>条件查询</li>
-</ul>
-<p>select field1，field2，……from table_name1,table_name2... where condition1 and|or condition2...</p>
-<ol>
-<li>逻辑条件：and（与）or（或）</li>
-</ol>
-<p>select * from users where id =1 and uname =‘张三’；（两个条件必须同时满足）</p>
-<p>select * from users where id =1 or uname =‘张三’；（两个条件满足一个即可）</p>
-<ol>
-<li>比较条件：> < >= <= = < >(between and)</li>
-</ol>
-<p>select * from users where age>18;</p>
-<p>select * from users where age=18;</p>
-<p>select * from users where age<>18;</p>
-<p>select * from users where age>=18;</p>
-<ol>
-<li>模糊条件：like</li>
-</ol>
-<p>模糊替代符号：%：替代任意个字符；</p>
-<p>​                            _ ：替代一个字符</p>
-<p>select * from users where uname like '张_';</p>
-<p>select * from users where uname like ‘李%’;</p>
-<ol>
-<li>分页查询：</li>
-</ol>
-<p>select column_name,column_name from table_name limit</p>
-<p>select * from users limit 2;<sup class="footnote-ref"><a href="#fn-查询前两条" id="fnref-查询前两条">[查询前两条]</a></sup></p>
-<p>select * from user limit 2,3;<sup class="footnote-ref"><a href="#fn-第二条后面的三条，即345" id="fnref-第二条后面的三条，即345">[第二条后面的三条，即345]</a></sup></p>
-<ol>
-<li>聚合查询：</li>
-</ol>
-<p>select max(column_name),min(column_name),avg(column_name),count(column_name) from table_name</p>
-<p>max():取最大值；</p>
-<p>select max(age) from users;</p>
-<p>min():取最小值；</p>
-<p>select min(age) from users;</p>
-<p>avg():平均函数；</p>
-<p>select avg(age) from users;</p>
-<p>count():统计表的记录数量</p>
-<p>select count(*) from user;</p>
-<ol>
-<li>分组查询：</li>
-</ol>
-<p>select column_name,function(column) from table_name where column_name operator value where column_name operator value group by column_name;</p>
-<p>select age,count(*) from users group by age;<sup class="footnote-ref"><a href="#fn-统计年龄及数量" id="fnref-统计年龄及数量">[统计年龄及数量]</a></sup></p>
-<ol>
-<li>排序查询：</li>
-</ol>
-<p>asc：升序。数值从小到大，字母a-z</p>
-<p>select * from users <mark>order by</mark> id asc；<sup class="footnote-ref"><a href="#fn-对id字段升序排序" id="fnref-对id字段升序排序">[对id字段升序排序]</a></sup></p>
-<p>desc：降序。数值从大到小，字母z-a</p>
-<p>select * from users order by id desc；</p>
-<ul>
+<li>增（insert）
+    SQL语法：
+      insert into table_name(field1,field2...) values(value1,value2...);
+    向User表中插入数据：
+    insert into user values(2,'李四','123456',18);
+    向User表中指定列中插入数据：
+    insert into user(id,name) values(1,'张三');</li>
+<li>删（delete from）
+    SQL语法：
+      drop table table_name;
+    全表数据删除：
+    delete from student;
+    按条件删除数据
+    delete from student where id=2;</li>
+<li>改（update）
+    SQL语法：
+      update table_name set field=new-value1,field2=new-value2 where 
+    不按条件，修改整个字段
+    update users set uname='张三';
+    按条件修改 一个字段
+    update users set uname='李四' where id=2;
+    修改多个字段
+    update users set uname='王五',age=40 where id=1;</li>
+<li>查（select）
+    SQL语法：
+      select column_name,column_name from
+    查询所有字段
+    select * from 表名;
+    查询指定的字段
+    select 字段名1,字段名2 from 表名；
+    查询时指定别名（as可省略）重命名
+    select 字段名1 as ‘编号1’，字段名1 as ‘编号’
+    查询去除重复记录
+    select distinct 字段名 from 表名；</li>
+<li>条件查询
+      select field1，field2，……from table_name1,table_name2... where condition1 and|or condition2...
+      1. 逻辑条件：and（与）or（或）
+         select * from users where id =1 and uname =‘张三’；（两个条件必须同时满足）
+         select * from users where id =1 or uname =‘张三’；（两个条件满足一个即可）
+      2. 比较条件：> < >= <= = < >(between and)
+         select * from users where age>18;
+         select * from users where age=18;
+         select * from users where age<>18;
+         select * from users where age>=18;
+      3. 模糊条件：like
+         模糊替代符号：%：替代任意个字符；
+         ​                            _ ：替代一个字符
+         select * from users where uname like '张_';
+         select * from users where uname like ‘李%’;
+      4. 分页查询：
+         select column_name,column_name from table_name limit
+         select * from users limit 2;[<sup>查询前两条]
+         select * from user limit 2,3;[</sup>第二条后面的三条，即345]
+      5. 聚合查询：
+         select max(column_name),min(column_name),avg(column_name),count(column_name) from table_name
+         max():取最大值；
+         select max(age) from users;
+         min():取最小值；
+         select min(age) from users;
+         avg():平均函数；
+         select avg(age) from users;
+         count():统计表的记录数量
+         select count(*) from user;
+      6. 分组查询：
+         select column_name,function(column) from table_name where column_name operator value where column_name operator value group by column_name;
+         select age,count(*) from users group by age;[<sup>统计年龄及数量]
+      7. 排序查询：
+         asc：升序。数值从小到大，字母a-z
+         select * from users <mark>order by</mark> id asc；[</sup>对id字段升序排序]
+         desc：降序。数值从大到小，字母z-a
+         select * from users order by id desc；</li>
 <li>常用的数据库常量</li>
 <li>select @@tmpdir查看临时目录</li>
 <li>select @@datadir数据存放位置</li>

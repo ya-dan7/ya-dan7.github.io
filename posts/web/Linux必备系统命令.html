@@ -37,17 +37,13 @@
         <h1>Linux必备系统命令</h1>
 <h2>Linux基本常识</h2>
 <ul>
-<li>Linux简介</li>
+<li>Linux简介
+  开源、免费、多用户、多任务、多线程、多CPU 的 操作系统</li>
+<li>Linux目录结构
+  <img src="Linux必备系统命令.assets/image-20260428213523213.png" alt="image-20260428213523213" loading="lazy"></li>
+<li>Linux远程登录
+  <img src="Linux必备系统命令.assets/image-20260428213630155.png" alt="image-20260428213630155" loading="lazy"></li>
 </ul>
-<p>开源、免费、多用户、多任务、多线程、多CPU 的 操作系统</p>
-<ul>
-<li>Linux目录结构</li>
-</ul>
-<p><img src="Linux必备系统命令.assets/image-20260428213523213.png" alt="image-20260428213523213" loading="lazy"></p>
-<ul>
-<li>Linux远程登录</li>
-</ul>
-<p><img src="Linux必备系统命令.assets/image-20260428213630155.png" alt="image-20260428213630155" loading="lazy"></p>
 <h2>Linux常用命令</h2>
 <ul>
 <li>文件处理命令</li>
@@ -62,17 +58,13 @@
 <li>cd ..回退到上一级目录</li>
 <li>cd /root相对路径 cd /root/1绝对路径</li>
 <li>touch---创建文件 touch 1.txt</li>
-<li>vi---创建直接写入</li>
-</ul>
-<p>ESC后输入：/要搜索的---查找</p>
-<p>：wq保存退出 ：q不保存退出</p>
-<ul>
-<li>cp---复制文件</li>
-</ul>
-<p>> cp 1.txt 2.txt
+<li>vi---创建直接写入
+    ESC后输入：/要搜索的---查找
+    ：wq保存退出 ：q不保存退出</li>
+<li>cp---复制文件
+    > cp 1.txt 2.txt
     >
-    > cp 1.txt 2/</p>
-<ul>
+    > cp 1.txt 2/</li>
 <li>cp -r递归复制其子目录内所有内容</li>
 <li>mv---剪切文件</li>
 <li>pwd---显示当前目录</li>
@@ -86,120 +78,104 @@
 <li>more/less 一页一页的 80% 按回车键继续展示</li>
 <li>head -n显示前n行</li>
 <li>tail -n后n行 tail -f动态显示后n行</li>
-<li>文件搜索命令</li>
-</ul>
-<p>find 查找文件或目录</p>
-<p>find -name</p>
-<p>>find -name 2.txt
+<li>文件搜索命令
+  find 查找文件或目录
+  find -name
+  >find -name 2.txt
   >
-  >find -name "*.txt"</p>
-<p>find -amin -n 在过去n分钟内被<strong>读取</strong>过</p>
-<p>find -anewer file 比文件file更晚被读取过</p>
-<p>find -atime -n 在过去n天内被读取过的文件</p>
-<p>find -cmin -n 在过去n分钟内被<strong>修改</strong>过</p>
-<p>find -cnewer file 比文件file更新的文件</p>
-<p>find -ctime -n 在过去n天内被修改过的文件</p>
-<p>find -type根据文件类型查找</p>
-<p>find -type f文件</p>
-<p>find -type d目录</p>
-<p>find -type l链接</p>
-<p>> find /bin/ -type l</p>
-<p>查找系统中所有文件长度为0的普通文件，并列出它们的完整路径：</p>
-<p>find / -type f -size 0 -exec ls -l {} \;</p>
-<ul>
-<li>权限管理命令</li>
-</ul>
-<p>chmod 更改文件权限</p>
-<p>chmod +x 文件目录（全部）</p>
-<p>> chmod -x 1/</p>
-<p>chmod -R u+rwx 文件/文件夹（所有者）</p>
-<p>> chmod -R u-r 1/</p>
-<p>chmod -R g+rwx 文件/文件夹（文件所在组）</p>
-<p>chmod -R o+rwx 文件/文件夹（其他用户）</p>
-<ul>
-<li>授予用户、组、其他人对文件或文件夹可读r可写w可执行x</li>
-</ul>
-<p>chmod -R +777 文件/文件夹</p>
-<p>二进制权限：</p>
-<p>rwx=111=4+2+1=7</p>
-<p>r-x=101=4+0+1=5</p>
-<p>rw-=110=4+2+0=6</p>
-<p>r--=100=4+0+0=4</p>
-<ul>
+  >find -name "*.txt"
+  find -amin -n 在过去n分钟内被<strong>读取</strong>过
+  find -anewer file 比文件file更晚被读取过
+  find -atime -n 在过去n天内被读取过的文件
+  find -cmin -n 在过去n分钟内被<strong>修改</strong>过
+  find -cnewer file 比文件file更新的文件
+  find -ctime -n 在过去n天内被修改过的文件
+  find -type根据文件类型查找
+  find -type f文件
+  find -type d目录
+  find -type l链接
+  > find /bin/ -type l
+  查找系统中所有文件长度为0的普通文件，并列出它们的完整路径：
+  find / -type f -size 0 -exec ls -l {} \;</li>
+<li>权限管理命令
+  chmod 更改文件权限
+  chmod +x 文件目录（全部）
+  > chmod -x 1/
+  chmod -R u+rwx 文件/文件夹（所有者）
+  > chmod -R u-r 1/
+  chmod -R g+rwx 文件/文件夹（文件所在组）
+  chmod -R o+rwx 文件/文件夹（其他用户）</li>
+<li>授予用户、组、其他人对文件或文件夹可读r可写w可执行x
+    chmod -R +777 文件/文件夹
+    二进制权限：
+    rwx=111=4+2+1=7
+    r-x=101=4+0+1=5
+    rw-=110=4+2+0=6
+    r--=100=4+0+0=4</li>
 <li>压缩解压命令</li>
-<li>gzip 压缩、解压缩<strong>.gz</strong>文件</li>
+<li>gzip 压缩、解压缩<strong>.gz</strong>文件
+    gzip<文件> 压缩文件
+    > gzip 1.txt
+    gunzip/gzip -d<文件> 解压文件
+    > gzip -d 1.txt</li>
+<li>zip 压缩、解压缩<strong>zip</strong>文件<sup class="footnote-ref"><a href="#fn-可以文件夹" id="fnref-可以文件夹">[可以文件夹]</a></sup>
+    zip -r<压缩后文件名><目录> 打包目录
+    > zip -r test.zip test/
+    unzip <zip压缩文件></li>
+<li>tar 打包和压缩目录（保留源文件）
+    tar -zcf<压缩后文件；名><被压缩目录> 打包
+    > tar -zcf 2.tar.gz 2.txt
+    tar -zxvf 压缩包文件名 解压
+    > tar -zxvf 2.tar.gz
+    -f 制定文件名
+    -v 显示详细信息
+    -z 打包/解包的同时压缩/解压（放在选项的前面）</li>
+<li>网络命令
+  ping 测试网络连通性
+  > ping baidu.com
+  ifconfig 查看当前的<strong>网络配置</strong>信息
+  netstat 显示网络相关信息
+   netstat -tlun查看本机<strong>监听的端口</strong>
+   netstat -rn查看本机<strong>路由表</strong>
+   netstat -anp 列出<strong>所有端口</strong>信息，最后一列为进程ID
+   netstat -anp<strong>t</strong> 查看<strong>tcp端口</strong>信息</li>
+<li>查看进程
+  Ps---查看系统<strong>进程</strong>
+  ps aux：列出全部进程
+    a--查看<strong>其他用户</strong>的进程
+    x--查看<strong>自己</strong>的进程
+    u--显示进程的<strong>用户名和时间</strong>
+  查看关于nginx的相关进程信息
+  ps aux | grep nginx 查找某个进程
+  grep 查找
+  ps -u 用户 指定进程用户查找
+  查看指定用户的信息
+  ps -u root
+  Top---<strong>实时刷新</strong>的进程信息
+  c：显示进程的<strong>完整</strong>命令
+  P：<strong>CPU</strong>降序的方式排序
+  M：按<strong>内存的占用</strong>大小来排序
+  q：退出
+  ctrl+c：退出</li>
+<li>其他命令
+  uname -a：查看当前操作系统的Linux内核信息（经常根据内核版本判断是否有本地提权的风险）
+  whoami：显示Linux上<strong>当前</strong>已登录用户
+  id：显示<strong>当前已登录</strong>的用户和组
+  last：显示<strong>之前</strong>登录系统的用户信息
+  lastlog：显示所有用户的<strong>最后一次</strong>登录信息
+  useradd 用户1：添加用户1
+  userdel 用户1：删除用户1<sup class="footnote-ref"><a href="#fn-但cd /home中没被删干净 可用rm -rf彻底删除" id="fnref-但cd /home中没被删干净 可用rm -rf彻底删除">[但cd /home中没被删干净 可用rm -rf彻底删除]</a></sup>
+  passwd 用户1：修改用户1密码
+  cat /var/log加两次tab键：查看日志目录
+  history：查看历史操作命令
+  history -c：清理历史记录
+  cat ~/.bash_history 查看历史操作命令
+  crontab 计划任务
+  crontab -l列出系统的计划任务
+  crontab -e进入编辑模式
+  crontab -u root -e查看某个特定用户的
+  同理crontab -u root -l</li>
 </ul>
-<p>gzip<文件> 压缩文件</p>
-<p>> gzip 1.txt</p>
-<p>gunzip/gzip -d<文件> 解压文件</p>
-<p>> gzip -d 1.txt</p>
-<ul>
-<li>zip 压缩、解压缩<strong>zip</strong>文件<sup class="footnote-ref"><a href="#fn-可以文件夹" id="fnref-可以文件夹">[可以文件夹]</a></sup></li>
-</ul>
-<p>zip -r<压缩后文件名><目录> 打包目录</p>
-<p>> zip -r test.zip test/</p>
-<p>unzip <zip压缩文件></p>
-<ul>
-<li>tar 打包和压缩目录（保留源文件）</li>
-</ul>
-<p>tar -zcf<压缩后文件；名><被压缩目录> 打包</p>
-<p>> tar -zcf 2.tar.gz 2.txt</p>
-<p>tar -zxvf 压缩包文件名 解压</p>
-<p>> tar -zxvf 2.tar.gz</p>
-<p>-f 制定文件名</p>
-<p>-v 显示详细信息</p>
-<p>-z 打包/解包的同时压缩/解压（放在选项的前面）</p>
-<ul>
-<li>网络命令</li>
-</ul>
-<p>ping 测试网络连通性</p>
-<p>> ping baidu.com</p>
-<p>ifconfig 查看当前的<strong>网络配置</strong>信息</p>
-<p>netstat 显示网络相关信息</p>
-<p>netstat -tlun查看本机<strong>监听的端口</strong></p>
-<p>netstat -rn查看本机<strong>路由表</strong></p>
-<p>netstat -anp 列出<strong>所有端口</strong>信息，最后一列为进程ID</p>
-<p>netstat -anp<strong>t</strong> 查看<strong>tcp端口</strong>信息</p>
-<ul>
-<li>查看进程</li>
-</ul>
-<p>Ps---查看系统<strong>进程</strong></p>
-<p>ps aux：列出全部进程</p>
-<p>a--查看<strong>其他用户</strong>的进程</p>
-<p>x--查看<strong>自己</strong>的进程</p>
-<p>u--显示进程的<strong>用户名和时间</strong></p>
-<p>查看关于nginx的相关进程信息</p>
-<p>ps aux | grep nginx 查找某个进程</p>
-<p>grep 查找</p>
-<p>ps -u 用户 指定进程用户查找</p>
-<p>查看指定用户的信息</p>
-<p>ps -u root</p>
-<p>Top---<strong>实时刷新</strong>的进程信息</p>
-<p>c：显示进程的<strong>完整</strong>命令</p>
-<p>P：<strong>CPU</strong>降序的方式排序</p>
-<p>M：按<strong>内存的占用</strong>大小来排序</p>
-<p>q：退出</p>
-<p>ctrl+c：退出</p>
-<ul>
-<li>其他命令</li>
-</ul>
-<p>uname -a：查看当前操作系统的Linux内核信息（经常根据内核版本判断是否有本地提权的风险）</p>
-<p>whoami：显示Linux上<strong>当前</strong>已登录用户</p>
-<p>id：显示<strong>当前已登录</strong>的用户和组</p>
-<p>last：显示<strong>之前</strong>登录系统的用户信息</p>
-<p>lastlog：显示所有用户的<strong>最后一次</strong>登录信息</p>
-<p>useradd 用户1：添加用户1</p>
-<p>userdel 用户1：删除用户1<sup class="footnote-ref"><a href="#fn-但cd /home中没被删干净 可用rm -rf彻底删除" id="fnref-但cd /home中没被删干净 可用rm -rf彻底删除">[但cd /home中没被删干净 可用rm -rf彻底删除]</a></sup></p>
-<p>passwd 用户1：修改用户1密码</p>
-<p>cat /var/log加两次tab键：查看日志目录</p>
-<p>history：查看历史操作命令</p>
-<p>history -c：清理历史记录</p>
-<p>cat ~/.bash_history 查看历史操作命令</p>
-<p>crontab 计划任务</p>
-<p>crontab -l列出系统的计划任务</p>
-<p>crontab -e进入编辑模式</p>
-<p>crontab -u root -e查看某个特定用户的</p>
-<p>同理crontab -u root -l</p>
 
       </div>
     </article>

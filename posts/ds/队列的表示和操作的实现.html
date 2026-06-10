@@ -52,16 +52,14 @@ Typedef struct{
 <p>rear=MAXQSIZE时，发生溢出：</p>
 <ol>
 <li>front=0：真溢出</li>
-<li>front!=0：假溢出</li>
+<li>front!=0：假溢出
+   * 处理：将队空间设想成循环的表，当rear为maxqsize时，若<strong>向量的开始端空着</strong>，又可从头使用空着的空间
+   * base[0]接在base[MAXQSIZE-1]之后，若rear+1==M，则令rear=0
+   * 实现方法：利用模（mod）运算
+   * 插入元素：<code>Q.base[Q.rear]=x;</code>
+     ​                   <code>Q.rear=(Q.rear+1)%MAXQSIZE;</code>
+     <img src="队列的表示和操作的实现.assets/image-20260419160400496.png" alt="" loading="lazy"></li>
 </ol>
-<ul>
-<li>处理：将队空间设想成循环的表，当rear为maxqsize时，若<strong>向量的开始端空着</strong>，又可从头使用空着的空间</li>
-<li>base[0]接在base[MAXQSIZE-1]之后，若rear+1==M，则令rear=0</li>
-<li>实现方法：利用模（mod）运算</li>
-<li>插入元素：<code>Q.base[Q.rear]=x;</code></li>
-</ul>
-<p>​                   <code>Q.rear=(Q.rear+1)%MAXQSIZE;</code></p>
-<p><img src="队列的表示和操作的实现.assets/image-20260419160400496.png" alt="" loading="lazy"></p>
 <p>队空、队满：front==rear</p>
 <ul>
 <li>解决判断方法：少用一个元素空间</li>

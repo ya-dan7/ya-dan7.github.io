@@ -40,37 +40,25 @@
 <p><img src="跨站脚本漏洞（XSS）.assets/image-20260521192209681.png" alt="image-20260521192209681" loading="lazy"></p>
 <ul>
 <li>常见类型：</li>
-<li>反射型</li>
+<li>反射型
+    交互的数据一般<strong>不会被存在</strong>数据库里面，<strong>一次性</strong>，所见即所得，一般出现在查询类页面等。</li>
+<li>存储型
+    交互的数据会<strong>被存在数据库</strong>里面，<strong>永久性</strong>存储，一般出现在留言板，注册等页面。</li>
+<li>DOM型
+    不与后台服务器产生数据交互，是一种通过DOM操作前端代码输出的时候产生的问题，一次性也属于反射型。</li>
+<li>漏洞原因：
+  程序对输入和输出的控制不够严格，导致“精心构造”的脚本输入后，在输到前端时被浏览器当作有效代码解析执行从而产生危害。</li>
+<li>测试流程：
+  1. 在目标站点上找到<strong>输入点</strong>，比如查询接口,留言板等
+  2. 输入一组”<strong>特殊字符+唯一识别字符</strong>”，提交，查看返回的<strong>源码</strong>，是否有做对应的处理;
+  3. 通过<strong>搜索定位</strong>到唯一字符，结合唯一字符前后语法确认是否可以构造执行js的条件(构造闭合)
+  4. 提交构造的脚本代码(以及各种绕过姿势)，看是否可以成功执行，
+     如果成功执行则说明存在XSS漏洞;
+  tips：
+  1. 一般查询接口容易出现反射型XSS，留言板容易出现存储型XSS
+  2. 由于后台可能存在过滤措施，构造的script可能会被过滤掉，而无法生效,或者环境限制了执行(浏览器)
+  3. 通过变化不同的script，尝试绕过后台过滤机制;</li>
 </ul>
-<p>交互的数据一般<strong>不会被存在</strong>数据库里面，<strong>一次性</strong>，所见即所得，一般出现在查询类页面等。</p>
-<ul>
-<li>存储型</li>
-</ul>
-<p>交互的数据会<strong>被存在数据库</strong>里面，<strong>永久性</strong>存储，一般出现在留言板，注册等页面。</p>
-<ul>
-<li>DOM型</li>
-</ul>
-<p>不与后台服务器产生数据交互，是一种通过DOM操作前端代码输出的时候产生的问题，一次性也属于反射型。</p>
-<ul>
-<li>漏洞原因：</li>
-</ul>
-<p>程序对输入和输出的控制不够严格，导致“精心构造”的脚本输入后，在输到前端时被浏览器当作有效代码解析执行从而产生危害。</p>
-<ul>
-<li>测试流程：</li>
-</ul>
-<ol>
-<li>在目标站点上找到<strong>输入点</strong>，比如查询接口,留言板等</li>
-<li>输入一组”<strong>特殊字符+唯一识别字符</strong>”，提交，查看返回的<strong>源码</strong>，是否有做对应的处理;</li>
-<li>通过<strong>搜索定位</strong>到唯一字符，结合唯一字符前后语法确认是否可以构造执行js的条件(构造闭合)</li>
-<li>提交构造的脚本代码(以及各种绕过姿势)，看是否可以成功执行，</li>
-</ol>
-<p>如果成功执行则说明存在XSS漏洞;</p>
-<p>tips：</p>
-<ol>
-<li>一般查询接口容易出现反射型XSS，留言板容易出现存储型XSS</li>
-<li>由于后台可能存在过滤措施，构造的script可能会被过滤掉，而无法生效,或者环境限制了执行(浏览器)</li>
-<li>通过变化不同的script，尝试绕过后台过滤机制;</li>
-</ol>
 <h3>反射型XSS</h3>
 <p>在网页源代码加入正确格式后可被直接输出</p>
 <p>GET方式的XSS漏洞更加容易被利用，一般利用的方式是将带有跨站脚本的URL伪装后发送给目标</p>
@@ -81,14 +69,14 @@
 <p>点击、刷新页面都会执行</p>
 <h3>DOM型XSS</h3>
 <ul>
-<li>DOM：</li>
+<li>DOM：
+  一个个访问HTML的标准编程接口
+  <img src="跨站脚本漏洞（XSS）.assets/image-20260521200026791.png" alt="image-20260521200026791" loading="lazy">
+  通过JavaScript，可以重构整个HTML文档<sup class="footnote-ref"><a href="#fn-添加、移除、改变或重排页面上的项目" id="fnref-添加、移除、改变或重排页面上的项目">[添加、移除、改变或重排页面上的项目]</a></sup>
+  要改变页面的某个东西，JavaScript就需要获得对HTML 文档中所有元素进行访问的入口。
+  这个入口，连同对HTML 元素进行添加、移动、改变或移除的方法和属性，都是通过文档对象模型来获得的(DOM)。
+  <img src="跨站脚本漏洞（XSS）.assets/image-20260521200956781.png" alt="image-20260521200956781" loading="lazy"></li>
 </ul>
-<p>一个个访问HTML的标准编程接口</p>
-<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521200026791.png" alt="image-20260521200026791" loading="lazy"></p>
-<p>通过JavaScript，可以重构整个HTML文档<sup class="footnote-ref"><a href="#fn-添加、移除、改变或重排页面上的项目" id="fnref-添加、移除、改变或重排页面上的项目">[添加、移除、改变或重排页面上的项目]</a></sup></p>
-<p>要改变页面的某个东西，JavaScript就需要获得对HTML 文档中所有元素进行访问的入口。</p>
-<p>这个入口，连同对HTML 元素进行添加、移动、改变或移除的方法和属性，都是通过文档对象模型来获得的(DOM)。</p>
-<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521200956781.png" alt="image-20260521200956781" loading="lazy"></p>
 <p><img src="跨站脚本漏洞（XSS）.assets/image-20260521201826183.png" alt="image-20260521201826183" loading="lazy"></p>
 <p><strong>从浏览器地址栏的 URL 中获取参数，未经严格过滤直接显示在网页上，从而让攻击者可以注入恶意脚本。</strong></p>
 <h6>1. 获取 URL 参数</h6>
@@ -126,25 +114,19 @@
 <h6>利用这段代码（复现步骤）</h6>
 <p>这段代码下方注释里其实已经给了“通关秘籍”：</p>
 <ol>
-<li><strong>构造恶意 URL</strong>：</li>
+<li><strong>构造恶意 URL</strong>： 
+   让 <code>xss</code>变量的值为那段恶意代码。
+   假设当前页面是 <code>index.html</code>，你在浏览器地址栏输入： <code>http://127.0.0.1/index.html?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;</code></li>
+<li><strong>后端执行过程</strong>：
+   <code>str</code>获取到：<code>?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code> 
+   <code>txss</code>提取出：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code> 
+   <code>xss</code>替换后：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code>(没变化)</li>
+<li><strong>拼接 HTML</strong>：
+   最终 <code>innerHTML</code>变成了这样： <code>&lt;a href=''&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')'&gt;'&gt;就让往事都随风，都随风吧&lt;/a&gt;</code></li>
+<li><strong>结果</strong>： 
+   原来的 <code>&lt;a&gt;</code>标签被单引号 <code>'</code>闭合了。 页面上成功插入了一个 <code>&lt;img&gt;</code>图片标签。 
+   当你的鼠标<strong>移上去</strong> (<code>onmouseover</code>) 时，就会触发 <code>alert('xss')</code>弹窗。</li>
 </ol>
-<p>让 <code>xss</code>变量的值为那段恶意代码。</p>
-<p>假设当前页面是 <code>index.html</code>，你在浏览器地址栏输入： <code>http://127.0.0.1/index.html?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;</code></p>
-<ol>
-<li><strong>后端执行过程</strong>：</li>
-</ol>
-<p><code>str</code>获取到：<code>?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code></p>
-<p><code>txss</code>提取出：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code></p>
-<p><code>xss</code>替换后：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code>(没变化)</p>
-<ol>
-<li><strong>拼接 HTML</strong>：</li>
-</ol>
-<p>最终 <code>innerHTML</code>变成了这样： <code>&lt;a href=''&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')'&gt;'&gt;就让往事都随风，都随风吧&lt;/a&gt;</code></p>
-<ol>
-<li><strong>结果</strong>：</li>
-</ol>
-<p>原来的 <code>&lt;a&gt;</code>标签被单引号 <code>'</code>闭合了。 页面上成功插入了一个 <code>&lt;img&gt;</code>图片标签。</p>
-<p>当你的鼠标<strong>移上去</strong> (<code>onmouseover</code>) 时，就会触发 <code>alert('xss')</code>弹窗。</p>
 <h3>XSS漏洞测试：cookie获取、钓鱼攻击</h3>
 <p>跨域：同源策略</p>
 <p>为了安全考虑，所有的浏览器都约定了“同源策略”同源策略规定，两个不同域名之间不能使用JS进行相互操作。比如:x.com域名下的javascrip并不能操作y.com域下的对象。</p>

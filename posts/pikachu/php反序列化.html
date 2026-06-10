@@ -36,9 +36,9 @@
       <div class="post-content">
         <h1>php反序列化</h1>
 <ul>
-<li>序列化serialize()</li>
+<li>序列化serialize()
+  把一个对象变成可以传输的字符串</li>
 </ul>
-<p>把一个对象变成可以传输的字符串</p>
 <pre><code class="language-c++">   class S{
           public $test=&quot;pikachu&quot;;
       }
@@ -56,9 +56,9 @@
           7:变量值的长度
           pikachu:变量值</code></pre>
 <ul>
-<li>反序列化unserialize()</li>
+<li>反序列化unserialize()
+  把被序列化的字符串还原为对象,然后在接下来的代码中继续使用</li>
 </ul>
-<p>把被序列化的字符串还原为对象,然后在接下来的代码中继续使用</p>
 <pre><code class="language-c++">   $u=unserialize(&quot;O:1:&quot;S&quot;:1:{s:4:&quot;test&quot;;s:7:&quot;pikachu&quot;;}&quot;);
       echo $u-&gt;test; //得到的结果为pikachu</code></pre>
 <p>序列化和反序列化本身没有问题,但是如果反序列化的内容是用户可以控制的,且后台不正当的使用了PHP中的魔法函数,就会导致安全问题</p>

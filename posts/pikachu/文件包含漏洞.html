@@ -40,9 +40,9 @@
 文件包含漏洞有<strong>“本地文件包含漏洞”和“远程文件包含漏洞”</strong>两种情况。</p>
 <p><img src="文件包含漏洞.assets/image-20260523153119454.png" alt="image-20260523153119454" loading="lazy"></p>
 <ul>
-<li>包含函数</li>
+<li>包含函数
+  include()或require()语句，可以将PHP文件的内容插入另一个PHP 文件(在服务器执行它之前)</li>
 </ul>
-<p>include()或require()语句，可以将PHP文件的内容插入另一个PHP 文件(在服务器执行它之前)</p>
 <table>
 <thead><tr>
 <th style="text-align:left">require</th>
@@ -61,22 +61,20 @@
 <p><img src="文件包含漏洞.assets/image-20260523153845048.png" alt="image-20260523153845048" loading="lazy"></p>
 <h3>远程文件包含漏洞</h3>
 <ul>
-<li>前提</li>
+<li>前提
+  如果使用include、require，则需要php.in配置：
+  allow_url_fopen = on//默认打开
+  allow_url_include=on//默认关闭</li>
 </ul>
-<p>如果使用include、require，则需要php.in配置：</p>
-<p>allow_url_fopen = on//默认打开</p>
-<p>allow_url_include=on//默认关闭</p>
 <p><code>http://127.0.0.1/pikachu/vul/fileinclude/fi_remote.php?filename=include%2Ffile2.php&amp;submit=%E6%8F%90%E4%BA%A4</code></p>
 <h3>文件包含漏洞防范</h3>
 <ol>
 <li>功能设计尽量<strong>不要将文件包含函数对应文件放给前端</strong>选择、操作</li>
 <li><strong>过滤</strong>各种../../  http://  https://</li>
-<li>配置php.ini配置文件：</li>
-</ol>
-<p>allow_url_fopen = off</p>
-<p>allow_url_include = off</p>
-<p>magic_quotes_gpc=on //gpc在</p>
-<ol>
+<li>配置php.ini配置文件：
+   allow_url_fopen = off
+   allow_url_include = off
+   magic_quotes_gpc=on //gpc在</li>
 <li>通过白名单策略，仅允许包含运行指定的文件，其他都禁止</li>
 </ol>
 

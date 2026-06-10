@@ -48,26 +48,22 @@
   3. 查看<strong>html</strong>源码，看是否通过js在前端做了上传限制，可以绕过
   4. 尝试不同方式<strong>绕过</strong>：黑白名单绕过/MIME类型绕过/目录0x00截断绕过
   5. <strong>猜测/结合其他漏洞</strong><sup class="footnote-ref"><a href="#fn-比如敏感信息泄露" id="fnref-比如敏感信息泄露">[比如敏感信息泄露]</a></sup>得到木马路径，连接测试</li>
-<li>client check</li>
-</ul>
-<p>前端限制，直接删除onchange内容，即可绕过限制</p>
-<ul>
+<li>client check
+  前端限制，直接删除onchange内容，即可绕过限制</li>
 <li>MIME type</li>
-<li>MIME：多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。</li>
-</ul>
-<p>每个MIME类型：数据的大类别<sup class="footnote-ref"><a href="#fn-声音audio、图象image等" id="fnref-声音audio、图象image等">[声音audio、图象image等]</a></sup>+定义具体的种类。</p>
-<p>常见的MIME类型：</p>
-<p>超文本标记语言文本.html.html text/html
+<li>MIME：多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。
+    每个MIME类型：数据的大类别<sup class="footnote-ref"><a href="#fn-声音audio、图象image等" id="fnref-声音audio、图象image等">[声音audio、图象image等]</a></sup>+定义具体的种类。
+    常见的MIME类型：
+    超文本标记语言文本.html.html text/html
     普通文本.txt text/plain
     RTF文本.f application/rtf
     GIF图形.gif image/gif
-    JPEG图形.ipeg..jpg image/jpeg</p>
-<ul>
-<li>$_FILES()：</li>
+    JPEG图形.ipeg..jpg image/jpeg</li>
+<li>$_FILES()：
+    从客户计算机向远程服务器上传文件。
+    第一个参数是表单的input name，第二个下标可以是"name"，"type","size"，"tmp_name"或
+    error"。</li>
 </ul>
-<p>从客户计算机向远程服务器上传文件。</p>
-<p>第一个参数是表单的input name，第二个下标可以是"name"，"type","size"，"tmp_name"或
-    error"。</p>
 <table>
 <thead><tr>
 <th style="text-align:left">$_FILES [ "file" ] [ 'name"]</th>
@@ -98,25 +94,19 @@
 <p>Getimagesize()返回结果中有文件大小和文件类型，如果用这个函数来获取类型，从而判断是否是图片的话，会存在问题。</p>
 <p>可以绕过：因为图片头可以被伪造。</p>
 <ul>
-<li>图片木马的制作:</li>
-</ul>
-<p>直接伪造头部GIF89A
+<li>图片木马的制作:
+  直接伪造头部GIF89A
   CMD:copy /b test.png + muma.php cccc.png
-  使用GIMP(开源的图片修改软件)，通过增加备注，写入执行命令</p>
-<ul>
-<li>与文件包含漏洞结合</li>
+  使用GIMP(开源的图片修改软件)，通过增加备注，写入执行命令</li>
+<li>与文件包含漏洞结合
+  在文件上传漏洞中制作复合恶意图片，在文件包含漏洞的URL里改成该恶意文件</li>
+<li>防范措施
+  1. 不在前端使用js实施上传限制策略
+  2. 通过服务器对上传文件限制：</li>
+<li>多条件<strong>组合检查</strong><sup class="footnote-ref"><a href="#fn-文件大小、路径、扩展名、文件类型、文件完整性" id="fnref-文件大小、路径、扩展名、文件类型、文件完整性">[文件大小、路径、扩展名、文件类型、文件完整性]</a></sup></li>
+<li>对上传的文件在服务器上存储时进行<strong>重命名</strong><sup class="footnote-ref"><a href="#fn-指定合理命名规则" id="fnref-指定合理命名规则">[指定合理命名规则]</a></sup></li>
+<li>对服务器端上传文件的目录进行<strong>权限控制</strong><sup class="footnote-ref"><a href="#fn-比如只读" id="fnref-比如只读">[比如只读]</a></sup>，限制执行权限带来的危害</li>
 </ul>
-<p>在文件上传漏洞中制作复合恶意图片，在文件包含漏洞的URL里改成该恶意文件</p>
-<ul>
-<li>防范措施</li>
-</ul>
-<ol>
-<li>不在前端使用js实施上传限制策略</li>
-<li>通过服务器对上传文件限制：
-     * 多条件<strong>组合检查</strong>[<sup>文件大小、路径、扩展名、文件类型、文件完整性]
-     * 对上传的文件在服务器上存储时进行<strong>重命名</strong>[</sup>指定合理命名规则]
-     * 对服务器端上传文件的目录进行<strong>权限控制</strong><sup class="footnote-ref"><a href="#fn-比如只读" id="fnref-比如只读">[比如只读]</a></sup>，限制执行权限带来的危害</li>
-</ol>
 
       </div>
     </article>

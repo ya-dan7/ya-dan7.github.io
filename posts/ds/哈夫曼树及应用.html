@@ -44,11 +44,9 @@
 </ul>
 <p><img src="哈夫曼树及应用.assets/image-20260519173234918.png" alt="image-20260519173234918" loading="lazy"></p>
 <ul>
-<li>树的路径长度：从树根到每一个结点的路径长度之和<sup class="footnote-ref"><a href="#fn-记作TL" id="fnref-记作TL">[记作TL]</a></sup></li>
-</ul>
-<p><img src="哈夫曼树及应用.assets/image-20260519173436259.png" alt="image-20260519173436259" loading="lazy"></p>
-<p>结点数目相同的二叉树中，完全二叉树是路径长度最短的二叉树<sup class="footnote-ref"><a href="#fn-但不只有完全二叉树" id="fnref-但不只有完全二叉树">[但不只有完全二叉树]</a></sup></p>
-<ul>
+<li>树的路径长度：从树根到每一个结点的路径长度之和[<sup>记作TL]
+  <img src="哈夫曼树及应用.assets/image-20260519173436259.png" alt="image-20260519173436259" loading="lazy">
+  结点数目相同的二叉树中，完全二叉树是路径长度最短的二叉树[</sup>但不只有完全二叉树]</li>
 <li>权：将树中结点赋给一个有<strong>含义</strong>的数值，该数值称为<strong>结点的权</strong></li>
 <li>结点的带权路径长度（WPL）：从<strong>根</strong>结点到该结点之间的<strong>路径长度</strong>与该结点的<strong>权</strong>的<strong>乘积</strong></li>
 <li>树的带权路径长度：树中所有<strong>叶子</strong>结点的<strong>带权路径长度之和</strong></li>
@@ -65,12 +63,10 @@
 <li>构造森林全是根</li>
 <li>选用两小造新树</li>
 <li>删除两小添新人</li>
-<li>重复2、3剩单根</li>
+<li>重复2、3剩单根
+* 结点度数为0/2
+* n个叶子结点的哈夫曼树中共有2n-1个结点<sup class="footnote-ref"><a href="#fn-n-1次合并，多n-1个结点" id="fnref-n-1次合并，多n-1个结点">[n-1次合并，多n-1个结点]</a></sup></li>
 </ol>
-<ul>
-<li>结点度数为0/2</li>
-<li>n个叶子结点的哈夫曼树中共有2n-1个结点<sup class="footnote-ref"><a href="#fn-n-1次合并，多n-1个结点" id="fnref-n-1次合并，多n-1个结点">[n-1次合并，多n-1个结点]</a></sup></li>
-</ul>
 <p><img src="哈夫曼树及应用.assets/image-20260521161829741.png" alt="image-20260521161829741" loading="lazy"></p>
 <h3>哈夫曼树构造算法实现</h3>
 <p>顺序存储结构——一维结构数组</p>

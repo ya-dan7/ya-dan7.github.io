@@ -38,46 +38,46 @@
 <ul>
 <li>遍历：顺着某一条搜索路径巡访二叉树中的结点，使每个结点<strong>均被访问<sup class="footnote-ref"><a href="#fn-各种处理，如：输出结点信息，修改结点数据值，但不能破坏原来的数据结构（不插入删除）" id="fnref-各种处理，如：输出结点信息，修改结点数据值，但不能破坏原来的数据结构（不插入删除）">[各种处理，如：输出结点信息，修改结点数据值，但不能破坏原来的数据结构（不插入删除）]</a></sup>一次</strong>，且<strong>仅被</strong>访问一次（周游）</li>
 <li>目的：得到树中所有结点的一个<strong>线性排列</strong></li>
-<li>遍历方法：</li>
+<li>遍历方法：
+  <img src="遍历二叉树.assets/image-20260507161206101.png" alt="image-20260507161206101" loading="lazy">
+  L：遍历左子树 D：访问根结点 R：遍历右子树
+  若<strong>先左后右</strong>：
+  DLR：先（根）序遍历
+  <img src="遍历二叉树.assets/image-20260507163217893.png" alt="image-20260507163217893" loading="lazy">
+  <img src="遍历二叉树.assets/image-20260507163243504.png" alt="" loading="lazy">
+  LDR：中（根）序遍历
+  <img src="遍历二叉树.assets/image-20260507163336246.png" alt="image-20260507163336246" loading="lazy">
+  <img src="遍历二叉树.assets/image-20260507163352807.png" alt="" loading="lazy">
+  LRD：后（根）序遍历
+  <img src="遍历二叉树.assets/image-20260507163415901.png" alt="image-20260507163415901" loading="lazy">
+  <img src="遍历二叉树.assets/image-20260507163434040.png" alt="" loading="lazy">
+  <img src="遍历二叉树.assets/image-20260507162002256.png" alt="image-20260507162002256" loading="lazy">
+  一样递归遍历左右子树</li>
 </ul>
-<p><img src="遍历二叉树.assets/image-20260507161206101.png" alt="image-20260507161206101" loading="lazy"></p>
-<p>L：遍历左子树 D：访问根结点 R：遍历右子树</p>
-<p>若<strong>先左后右</strong>：</p>
-<p>DLR：先（根）序遍历</p>
-<p><img src="遍历二叉树.assets/image-20260507163217893.png" alt="image-20260507163217893" loading="lazy"></p>
-<p><img src="遍历二叉树.assets/image-20260507163243504.png" alt="" loading="lazy"></p>
-<p>LDR：中（根）序遍历</p>
-<p><img src="遍历二叉树.assets/image-20260507163336246.png" alt="image-20260507163336246" loading="lazy"></p>
-<p><img src="遍历二叉树.assets/image-20260507163352807.png" alt="" loading="lazy"></p>
-<p>LRD：后（根）序遍历</p>
-<p><img src="遍历二叉树.assets/image-20260507163415901.png" alt="image-20260507163415901" loading="lazy"></p>
-<p><img src="遍历二叉树.assets/image-20260507163434040.png" alt="" loading="lazy"></p>
-<p><img src="遍历二叉树.assets/image-20260507162002256.png" alt="image-20260507162002256" loading="lazy"></p>
-<p>一样递归遍历左右子树</p>
 <h3>根据遍历系列确定二叉树<sup class="footnote-ref"><a href="#fn-先找到最左的" id="fnref-先找到最左的">[先找到最左的]</a></sup></h3>
 <ul>
 <li>二叉树各结点的值均不相同：二叉树结点的先序、中序、后序序列都是唯一的</li>
 <li>由二叉树的先序、中序序列，或中序、后序序列可以确定唯一二叉树（只有先后不可以）</li>
-<li>已知先序、中序：</li>
+<li>已知先序、中序：
+  <img src="遍历二叉树.assets/image-20260507164921199.png" alt="image-20260507164921199" loading="lazy">
+  <mark>先序--根，中序--左右子树</mark>
+  <img src="遍历二叉树.assets/image-20260507164934617.png" alt="image-20260507164934617" loading="lazy">
+  <img src="遍历二叉树.assets/image-20260507165021772.png" alt="image-20260507165021772" loading="lazy"></li>
 </ul>
-<p><img src="遍历二叉树.assets/image-20260507164921199.png" alt="image-20260507164921199" loading="lazy"></p>
-<p><mark>先序--根，中序--左右子树</mark></p>
-<p><img src="遍历二叉树.assets/image-20260507164934617.png" alt="image-20260507164934617" loading="lazy"></p>
-<p><img src="遍历二叉树.assets/image-20260507165021772.png" alt="image-20260507165021772" loading="lazy"></p>
 <p><img src="遍历二叉树.assets/image-20260507165128647.png" alt="image-20260507165128647" loading="lazy"></p>
 <p><img src="遍历二叉树.assets/image-20260507165241403.png" alt="" loading="lazy"></p>
 <ul>
-<li>中序、后序：</li>
+<li>中序、后序：
+  后序---根在尾部，中序---左右子树
+  <img src="遍历二叉树.assets/image-20260507165652924.png" alt="image-20260507165652924" loading="lazy"></li>
 </ul>
-<p>后序---根在尾部，中序---左右子树</p>
-<p><img src="遍历二叉树.assets/image-20260507165652924.png" alt="image-20260507165652924" loading="lazy"></p>
 <h3>算法实现</h3>
 <ul>
-<li>先序遍历：</li>
+<li>先序遍历：
+  若空：空操作
+  非空：访问根结点（D）先序遍历左子树（L）先序遍历右子树（R）
+  <img src="遍历二叉树.assets/image-20260507170904836.png" alt="image-20260507170904836" loading="lazy">  <img src="遍历二叉树.assets/image-20260507170920193.png" alt="" loading="lazy"></li>
 </ul>
-<p>若空：空操作</p>
-<p>非空：访问根结点（D）先序遍历左子树（L）先序遍历右子树（R）</p>
-<p><img src="遍历二叉树.assets/image-20260507170904836.png" alt="image-20260507170904836" loading="lazy">  <img src="遍历二叉树.assets/image-20260507170920193.png" alt="" loading="lazy"></p>
 <pre><code class="language-c++">  Status PreOrderTraverse(BiTree T){
       if(T==NULL)return OK;//空二叉树
       else{
@@ -96,10 +96,10 @@
 <p><img src="遍历二叉树.assets/image-20260507172222617.png" alt="image-20260507172222617" loading="lazy"></p>
 <p>​</p>
 <ul>
-<li>中序遍历</li>
+<li>中序遍历
+  若空：空操作
+  非空：先序遍历左子树（L）访问根结点（D）先序遍历右子树（R）</li>
 </ul>
-<p>若空：空操作</p>
-<p>非空：先序遍历左子树（L）访问根结点（D）先序遍历右子树（R）</p>
 <pre><code class="language-c++">  Status InOrderTraverse(BiTree T){
       if(T==NULL)return OK;//空二叉树
       else{
@@ -109,10 +109,10 @@
       }
   }</code></pre>
 <ul>
-<li>后序遍历</li>
+<li>后序遍历
+  若空：空操作
+  非空：先序遍历左子树（L）先序遍历右子树（R）访问根结点（D）</li>
 </ul>
-<p>若空：空操作</p>
-<p>非空：先序遍历左子树（L）先序遍历右子树（R）访问根结点（D）</p>
 <pre><code class="language-c++">  Status PostOrderTraverse(BiTree T){
       if(T==NULL)return OK;//空二叉树
       else{
@@ -216,10 +216,10 @@
 <h3>二叉树遍历算法的应用——计算二叉树的深度</h3>
 <ul>
 <li>空树：深度为0</li>
-<li>否则：递归计算左子树的深度为m</li>
+<li>否则：递归计算左子树的深度为m
+  ​            递归计算右子树的深度为n
+  ​            二叉树的深度为 max{m,n}+1</li>
 </ul>
-<p>​            递归计算右子树的深度为n</p>
-<p>​            二叉树的深度为 max{m,n}+1</p>
 <pre><code class="language-c++">int Depth(BiTree T){
     if(T=NULL) return 0; //空树：返回0
     else{

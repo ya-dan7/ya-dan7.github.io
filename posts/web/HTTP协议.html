@@ -65,25 +65,23 @@
 <p><strong>以POST方式请求访问某台 HTTP 服务器上的 /form/login 页面资源，并附带参数 name = veal、age = 37</strong>，是HTTP1.1版本，请求体长度为16</p>
 <p>开始有post->最后一行数据</p>
 <ul>
-<li><strong>响应报文</strong></li>
+<li><strong>响应报文</strong>
+  <img src="HTTP协议.assets/image-20260420204350104.png" alt="image-20260420204350104" loading="lazy"></li>
 </ul>
-<p><img src="HTTP协议.assets/image-20260420204350104.png" alt="image-20260420204350104" loading="lazy"></p>
 <p>实体是一个实际情况</p>
 <ul>
-<li><strong>HTTP请求方法</strong></li>
+<li><strong>HTTP请求方法</strong>
+  1. GET[<sup>查]：请求指定的<strong>页面信息</strong>，并<strong>返回实体主体</strong>
+  2. POST[</sup>z增]：向指定资源<strong>提交数据</strong>进行<strong>处理请求</strong>(比如提交表单或者上传文件)。<strong>数据被包含在请求体中</strong>。
+     POST请求可能会导致<strong>新的资源的建立或已有资源的修改</strong>。
+  3. HEAD：向服务器索要与GET请求相一致的响应，只不过<strong>响应体将不会被返回</strong>。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。（扫描端口）
+  4. PUT[<sup>增]：向指定资源位置上<strong>传其最新内容</strong>（可用post替代，一般此方法被禁用）
+  5. DELETE[</sup>删]：请求服务器<strong>删除</strong>Request-URL所标识的资源
+  6. OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向Web服务器发送“*”的请求来测试服务器的功能性（设置服务器配置文件把危险方法禁用）
+  7. TRACE：回显服务器收到的请求，主要用于测试或者诊断
+  8. CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器
+     get和post区别</li>
 </ul>
-<ol>
-<li>GET<sup class="footnote-ref"><a href="#fn-查" id="fnref-查">[查]</a></sup>：请求指定的<strong>页面信息</strong>，并<strong>返回实体主体</strong></li>
-<li>POST<sup class="footnote-ref"><a href="#fn-z增" id="fnref-z增">[z增]</a></sup>：向指定资源<strong>提交数据</strong>进行<strong>处理请求</strong>(比如提交表单或者上传文件)。<strong>数据被包含在请求体中</strong>。
-     POST请求可能会导致<strong>新的资源的建立或已有资源的修改</strong>。</li>
-<li>HEAD：向服务器索要与GET请求相一致的响应，只不过<strong>响应体将不会被返回</strong>。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。（扫描端口）</li>
-<li>PUT<sup class="footnote-ref"><a href="#fn-增" id="fnref-增">[增]</a></sup>：向指定资源位置上<strong>传其最新内容</strong>（可用post替代，一般此方法被禁用）</li>
-<li>DELETE<sup class="footnote-ref"><a href="#fn-删" id="fnref-删">[删]</a></sup>：请求服务器<strong>删除</strong>Request-URL所标识的资源</li>
-<li>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向Web服务器发送“*”的请求来测试服务器的功能性（设置服务器配置文件把危险方法禁用）</li>
-<li>TRACE：回显服务器收到的请求，主要用于测试或者诊断</li>
-<li>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器</li>
-</ol>
-<p>get和post区别</p>
 <table>
 <thead><tr>
 <th style="text-align:left">get</th>
@@ -113,10 +111,10 @@
 </tbody>
 </table>
 <ul>
-<li><strong>HTTP状态码</strong></li>
+<li><strong>HTTP状态码</strong>
+  状态码<sup class="footnote-ref"><a href="#fn-Status-Code" id="fnref-Status-Code">[Status-Code]</a></sup>：响应报文状态行中包含的一个3位数字。指明特定的请求是否被满足，如果没有满足，原因是什么
+  分类：</li>
 </ul>
-<p>状态码<sup class="footnote-ref"><a href="#fn-Status-Code" id="fnref-Status-Code">[Status-Code]</a></sup>：响应报文状态行中包含的一个3位数字。指明特定的请求是否被满足，如果没有满足，原因是什么</p>
-<p>分类：</p>
 <table>
 <thead><tr>
 <th style="text-align:left">状态码</th>
@@ -307,11 +305,11 @@
 </tbody>
 </table>
 <ul>
-<li>HTTP会话</li>
+<li>HTTP会话
+  一次会话就是你与某个网站进行了一次完整的交流，这个交流可能会你来我往很多次（一次会话可能会有很多次请求、响应，就像人与人的一次会话会有很多对话）。
+  HTTP 是一种<strong>无状态</strong>协议，这意味着每次请求都是<strong>独立</strong>的，服务器不会记录客户端的状态信息。为了实现状态管理，HTTP 引入了 <strong>Cookie 和 Session 机制</strong>。
+  简单来说，我们电脑与网站服务器又不和人一样能面对面互相见到，它怎么知道我是我？cookie与session就相当于我们双方的“脸部特征”，让我们能够互相认识，从而<strong>不用每说一句之前都得重新“自我介绍“。</strong></li>
 </ul>
-<p>一次会话就是你与某个网站进行了一次完整的交流，这个交流可能会你来我往很多次（一次会话可能会有很多次请求、响应，就像人与人的一次会话会有很多对话）。</p>
-<p>HTTP 是一种<strong>无状态</strong>协议，这意味着每次请求都是<strong>独立</strong>的，服务器不会记录客户端的状态信息。为了实现状态管理，HTTP 引入了 <strong>Cookie 和 Session 机制</strong>。</p>
-<p>简单来说，我们电脑与网站服务器又不和人一样能面对面互相见到，它怎么知道我是我？cookie与session就相当于我们双方的“脸部特征”，让我们能够互相认识，从而<strong>不用每说一句之前都得重新“自我介绍“。</strong></p>
 <table>
 <thead><tr>
 <th style="text-align:left">session</th>
@@ -336,20 +334,18 @@
 </tbody>
 </table>
 <ul>
-<li>工作原理：</li>
+<li>工作原理：
+    客户端请求服务端
+    ——> 服务端开启<strong>会话</strong>，并下发一个特殊的<strong>COOKIE</strong>（会话的唯一标识符），   服务端将会话数据<strong>存储</strong>在指定位置
+     ——>客户端<strong>收到服务端响应</strong>内容，并且<strong>保存这个COOKIE</strong>
+     ——>客户端在下一次请求服务端时<strong>带上这个COOKIE</strong>，服务端根据这个唯一标识符<strong>读取</strong>相关会话数据，<strong>恢复</strong>会话的状态</li>
 </ul>
-<p>客户端请求服务端</p>
-<p>——> 服务端开启<strong>会话</strong>，并下发一个特殊的<strong>COOKIE</strong>（会话的唯一标识符），   服务端将会话数据<strong>存储</strong>在指定位置</p>
-<p>——>客户端<strong>收到服务端响应</strong>内容，并且<strong>保存这个COOKIE</strong></p>
-<p>——>客户端在下一次请求服务端时<strong>带上这个COOKIE</strong>，服务端根据这个唯一标识符<strong>读取</strong>相关会话数据，<strong>恢复</strong>会话的状态</p>
 <h2>三、HTTP协议中的URL</h2>
 <ul>
-<li>什么是URL？</li>
-</ul>
-<p>统一资源定位符。</p>
-<p>从互联网得到资源的<strong>位置和访问方法</strong>的简洁表示，是互联网上标准资源的地址</p>
-<p>互联网上每个文件都有一个<strong>唯一</strong>的URL</p>
-<ul>
+<li>什么是URL？
+  统一资源定位符。
+  从互联网得到资源的<strong>位置和访问方法</strong>的简洁表示，是互联网上标准资源的地址
+  互联网上每个文件都有一个<strong>唯一</strong>的URL</li>
 <li>URL格式</li>
 </ul>
 <table>
@@ -430,52 +426,44 @@
   2. URL编码只能使用 <strong>% 加两位的十六进制数</strong> 替换非ASCII字符
   3. URL不能包含空格 用<strong>+替换空格</strong>
   4. 只有字母和数字[<sup>0-9 a-z A-Z]、一些特殊符号[</sup>$-_.+!'()不包括“”]、某些保留字，才可以<strong>不经过编码</strong>直接用于URL</li>
-<li>同源策略SOP</li>
+<li>同源策略SOP
+  同源：<strong>域名、协议、端口号</strong> 相同
+  同源策略：浏览器的行为，为了保护<strong>本地数据不被JavaScript代码获取回来的数据污染</strong>
+  原因：如果没有同源设计策略，那么在A.com网站加载过的js脚本，就能在没有加载过这个脚本的B.com上的页面随意执行并被读取，可能造成页面混乱、被破坏、数据窃取…不安全行为，如前端跨域安全
+  <img src="HTTP协议.assets/image-20260428205518818.png" alt="image-20260428205518818" loading="lazy"></li>
 </ul>
-<p>同源：<strong>域名、协议、端口号</strong> 相同</p>
-<p>同源策略：浏览器的行为，为了保护<strong>本地数据不被JavaScript代码获取回来的数据污染</strong></p>
-<p>原因：如果没有同源设计策略，那么在A.com网站加载过的js脚本，就能在没有加载过这个脚本的B.com上的页面随意执行并被读取，可能造成页面混乱、被破坏、数据窃取…不安全行为，如前端跨域安全</p>
-<p><img src="HTTP协议.assets/image-20260428205518818.png" alt="image-20260428205518818" loading="lazy"></p>
 <h2>相关知识</h2>
 <ul>
-<li>curl</li>
-</ul>
-<p>一种<strong>命令行工具</strong></p>
-<p>作用：发出网络请求，得到和提取数据，显示在"标准输出"（stdout）上面。</p>
-<p>Curl不只是一个编程用的函数库，这个命令本身，就是一个无比有用的网站开发工具。
-  它支持多种协议</p>
-<p>用于网站开发：</p>
-<ol>
-<li>查看网页源码
-     直接在curl命令后加上网址，就可以看到网页源码。</li>
-</ol>
-<p>> 以网址www.sina.com为例</p>
-<ol>
-<li>显示头信息
-     <code>-i</code>参数可以显示http response的头信息，连同网页代码一起。</li>
-<li>显示通信过程
-     <code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。</li>
-<li>发送表单信息
-     发送表单信息有<strong>GET和POST</strong>两种方法。</li>
-</ol>
-<p>GET方法相对简单，只要把数据附在网址后面就行。</p>
-<p>>curl example.com/form.cgi?data=xxx</p>
-<p>POST方法必须把数据和网址分开，curl就要用到--data参数。</p>
-<p>> curl -X POST --data "data=xxx" example.com/form.cgi</p>
-<p>如果数据没有经过表单编码，还可以让curl编码，参数是<code>--data-urlencode</code>。</p>
-<ol>
-<li>HTTP动词
-     curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。</li>
-<li>cookie
-     使用<code>--cookie</code>参数，可以让curl发送cookie。</li>
-</ol>
-<p>> curl --cookie "name=xxx" www.example.com</p>
-<p>具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。
-  <code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。</p>
-<ol>
-<li>HTTP认证
+<li>curl
+  一种<strong>命令行工具</strong>
+  作用：发出网络请求，得到和提取数据，显示在"标准输出"（stdout）上面。
+  Curl不只是一个编程用的函数库，这个命令本身，就是一个无比有用的网站开发工具。
+  它支持多种协议
+  用于网站开发：
+  1. 查看网页源码
+     直接在curl命令后加上网址，就可以看到网页源码。
+     > 以网址www.sina.com为例
+  2. 显示头信息
+     <code>-i</code>参数可以显示http response的头信息，连同网页代码一起。
+  3. 显示通信过程
+     <code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。
+  4. 发送表单信息
+     发送表单信息有<strong>GET和POST</strong>两种方法。
+     GET方法相对简单，只要把数据附在网址后面就行。
+     >curl example.com/form.cgi?data=xxx
+     POST方法必须把数据和网址分开，curl就要用到--data参数。
+     > curl -X POST --data "data=xxx" example.com/form.cgi
+  如果数据没有经过表单编码，还可以让curl编码，参数是<code>--data-urlencode</code>。
+  5. HTTP动词
+     curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。
+  6. cookie
+     使用<code>--cookie</code>参数，可以让curl发送cookie。
+     > curl --cookie "name=xxx" www.example.com
+  具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。
+  <code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。
+  7. HTTP认证
      有些网域需要HTTP认证，这时curl需要用到<code>--user</code>参数。</li>
-</ol>
+</ul>
 
       </div>
     </article>

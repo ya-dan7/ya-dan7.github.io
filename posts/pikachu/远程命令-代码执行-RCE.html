@@ -37,9 +37,9 @@
         <h1>远程命令、代码执行（RCE）</h1>
 <p>可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。</p>
 <ul>
-<li>exec"ping" 远程系统命令执行</li>
+<li>exec"ping" 远程系统命令执行
+  在ip输入127.0.0.1 & ifconfig</li>
 </ul>
-<p>在ip输入127.0.0.1 & ifconfig</p>
 <pre><code class="language-c++">  if(isset($_POST['submit'])&amp;&amp;$_POST['ipaddress']!=null){
       $ip=$_POST['ipaddress'];
       if(stristr(php_uname('s'),'windows')){
