@@ -1,5 +1,5 @@
 /* ============================================================
-   Blog Theme — Clean & Readable
+   Blog Theme — Deep Blue Ocean
    Designed for Chinese technical notes
    ============================================================ */
 
@@ -11,48 +11,49 @@
 }
 
 :root {
-    --bg: #fefefe;
-    --bg-secondary: #f8f9fa;
-    --text: #2c3e50;
-    --text-light: #6b7c8e;
-    --text-lighter: #94a3b8;
-    --border: #e8ecf1;
-    --accent: #4c6ef5;
-    --accent-hover: #3b5de7;
-    --accent-bg: #eef1ff;
-    --card-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    --card-hover-shadow: 0 8px 24px rgba(0,0,0,0.10);
-    --code-bg: #f1f3f5;
-    --code-text: #e03131;
-    --block-bg: #1e293b;
-    --block-text: #e2e8f0;
-    --tag-bg: #f0f2f5;
-    --tag-text: #5a6a7e;
+    /* Glass-panel colors — sit on top of the ocean gradient */
+    --bg: rgba(10, 25, 47, 0.82);
+    --bg-secondary: rgba(16, 36, 64, 0.65);
+    --text: #e0eaf5;
+    --text-light: #a8c4dc;
+    --text-lighter: #6b8aa8;
+    --border: rgba(100, 160, 210, 0.18);
+    --accent: #5cc8f0;
+    --accent-hover: #38bdf8;
+    --accent-bg: rgba(56, 189, 248, 0.12);
+    --card-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    --card-hover-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(92, 200, 240, 0.15);
+    --code-bg: rgba(16, 36, 64, 0.7);
+    --code-text: #ff8a80;
+    --block-bg: rgba(8, 20, 38, 0.85);
+    --block-text: #c8daea;
+    --tag-bg: rgba(56, 189, 248, 0.15);
+    --tag-text: #8cc8f0;
     --radius: 8px;
     --max-width: 800px;
     --transition: 0.2s ease;
 }
 
-/* ---------- Dark Mode ---------- */
+/* ---------- Dark Mode (deeper ocean at night) ---------- */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #0f172a;
-        --bg-secondary: #1e293b;
-        --text: #e2e8f0;
-        --text-light: #94a3b8;
-        --text-lighter: #64748b;
-        --border: #334155;
-        --accent: #818cf8;
-        --accent-hover: #6366f1;
-        --accent-bg: #1e1b4b;
-        --card-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        --card-hover-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        --code-bg: #334155;
-        --code-text: #f87171;
-        --block-bg: #0f172a;
-        --block-text: #cbd5e1;
-        --tag-bg: #334155;
-        --tag-text: #94a3b8;
+        --bg: rgba(6, 18, 34, 0.88);
+        --bg-secondary: rgba(10, 26, 48, 0.72);
+        --text: #dce8f5;
+        --text-light: #9ab8d8;
+        --text-lighter: #5e7d9e;
+        --border: rgba(80, 140, 200, 0.15);
+        --accent: #7dd8fc;
+        --accent-hover: #38bdf8;
+        --accent-bg: rgba(56, 189, 248, 0.10);
+        --card-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        --card-hover-shadow: 0 12px 36px rgba(0,0,0,0.6), 0 0 0 1px rgba(125, 216, 252, 0.12);
+        --code-bg: rgba(12, 28, 52, 0.75);
+        --code-text: #ff9e9a;
+        --block-bg: rgba(5, 14, 28, 0.9);
+        --block-text: #bfd2e8;
+        --tag-bg: rgba(56, 189, 248, 0.12);
+        --tag-text: #7db8e8;
     }
 }
 
@@ -65,10 +66,25 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
                  "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans CJK SC",
                  sans-serif;
-    background: var(--bg);
     color: var(--text);
     line-height: 1.75;
     min-height: 100vh;
+    /* ── Deep Blue Ocean Background ── */
+    background-color: #0a1628; /* fallback */
+    background-image:
+        /* Overlay gradient for readability */
+        linear-gradient(
+            180deg,
+            rgba(6, 18, 38, 0.25) 0%,
+            rgba(8, 22, 44, 0.45) 50%,
+            rgba(5, 14, 28, 0.70) 100%
+        ),
+        /* Real deep ocean photo */
+        url('../images/bg-ocean.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 a {
@@ -93,10 +109,11 @@ a:hover {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--bg);
+    background: rgba(8, 20, 38, 0.78);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav .container {
@@ -160,7 +177,7 @@ a:hover {
     font-weight: 800;
     letter-spacing: -0.5px;
     margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--accent), #a855f7);
+    background: linear-gradient(135deg, #7dd8fc, #60a5fa, #38bdf8, #2dd4bf);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -246,6 +263,8 @@ a:hover {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .post-card::before {
@@ -255,7 +274,7 @@ a:hover {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--accent), #a855f7);
+    background: linear-gradient(90deg, #38bdf8, #2dd4bf, #60a5fa);
     opacity: 0;
     transition: opacity var(--transition);
 }
@@ -553,17 +572,19 @@ a:hover {
     border: 2px solid var(--border);
     border-radius: 24px;
     font-size: 0.95rem;
-    background: var(--bg-secondary);
+    background: rgba(16, 36, 64, 0.5);
     color: var(--text);
     font-family: inherit;
     outline: none;
     transition: all var(--transition);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .search-input:focus {
     border-color: var(--accent);
-    background: var(--bg);
-    box-shadow: 0 0 0 4px var(--accent-bg);
+    background: rgba(20, 44, 74, 0.6);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12), 0 0 20px rgba(56, 189, 248, 0.08);
 }
 
 .search-input::placeholder {
@@ -628,6 +649,35 @@ a:hover {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-light);
+}
+
+/* ---------- Ocean Animation ---------- */
+.ocean-waves {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 120px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 80px,
+            rgba(120, 200, 240, 0.06) 80px,
+            rgba(120, 200, 240, 0.06) 82px
+        );
+    animation: waveDrift 25s linear infinite;
+}
+
+@keyframes waveDrift {
+    0%   { transform: translateX(0) translateY(0); }
+    25%  { transform: translateX(-2%) translateY(3px); }
+    50%  { transform: translateX(-1%) translateY(0); }
+    75%  { transform: translateX(-3%) translateY(-2px); }
+    100% { transform: translateX(0) translateY(0); }
 }
 
 /* ---------- Responsive ---------- */

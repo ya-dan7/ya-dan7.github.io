@@ -395,6 +395,7 @@ function pageTemplate(title, body, depth) {
     ${body}
   </div>
 </main>
+<div class="ocean-waves"></div>
 <footer class="footer">
   <div class="container">
     <p>📒 鸭蛋的学习笔记 · Powered by plain HTML & CSS</p>
@@ -460,6 +461,7 @@ function indexTemplate(body, postCount, catCount) {
     <p>没有找到匹配的笔记</p>
   </div>
 </main>
+<div class="ocean-waves"></div>
 <footer class="footer">
   <div class="container">
     <p>📒 鸭蛋的学习笔记 · 最后更新 ${new Date().toLocaleDateString('zh-CN')}</p>
