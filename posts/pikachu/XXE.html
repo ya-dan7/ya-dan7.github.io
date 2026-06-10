@@ -30,7 +30,7 @@
         <h1>XXE</h1>
         <div class="post-meta">
           <span>📁 Pikachu靶场</span>
-          <span>📄 28 行</span>
+          <span>📄 40 行</span>
         </div>
       </header>
       <div class="post-content">
@@ -38,37 +38,37 @@
 <ol>
 <li>XML声明</li>
 </ol>
-<p><?xml version = "1.0"?></p>
+<pre><code class="language-xml">   &lt;?xml version = &quot;1.0&quot;?&gt;</code></pre>
 <ol>
 <li>文档类型定义DTD</li>
 </ol>
-<p>< !DOCTYPE note [ <!--定义此文档是note类型的文档-- ></p>
-<p>< !ENTITY entity-name SYSTEM"URL/URL"> <!--外部实体声明-- ></p>
-<p>]]] ></p>
+<pre><code class="language-xml">   &lt;!DOCTYPE note [ &lt;!--定义此文档是note类型的文档--&gt;
+   &lt;!ENTITY entity-name SYSTEM &quot;URL/URL&quot;&gt; &lt;!--外部实体声明--&gt;
+   ]&gt;</code></pre>
 <ol>
-<li>文档元素
-   <note>
-   <to>Dave</to>
-   <from>Tom</from></li>
+<li>文档元素</li>
 </ol>
-<p><head>Reminder</head></p>
-<p><body>You are a good man</body>
-   </note></p>
+<pre><code class="language-xml">   &lt;note&gt;
+   &lt;to&gt;Dave&lt;/to&gt;
+   &lt;from&gt;Tom&lt;/from&gt;
+   &lt;head&gt;Reminder&lt;/head&gt;
+   &lt;body&gt;You are a good man&lt;/body&gt;
+   &lt;/note&gt;</code></pre>
 <ul>
 <li>DTD:Document Type Definition 文档类型定义，用来为XML文档<strong>定义语义约束</strong>。</li>
 </ul>
 <ol>
 <li>DTD内部声明</li>
 </ol>
-<p>< !DOCTYPE 根元素[元素声明] ></p>
+<pre><code class="language-xml">     &lt;!DOCTYPE 根元素 [元素声明]&gt;</code></pre>
 <ol>
-<li>.DTD外部引用</li>
+<li>DTD外部引用</li>
 </ol>
-<p>< !DOCTYPE 根元素名称 SYSTEM "外部DTD的URI" ></p>
+<pre><code class="language-xml">     &lt;!DOCTYPE 根元素名称 SYSTEM &quot;外部DTD的URI&quot;&gt;</code></pre>
 <ol>
 <li>引用公共DTD</li>
 </ol>
-<p>< !DOCTYPE 根元素名称 PUBLIC"DTD标识名“"公用DTD的URI ”></p>
+<pre><code class="language-xml">     &lt;!DOCTYPE 根元素名称 PUBLIC &quot;DTD标识名&quot; &quot;公用DTD的URI&quot;&gt;</code></pre>
 <p><img src="XXE.assets/image-20260523173515173.png" alt="image-20260523173515173" loading="lazy"></p>
 <p>外部引用可以支持http,file,ftp等协议</p>
 <p>如果一个接口支持接收xmI数据，且没有对xml数据做任何安全上的措施，就可能导致XXE漏洞</p>
