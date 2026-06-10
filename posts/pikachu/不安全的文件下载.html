@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不安全的文件下载 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>不安全的文件下载</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 8 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>不安全的文件下载和上传</h1>
+<p>很多网站都会提供文件下载功能，即用户可以通过点击下载链接，下载到链接所对应的文件。
+但是，如果文件下载功能设计不当，则可能导致攻击者可以通过<strong>构造文件路径</strong>，从而获取到后台服务器上的其他的敏感文件。(任意文件下载)</p>
+<p><code>http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=ai.png</code></p>
+<p><code>http://127.0.0.1/pikachu/vul/unsafedownload/execdownload.php?filename=../../../../../../../../etc/passwd</code></p>
+<ul>
+<li>防范措施
+  1. 对<strong>传入的文件名</strong>进行严格的过滤和限定
+  2. 对<strong>文件下载的目录</strong>进行严格的限定</li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

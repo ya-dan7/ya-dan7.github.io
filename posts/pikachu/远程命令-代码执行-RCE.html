@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>远程命令、代码执行（RCE） — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>远程命令、代码执行（RCE）</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 24 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>远程命令、代码执行（RCE）</h1>
+<p>可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。</p>
+<ul>
+<li>exec"ping" 远程系统命令执行</li>
+</ul>
+<p>在ip输入127.0.0.1 & ifconfig</p>
+<pre><code class="language-c++">  if(isset($_POST['submit'])&amp;&amp;$_POST['ipaddress']!=null){
+      $ip=$_POST['ipaddress'];
+      if(stristr(php_uname('s'),'windows')){
+          $result,=shell_exe('ping',$ip);//直接把变量拼接，没处理
+      }else{
+          $result,=shell_exec('ping -c 4 ',$ip);
+      }
+  }</code></pre>
+<ul>
+<li>exec"evel" 远程代码执行</li>
+</ul>
+<pre><code class="language-c++">  if(isset($_POST['submit'])&amp;&amp;$_POST['txt']!=null){
+      if(@!eval($_POST['txt'])){
+          $html.=&quot;&lt;p&gt;你喜欢的字符还挺奇怪&lt;/p&gt;&quot;;
+      }
+  }</code></pre>
+<p>用户输入没有任何处理</p>
+<p>用eval处理</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

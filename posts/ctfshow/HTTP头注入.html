@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP头注入 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>HTTP头注入</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 18 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h3>HTTP头注入</h3>
+<p><img src="HTTP头注入.assets/image-20260513203618801.png" alt="image-20260513203618801" loading="lazy"></p>
+<p><strong>攻击本质</strong>：应用程序未对用户输入的HTTP头部字段进行严格过滤或转义，导致攻击者可以通过构造恶意数据污染服务器响应头或执行非预期操作。</p>
+<p><strong>常见注入点</strong>：</p>
+<ol>
+<li><strong>User - Agent</strong>（用户代理）</li>
+<li><strong>Referer</strong>（来源地址）</li>
+<li><strong>Cookie</strong></li>
+<li><strong>X - Forwarded - For</strong>（代理链）</li>
+<li><strong>自定义头字段</strong>（如 <code>X - API - KEY</code>）</li>
+</ol>
+<ul>
+<li>协议转换：https->http</li>
+<li>密码逻辑：虽然题目源码里有 Base64 字符串 <code>Q1RGe2Vhc3lfYnFzZTYOfQ==</code>，但实际上服务器最后只认 <code>User-Agent</code>，密码反而不是最重要的（或者说这是一个误导项，用来迷惑人的）。</li>
+<li>步骤：
+  * proxy
+  * intercept on
+  * HTTP history找到，右键send to repeater，
+  * User-Agent改为ctf-show-brower，
+  * 最后一行加username=admin&password=CTF%7beasy_base64%7d 
+  * send</li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

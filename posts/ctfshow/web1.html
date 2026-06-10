@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>web1 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>web1</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 17 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <p>web1</p>
+<p><img src="web1.assets/image-20260518201346633.png" alt="image-20260518201346633" loading="lazy"></p>
+<p><img src="web1.assets/image-20260518201404377.png" alt="" loading="lazy"></p>
+<p><strong>第一步：观察页面内容</strong></p>
+<p>页面上只显示了一句话：“webl:where is flag?”，<strong>没有任何输入框或按钮</strong>。</p>
+<p>这说明 Flag 要么是<strong>静态</strong>写死的，要么需要通过某种<strong>交互触发</strong>。</p>
+<p><strong>第二步：分析前端代码</strong></p>
+<ul>
+<li>这段代码定义了一个 <code>NavigatorUAData</code>的覆盖（override）逻辑。它的作用是：<strong>当网页尝试获取你的浏览器 User-Agent 信息时，强制修改返回值，伪装成特定的浏览器版本。</strong></li>
+<li><strong>意图猜测</strong>：题目作者可能想考察是否懂得<mark>修改请求头（User-Agent）</mark>来绕过这个检测，或者进入某个隐藏的逻辑分支。</li>
+</ul>
+<p><strong>第三步：验证请求与响应（图2）</strong></p>
+<ul>
+<li><strong>请求 (Request)</strong>：你的 User-Agent 目前被设置为了 <code>test123</code>。</li>
+<li><strong>响应 (Response)</strong>：服务器依然返回了包含 Flag 的 HTML 页面。</li>
+</ul>
+<p>在这个特定的题目中，<strong>修改 User-Agent 似乎并不是获取 Flag 的必要条件</strong>。</p>
+<p>Flag 是直接通过后端程序输出在 HTML 注释里的。</p>
+<h3>3. 总结与建议</h3>
+<ul>
+<li><strong>本题解法</strong>：直接查看 Response 响应包，找到 HTML 注释中的 <code>ctfshow{...}</code>字符串并提交。</li>
+<li><strong>举一反三</strong>：如果下次遇到类似题目，且修改 User-Agent 后没有返回 Flag： 继续在图1的代码中寻找其他过滤条件（比如检查特定路径、特定 Cookie 或 Referer）。 尝试在 Burp Suite 或浏览器开发者工具中拦截请求，修改 User-Agent 为代码逻辑中预期的浏览器（如 Chrome），然后再发送请求看看是否会触发不同的响应。</li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

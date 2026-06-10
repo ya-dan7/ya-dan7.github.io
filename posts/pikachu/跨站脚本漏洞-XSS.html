@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨站脚本漏洞（XSS） — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>跨站脚本漏洞（XSS）</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 140 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>跨站脚本漏洞（XSS）</h1>
+<p>发生在web前端</p>
+<p>可以用来进行钓鱼攻击、钓鱼攻击、前端js挖矿、用户cookie获取。甚至可以结合浏览器自身的漏洞对用户主机进行远程控制等</p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521192209681.png" alt="image-20260521192209681" loading="lazy"></p>
+<ul>
+<li>常见类型：</li>
+<li>反射型</li>
+</ul>
+<p>交互的数据一般<strong>不会被存在</strong>数据库里面，<strong>一次性</strong>，所见即所得，一般出现在查询类页面等。</p>
+<ul>
+<li>存储型</li>
+</ul>
+<p>交互的数据会<strong>被存在数据库</strong>里面，<strong>永久性</strong>存储，一般出现在留言板，注册等页面。</p>
+<ul>
+<li>DOM型</li>
+</ul>
+<p>不与后台服务器产生数据交互，是一种通过DOM操作前端代码输出的时候产生的问题，一次性也属于反射型。</p>
+<ul>
+<li>漏洞原因：</li>
+</ul>
+<p>程序对输入和输出的控制不够严格，导致“精心构造”的脚本输入后，在输到前端时被浏览器当作有效代码解析执行从而产生危害。</p>
+<ul>
+<li>测试流程：</li>
+</ul>
+<ol>
+<li>在目标站点上找到<strong>输入点</strong>，比如查询接口,留言板等</li>
+<li>输入一组”<strong>特殊字符+唯一识别字符</strong>”，提交，查看返回的<strong>源码</strong>，是否有做对应的处理;</li>
+<li>通过<strong>搜索定位</strong>到唯一字符，结合唯一字符前后语法确认是否可以构造执行js的条件(构造闭合)</li>
+<li>提交构造的脚本代码(以及各种绕过姿势)，看是否可以成功执行，</li>
+</ol>
+<p>如果成功执行则说明存在XSS漏洞;</p>
+<p>tips：</p>
+<ol>
+<li>一般查询接口容易出现反射型XSS，留言板容易出现存储型XSS
+  2. 由于后台可能存在过滤措施，构造的script可能会被过滤掉，而无法生效,或者环境限制了执行(浏览器)
+  3. 通过变化不同的script，尝试绕过后台过滤机制;</li>
+</ol>
+<h3>反射型XSS</h3>
+<p>在网页源代码加入正确格式后可被直接输出</p>
+<p>GET方式的XSS漏洞更加容易被利用，一般利用的方式是将带有跨站脚本的URL伪装后发送给目标</p>
+<p>而POST方式由于是以表单方式提交，无法直接使用URL方式进行攻击</p>
+<p>GET：以url方式提交数据;</p>
+<p>POST：以表单方式在请求体里面提交</p>
+<h3>存储型XSS</h3>
+<p>点击、刷新页面都会执行</p>
+<h3>DOM型XSS</h3>
+<ul>
+<li>DOM：</li>
+</ul>
+<p>一个个访问HTML的标准编程接口</p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521200026791.png" alt="image-20260521200026791" loading="lazy"></p>
+<p>通过JavaScript，可以重构整个HTML文档<sup class="footnote-ref"><a href="#fn-添加、移除、改变或重排页面上的项目" id="fnref-添加、移除、改变或重排页面上的项目">[添加、移除、改变或重排页面上的项目]</a></sup></p>
+<p>要改变页面的某个东西，JavaScript就需要获得对HTML 文档中所有元素进行访问的入口。</p>
+<p>这个入口，连同对HTML 元素进行添加、移动、改变或移除的方法和属性，都是通过文档对象模型来获得的(DOM)。</p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521200956781.png" alt="image-20260521200956781" loading="lazy"></p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521201826183.png" alt="image-20260521201826183" loading="lazy"></p>
+<p><strong>从浏览器地址栏的 URL 中获取参数，未经严格过滤直接显示在网页上，从而让攻击者可以注入恶意脚本。</strong></p>
+<h6>1. 获取 URL 参数</h6>
+<pre><code>var str = window.location.search;</code></pre>
+<ul>
+<li><strong>含义</strong>：获取当前页面 URL 中 <code>?</code>后面的部分。</li>
+<li><strong>例子</strong>：如果网址是 <code>http://127.0.0.1/dom.php?text=abc</code>，那么 <code>str</code>的值就是 <code>?text=abc</code>。</li>
+</ul>
+<h6>2. 提取Payload</h6>
+<pre><code>var txss = decodeURIComponent(str.split(&quot;text=&quot;)[1]);</code></pre>
+<ul>
+<li><strong><code>str.split(&quot;text=&quot;)</code></strong>：把字符串按 <code>text=</code>切开。 结果类似于数组：<code>[&quot;?&quot;,&quot;abc&quot;]</code>。</li>
+<li><strong><code>[1]</code></strong>：取出切开后的第二部分（也就是 <code>=</code>后面的值）。</li>
+<li><strong><code>decodeURIComponent(...)</code></strong>：把浏览器自动编码的特殊字符（如 <code>%20</code>空格）还原回来。</li>
+</ul>
+<h6>3. 简单的“伪净化”</h6>
+<pre><code>var xss = txss.replace(/\+/g, ' ');</code></pre>
+<ul>
+<li><strong>含义</strong>：把字符串里的 <code>+</code>号替换成空格。</li>
+<li><strong>注意</strong>：这行代码非常鸡肋。它<strong>只</strong>处理了加号，但没有处理 <code>&lt;</code>、<code>&gt;</code>、<code>&quot;</code>、<code>'</code>等真正危险的 HTML 标签符号。这就好比为了防止下雨，只戴了墨镜，却没穿雨衣。</li>
+</ul>
+<h6>4. 触发弹窗（展示漏洞利用）</h6>
+<pre><code>alert(xss);</code></pre>
+<ul>
+<li><strong>含义</strong>：弹出一个警告框，显示用户输入的内容。这是为了让你直观看到“代码执行了”。</li>
+</ul>
+<h6>5. 致命一击：innerHTML 拼接</h6>
+<pre><code>document.getElementById(&quot;dom&quot;).innerHTML = &quot;&lt;a href='&quot;+xss+&quot;'&gt;就让往事都随风，都随风吧&lt;/a&gt;&quot;;</code></pre>
+<ul>
+<li><strong>这是漏洞的核心所在</strong>。</li>
+<li><strong>原本意图</strong>：把用户输入的内容作为链接的地址（<code>href</code>），显示一个超链接。</li>
+<li><strong>危险性</strong>：因为前面没有过滤标签，如果用户输入了 HTML 代码，浏览器就会把它当成真实的 HTML 渲染出来。</li>
+</ul>
+<hr>
+<h6>利用这段代码（复现步骤）</h6>
+<p>这段代码下方注释里其实已经给了“通关秘籍”：</p>
+<ol>
+<li><strong>构造恶意 URL</strong>：</li>
+</ol>
+<p>让 <code>xss</code>变量的值为那段恶意代码。</p>
+<p>假设当前页面是 <code>index.html</code>，你在浏览器地址栏输入： <code>http://127.0.0.1/index.html?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;</code></p>
+<ol>
+<li><strong>后端执行过程</strong>：</li>
+</ol>
+<p><code>str</code>获取到：<code>?text='&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code></p>
+<p><code>txss</code>提取出：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code></p>
+<p><code>xss</code>替换后：<code>'&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')&quot;&gt;'</code>(没变化)</p>
+<ol>
+<li><strong>拼接 HTML</strong>：</li>
+</ol>
+<p>最终 <code>innerHTML</code>变成了这样： <code>&lt;a href=''&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert('xss')'&gt;'&gt;就让往事都随风，都随风吧&lt;/a&gt;</code></p>
+<ol>
+<li><strong>结果</strong>：</li>
+</ol>
+<p>原来的 <code>&lt;a&gt;</code>标签被单引号 <code>'</code>闭合了。 页面上成功插入了一个 <code>&lt;img&gt;</code>图片标签。</p>
+<p>当你的鼠标<strong>移上去</strong> (<code>onmouseover</code>) 时，就会触发 <code>alert('xss')</code>弹窗。</p>
+<h3>XSS漏洞测试：cookie获取、钓鱼攻击</h3>
+<p>跨域：同源策略</p>
+<p>为了安全考虑，所有的浏览器都约定了“同源策略”同源策略规定，两个不同域名之间不能使用JS进行相互操作。比如:x.com域名下的javascrip并不能操作y.com域下的对象。</p>
+<p>如果想要跨域操作，则需要管理员进行特殊的配置。
+比通过:header( "Access-Control-Allow-Origin:x.com” )指定。</p>
+<p>Tips:下面这些标签跨域加载资源(资源类型是有限制的)是不受同源策略限制的。</p>
+<p><code>&lt;script src=&quot;...&quot;&gt;</code> //js,加载到本地执行
+<code>&lt;img src=&quot;...&quot;&gt;</code> //图片</p>
+<p><code>&lt;link href=&quot;...&quot;&gt;</code> //css</p>
+<p><code>&lt;iframe src=&quot;...&quot;&gt;</code> //任意资源</p>
+<h3>XSS盲打</h3>
+<p>不管3721，往里面插XSS代码，然后等待，可能会有惊喜</p>
+<p>由于是后端，可能安全考虑不太严格当管理员登录时，就会被X!</p>
+<h3>XSS绕过</h3>
+<p><strong>XSS绕过-过滤-转换</strong></p>
+<ol>
+<li>前端限制绕过，直接抓包重放，或者修改HTML前端代码</li>
+<li>大小写，比如<SCRPT>aLeRT(111)</sCRIpt>（后端只过滤了小写script）</li>
+<li>拼凑：<scri<script>pt>alert(111)</scri</script>pt></li>
+<li>注释干扰：<scri<!--test-->pt>alert(111)</sc<!--test-->ript></li>
+</ol>
+<p><strong>XSS绕过-过滤-编码</strong></p>
+<p>后台过滤了特殊字符,比如<script>标签,但该标签可以<strong>被各种编码</strong>,后台不一定会过滤</p>
+<p>当浏览器对该编码进行识别时,会翻译成正常的标签,从而执行.</p>
+<p>在使用编码时注意编码在输出点是否会被正常识别和翻译</p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521212046410.png" alt="image-20260521212046410" loading="lazy"></p>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521212104065.png" alt="image-20260521212104065" loading="lazy"></p>
+<h3>htmlspecialchars（）函数</h3>
+<p>htmlspecialchars()函数把预定义的字符转换为<strong>HTML 实体</strong>。</p>
+<p>预定义的字符：</p>
+<table>
+<thead><tr>
+<th style="text-align:left">&</th>
+<th style="text-align:left">&amp</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">"</td>
+<td style="text-align:left">&quot</td>
+</tr>
+<tr>
+<td style="text-align:left">'</td>
+<td style="text-align:left">&#039</td>
+</tr>
+<tr>
+<td style="text-align:left"><</td>
+<td style="text-align:left">&lt</td>
+</tr>
+<tr>
+<td style="text-align:left">></td>
+<td style="text-align:left">&ot</td>
+</tr>
+</tbody>
+</table>
+<p>可用的引号类型：</p>
+<table>
+<thead><tr>
+<th style="text-align:left">ENT_COMPAT</th>
+<th style="text-align:left">默认。仅编码双引号</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">ENT_QUOTES</td>
+<td style="text-align:left">编码双引号和单引号</td>
+</tr>
+<tr>
+<td style="text-align:left">ENT_NOQUOTES</td>
+<td style="text-align:left">不编码任何引号</td>
+</tr>
+</tbody>
+</table>
+<h3>XSS常见防范措施</h3>
+<p>输入做过滤，输出做转义</p>
+<p>过滤：根据业务需求过滤<sup class="footnote-ref"><a href="#fn-比如：输入点要求输入手机号，则只允许输入手机号格式的数字" id="fnref-比如：输入点要求输入手机号，则只允许输入手机号格式的数字">[比如：输入点要求输入手机号，则只允许输入手机号格式的数字]</a></sup></p>
+<p>转义：所有输出到前端的数据都根据输出点转义<sup class="footnote-ref"><a href="#fn-比如：输出到HTML中进行HTML实体转义，输入到JS里进行JS转义" id="fnref-比如：输出到HTML中进行HTML实体转义，输入到JS里进行JS转义">[比如：输出到HTML中进行HTML实体转义，输入到JS里进行JS转义]</a></sup></p>
+<ul>
+<li>href输出</li>
+</ul>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521214319185.png" alt="image-20260521214319185" loading="lazy"></p>
+<p>防御：只允许http、https，其次在htmlspecialchars处理</p>
+<ul>
+<li>js输出</li>
+</ul>
+<p><img src="跨站脚本漏洞（XSS）.assets/image-20260521214552974.png" alt="image-20260521214552974" loading="lazy"></p>
+<p><script></p>
+<p>$ms='x'</script><script>alert('xss')</script>';</p>
+<p>'把原来的单引号闭合</p>
+<p></script>和前面的<script>闭合</p>
+<p>用/转义</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

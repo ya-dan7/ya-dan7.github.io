@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文件包含漏洞 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>文件包含漏洞</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 28 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>文件包含漏洞</h1>
+<p>在web后台开发中，程序员为了提高效率以及让代码看起来更加简洁，会使用<strong>“包含”函数</strong>功能<sup class="footnote-ref"><a href="#fn-比如把一系列功能函数都写进fuction.php中，当某个文件需要调用的时候就直接在文件头写上一句<?php include fuction.php?>就可以调用函数代码" id="fnref-比如把一系列功能函数都写进fuction.php中，当某个文件需要调用的时候就直接在文件头写上一句<?php include fuction.php?>就可以调用函数代码">[比如把一系列功能函数都写进fuction.php中，当某个文件需要调用的时候就直接在文件头写上一句<?php include fuction.php?>就可以调用函数代码]</a></sup>
+但有些时候，因为网站功能需求，会让前端用户选择需要包含的文件/在前端的功能中使用了“包含”功能，又由于开发人员没有对要包含的这个文件进行安全考虑，就导致攻击着可以通过<strong>修改包含文件的位置</strong>来让后台执行任意文件(代码)。
+文件包含漏洞有<strong>“本地文件包含漏洞”和“远程文件包含漏洞”</strong>两种情况。</p>
+<p><img src="文件包含漏洞.assets/image-20260523153119454.png" alt="image-20260523153119454" loading="lazy"></p>
+<ul>
+<li>包含函数</li>
+</ul>
+<p>include()或require()语句，可以将PHP文件的内容插入另一个PHP 文件(在服务器执行它之前)</p>
+<table>
+<thead><tr>
+<th style="text-align:left">require</th>
+<th style="text-align:left">会生成致命错误(E_COMPILE_ERROR)并停止脚本</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">include</td>
+<td style="text-align:left">只生成警告(E_WARNING)，并且<strong>脚本会继续</strong><sup class="footnote-ref"><a href="#fn-不管前面有没有错，后面有正确的就执行" id="fnref-不管前面有没有错，后面有正确的就执行">[不管前面有没有错，后面有正确的就执行]</a></sup></td>
+</tr>
+</tbody>
+</table>
+<p>> <code>http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=file2.php&amp;submit=%E6%8F%90%E4%BA%A4</code>
+  >
+  > <code>http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=../../../../../etc/passwd&amp;submit=%E6%8F%90%E4%BA%A4</code></p>
+<p><img src="文件包含漏洞.assets/image-20260523153845048.png" alt="image-20260523153845048" loading="lazy"></p>
+<h3>远程文件包含漏洞</h3>
+<ul>
+<li>前提</li>
+</ul>
+<p>如果使用include、require，则需要php.in配置：</p>
+<p>allow_url_fopen = on//默认打开</p>
+<p>allow_url_include=on//默认关闭</p>
+<p><code>http://127.0.0.1/pikachu/vul/fileinclude/fi_remote.php?filename=include%2Ffile2.php&amp;submit=%E6%8F%90%E4%BA%A4</code></p>
+<h3>文件包含漏洞防范</h3>
+<ol>
+<li>功能设计尽量<strong>不要将文件包含函数对应文件放给前端</strong>选择、操作</li>
+<li><strong>过滤</strong>各种../../  http://  https://</li>
+<li>配置php.ini配置文件：</li>
+</ol>
+<p>allow_url_fopen = off</p>
+<p>allow_url_include = off</p>
+<p>magic_quotes_gpc=on //gpc在</p>
+<ol>
+<li>通过白名单策略，仅允许包含运行指定的文件，其他都禁止</li>
+</ol>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

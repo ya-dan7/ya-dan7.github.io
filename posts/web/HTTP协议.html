@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP协议 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🌐 Web 基础</span>
+        <h1>HTTP协议</h1>
+        <div class="post-meta">
+          <span>📁 Web 基础</span>
+          <span>📄 161 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>前置技能（HTTP协议）</h1>
+<h2>一、HTTP协议简介</h2>
+<p>什么是HTTP协议：</p>
+<ul>
+<li>协议：计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则</li>
+<li>HTTP协议：Web服务器和客户端直接进行数据传输的规则，无状态<sup class="footnote-ref"><a href="#fn-无记忆" id="fnref-无记忆">[无记忆]</a></sup>的应用层</li>
+<li>HTTPS<sup class="footnote-ref"><a href="#fn-安全" id="fnref-安全">[安全]</a></sup>协议：以安全为目标的HTTP通道，HTTP+传输加密、身份认证（保证传输过程安全性）</li>
+</ul>
+<p>工作原理：</p>
+<p><img src="HTTP协议.assets/image-20260420195412660.png" alt="" loading="lazy"></p>
+<p>非持久性连接、持久性连接：</p>
+<table>
+<thead><tr>
+<th style="text-align:left">非持久性连接</th>
+<th style="text-align:left">持久性连接</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">浏览器<strong>每请求一个web文档，就创建一个新的连接</strong>，当文档传输<strong>完毕后，连接就立刻被释放</strong>。<br />HTTP 0.9、HTTP1.0采用此连接方式 <br />对于请求的web页中包含多个其他文档对象(如图像、声音、视频等)的链接的情况，由于请求每个链接对应的文档都要创建新连接，所以效率低下。</td>
+<td style="text-align:left">在<strong>一个连接中，可以进行多次文档的请求和响应</strong>。服务器在发送完响应后，<strong>并不立即释放连接</strong>，浏览器可以使用该连接<strong>继续请求其他文档</strong>。连接保持的时间可以由<strong>双方进行协商</strong>。</td>
+</tr>
+</tbody>
+</table>
+<h2>二、HTTP报文分析</h2>
+<ul>
+<li><strong>请求报文</strong></li>
+</ul>
+<p><img src="HTTP协议.assets/image-20260420203853678.png" alt="image-20260420203853678" loading="lazy"><img src="https://i-blog.csdnimg.cn/direct/70c0241bf46b465e825da1266989c276.jpeg" alt="img" loading="lazy"></p>
+<p><strong>以POST方式请求访问某台 HTTP 服务器上的 /form/login 页面资源，并附带参数 name = veal、age = 37</strong>，是HTTP1.1版本，请求体长度为16</p>
+<p>开始有post->最后一行数据</p>
+<ul>
+<li><strong>响应报文</strong></li>
+</ul>
+<p><img src="HTTP协议.assets/image-20260420204350104.png" alt="image-20260420204350104" loading="lazy"></p>
+<p>实体是一个实际情况</p>
+<ul>
+<li><strong>HTTP请求方法</strong></li>
+</ul>
+<ol>
+<li>GET<sup class="footnote-ref"><a href="#fn-查" id="fnref-查">[查]</a></sup>：请求指定的<strong>页面信息</strong>，并<strong>返回实体主体</strong></li>
+<li>POST<sup class="footnote-ref"><a href="#fn-z增" id="fnref-z增">[z增]</a></sup>：向指定资源<strong>提交数据</strong>进行<strong>处理请求</strong>(比如提交表单或者上传文件)。<strong>数据被包含在请求体中</strong>。
+     POST请求可能会导致<strong>新的资源的建立或已有资源的修改</strong>。</li>
+<li>HEAD：向服务器索要与GET请求相一致的响应，只不过<strong>响应体将不会被返回</strong>。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。（扫描端口）</li>
+<li>PUT<sup class="footnote-ref"><a href="#fn-增" id="fnref-增">[增]</a></sup>：向指定资源位置上<strong>传其最新内容</strong>（可用post替代，一般此方法被禁用）</li>
+<li>DELETE<sup class="footnote-ref"><a href="#fn-删" id="fnref-删">[删]</a></sup>：请求服务器<strong>删除</strong>Request-URL所标识的资源</li>
+<li>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向Web服务器发送“*”的请求来测试服务器的功能性（设置服务器配置文件把危险方法禁用）</li>
+<li>TRACE：回显服务器收到的请求，主要用于测试或者诊断</li>
+<li>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器</li>
+</ol>
+<p>get和post区别</p>
+<table>
+<thead><tr>
+<th style="text-align:left">get</th>
+<th style="text-align:left">post</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">数据位置</td>
+<td style="text-align:left">后面的URL</td>
+<td style="text-align:left">link放在下面</td>
+</tr>
+<tr>
+<td style="text-align:left">请求数据大小</td>
+<td style="text-align:left">有限制</td>
+<td style="text-align:left">无限制</td>
+</tr>
+<tr>
+<td style="text-align:left">获取数据</td>
+<td style="text-align:left">query string</td>
+<td style="text-align:left">提交form表单</td>
+</tr>
+<tr>
+<td style="text-align:left">安全性</td>
+<td style="text-align:left">直接在URL，不安全</td>
+<td style="text-align:left">相对安全</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>HTTP状态码</strong></li>
+</ul>
+<p>状态码<sup class="footnote-ref"><a href="#fn-Status-Code" id="fnref-Status-Code">[Status-Code]</a></sup>：响应报文状态行中包含的一个3位数字。指明特定的请求是否被满足，如果没有满足，原因是什么</p>
+<p>分类：</p>
+<table>
+<thead><tr>
+<th style="text-align:left">状态码</th>
+<th style="text-align:left">响应类别</th>
+<th style="text-align:left">含义</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">1xx</td>
+<td style="text-align:left">信息性状态码</td>
+<td style="text-align:left">服务器正在处理请求</td>
+</tr>
+<tr>
+<td style="text-align:left">2xx</td>
+<td style="text-align:left">成功状态码</td>
+<td style="text-align:left">请求已正常处理完毕</td>
+</tr>
+<tr>
+<td style="text-align:left">3xx</td>
+<td style="text-align:left">重定向状态码</td>
+<td style="text-align:left">需要进行额外操作以完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">4xx</td>
+<td style="text-align:left">客户端错误状态码</td>
+<td style="text-align:left">客户端原因导致服务器无法处理请求</td>
+</tr>
+<tr>
+<td style="text-align:left">5xx</td>
+<td style="text-align:left">服务器错误状态码</td>
+<td style="text-align:left">服务器原因导致处理请求错误</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead><tr>
+<th style="text-align:left">状态码</th>
+<th style="text-align:left">含义</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">2xx</td>
+<td style="text-align:left"><strong>200</strong></td>
+<td style="text-align:left">请求被服务器正常处理（最常见）</td>
+</tr>
+<tr>
+<td style="text-align:left">204</td>
+<td style="text-align:left">请求已成功处理，但没有内容返回<sup class="footnote-ref"><a href="#fn-eg.只是客户端向服务器发送请求" id="fnref-eg.只是客户端向服务器发送请求">[eg.只是客户端向服务器发送请求]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">206</td>
+<td style="text-align:left">服务器已完成部分GET请求</td>
+</tr>
+<tr>
+<td style="text-align:left">3xx</td>
+<td style="text-align:left"><strong>301</strong></td>
+<td style="text-align:left">永久重定向，资源已永久分配新URL</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>302</strong></td>
+<td style="text-align:left"><strong>临时</strong>重定向，资源已<strong>临时</strong>分配新URL</td>
+</tr>
+<tr>
+<td style="text-align:left">303</td>
+<td style="text-align:left">临时重定向，期望使用<strong>GET</strong>定向获取</td>
+</tr>
+<tr>
+<td style="text-align:left">304</td>
+<td style="text-align:left">发送附带条件请求未满足</td>
+</tr>
+<tr>
+<td style="text-align:left">307</td>
+<td style="text-align:left">临时重定向，POST不会变成GET</td>
+</tr>
+<tr>
+<td style="text-align:left">4xx</td>
+<td style="text-align:left">400</td>
+<td style="text-align:left">请求报文语法/参数错误<sup class="footnote-ref"><a href="#fn-修改后再发送" id="fnref-修改后再发送">[修改后再发送]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>401</strong></td>
+<td style="text-align:left">需要通过HTTP认证/认证失败<sup class="footnote-ref"><a href="#fn-未授权访问" id="fnref-未授权访问">[未授权访问]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>403</strong></td>
+<td style="text-align:left">请求资源被拒绝</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>404</strong></td>
+<td style="text-align:left">无法找到请求资源</td>
+</tr>
+<tr>
+<td style="text-align:left">5xx</td>
+<td style="text-align:left"><strong>500</strong></td>
+<td style="text-align:left">服务器故障/Web应用故障</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>503</strong></td>
+<td style="text-align:left">服务器超负载/停机维护</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://i-blog.csdnimg.cn/direct/af90669c49c24b318fd233265cf5dad7.png" alt="img" loading="lazy"></p>
+<ul>
+<li><strong>HTTP头部</strong></li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">头（Header）</th>
+<th style="text-align:left">说明</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">请求</td>
+<td style="text-align:left"><strong>User-Agent</strong></td>
+<td style="text-align:left">浏览器和它平台的信息<sup class="footnote-ref"><a href="#fn-Mozilla4.0" id="fnref-Mozilla4.0">[Mozilla4.0]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Accept</td>
+<td style="text-align:left">客户能处理的页面类型<sup class="footnote-ref"><a href="#fn-text/html" id="fnref-text/html">[text/html]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Charset</td>
+<td style="text-align:left">客户可接受的字符集<sup class="footnote-ref"><a href="#fn-Unicode-1-1,UTF-8" id="fnref-Unicode-1-1,UTF-8">[Unicode-1-1,UTF-8]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Encoding</td>
+<td style="text-align:left">客户能处理的页面编码方法<sup class="footnote-ref"><a href="#fn-gzip" id="fnref-gzip">[gzip]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Accept-Language</td>
+<td style="text-align:left">客户能处理的自然语言<sup class="footnote-ref"><a href="#fn-en(英语)、zh-cn(简体中文)" id="fnref-en(英语)、zh-cn(简体中文)">[en(英语)、zh-cn(简体中文)]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Host</strong></td>
+<td style="text-align:left">服务器的DNS名称，<strong>必须从URL提取</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Referer</strong></td>
+<td style="text-align:left">用户从该URL代表的页面发出<strong>访问</strong>当前请求的页面（验证）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Cookie</strong></td>
+<td style="text-align:left">将以前设置的Cookie送回服务器，用来作为会话信息（保存）</td>
+</tr>
+<tr>
+<td style="text-align:left">Date</td>
+<td style="text-align:left">消息被发送时的<strong>日期和时间</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">响应</td>
+<td style="text-align:left">Date</td>
+<td style="text-align:left">消息被发送时的<strong>日期和时间</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Server</strong></td>
+<td style="text-align:left">关于<strong>服务器</strong>的信息，如Microsoft-IIS/6.0</td>
+</tr>
+<tr>
+<td style="text-align:left">Content-Encoding</td>
+<td style="text-align:left">内容是如何被<strong>编码</strong>的<sup class="footnote-ref"><a href="#fn-gzip" id="fnref-gzip">[gzip]</a></sup></td>
+</tr>
+<tr>
+<td style="text-align:left">Content-Language</td>
+<td style="text-align:left">页面所使用的自然语言</td>
+</tr>
+<tr>
+<td style="text-align:left">Content-Length</td>
+<td style="text-align:left">以<strong>字节</strong>计算的<strong>页面长度</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">Content-Type</td>
+<td style="text-align:left">页面的<strong>MIME</strong>类型</td>
+</tr>
+<tr>
+<td style="text-align:left">Last-Modified</td>
+<td style="text-align:left">页面最后被修改的时间和日期，在<strong>页面缓存</strong>机制中意义重大</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Location</strong></td>
+<td style="text-align:left">客户将请求发送给别处，<strong>重定向到另一个URL</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Set-Cookie</strong></td>
+<td style="text-align:left">服务器希望客户<strong>保存一个Cookie</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>HTTP会话</li>
+</ul>
+<p>一次会话就是你与某个网站进行了一次完整的交流，这个交流可能会你来我往很多次（一次会话可能会有很多次请求、响应，就像人与人的一次会话会有很多对话）。</p>
+<p>HTTP 是一种<strong>无状态</strong>协议，这意味着每次请求都是<strong>独立</strong>的，服务器不会记录客户端的状态信息。为了实现状态管理，HTTP 引入了 <strong>Cookie 和 Session 机制</strong>。</p>
+<p>简单来说，我们电脑与网站服务器又不和人一样能面对面互相见到，它怎么知道我是我？cookie与session就相当于我们双方的“脸部特征”，让我们能够互相认识，从而<strong>不用每说一句之前都得重新“自我介绍“。</strong></p>
+<table>
+<thead><tr>
+<th style="text-align:left">session</th>
+<th style="text-align:left">Cookie</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">在服务器保存状态信息的机制。<br />服务器在接收到客户端的请求时，为该客户端创建一个 Session 对象，并将该对象的 ID 保存在一个 Cookie 中发送给客户端。<br />客户端在下一次请求时将该 Cookie 发送回服务器，服务器根据 Cookie 中的 Session ID 来查找该客户端对应的 Session 对象，从而实现状态管理。</td>
+<td style="text-align:left">在客户端保存状态信息的机制。<br />服务器可以通过 Set-Cookie 头部向客户端发送一个 Cookie，客户端在下一次请求时将该 Cookie 发送回服务器。<br />服务器可以根据 Cookie 的内容来识别客户端的身份，从而实现状态管理。</td>
+</tr>
+<tr>
+<td style="text-align:left">典型的场景比如购物车，当你点击下单按钮时，由于HTTP协议无状态，所以并不知道是哪个用户操作的，所以服务端要为特定的用户创建了特定的 Session，用用于标识这个用户，并且跟踪用户，这样才知道购物车里面有几本书。</td>
+<td style="text-align:left">每次HTTP请求的时候，客户端都会发送相应的Cookie信息到服务端。<br />大多数的应用都是用 Cookie来实现 Session跟踪的，第一次创建 Session的时候，服务端会在HTTP协议中告诉客户端，需要在Cookie里面记录个SessionID，以后每次请求把这个会话ID发送到服务器，我就知道你是谁了。</td>
+</tr>
+<tr>
+<td style="text-align:left">保存在服务端的，有一个唯一标识。<br />在服务端保存 Session的方法很多，内存、数据库、文件都有。<br />集群的时候也要考虑 Session的转移，在大型的网站一般会有专门的 Session服务器集群，用来保存用户会话，这个时候 Session信息都是放在内存的，使用一些缓存服务比如 Memcached之类的来放 Session。</td>
+<td style="text-align:left">Cookie是指某些网站为了辨别用户身份而储存在客户端上的数据（通常经过加密）。<br />也就是说，只要有了某个用户的 cookie，就能以他的身份登录。</td>
+</tr>
+<tr>
+<td style="text-align:left">提示中说，只有<strong>admin身份</strong>可以获得flag，抓包，cookie信息的admin=0（false），我们尝试将其改为1(true)，扔进repeater模块，进行改包，将cookie身份改为admin，得到flag。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>工作原理：</li>
+</ul>
+<p>客户端请求服务端</p>
+<p>——> 服务端开启<strong>会话</strong>，并下发一个特殊的<strong>COOKIE</strong>（会话的唯一标识符），   服务端将会话数据<strong>存储</strong>在指定位置</p>
+<p>——>客户端<strong>收到服务端响应</strong>内容，并且<strong>保存这个COOKIE</strong></p>
+<p>——>客户端在下一次请求服务端时<strong>带上这个COOKIE</strong>，服务端根据这个唯一标识符<strong>读取</strong>相关会话数据，<strong>恢复</strong>会话的状态</p>
+<h2>三、HTTP协议中的URL</h2>
+<ul>
+<li>什么是URL？</li>
+</ul>
+<p>统一资源定位符。</p>
+<p>从互联网得到资源的<strong>位置和访问方法</strong>的简洁表示，是互联网上标准资源的地址</p>
+<p>互联网上每个文件都有一个<strong>唯一</strong>的URL</p>
+<ul>
+<li>URL格式</li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:left">协议://</th>
+<th style="text-align:left">用户名：密码@子域名.域名.顶级域名</th>
+<th style="text-align:left">：端口号</th>
+<th style="text-align:left">/目录</th>
+<th style="text-align:left">/文件名.文件后缀</th>
+<th style="text-align:left">？参数=值</th>
+<th style="text-align:left">#标志</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">相对URL</td>
+<td style="text-align:left">/目录</td>
+<td style="text-align:left">/文件名.文件后缀</td>
+<td style="text-align:left">？参数=值</td>
+<td style="text-align:left">#标志</td>
+</tr>
+<tr>
+<td style="text-align:left">http://</td>
+<td style="text-align:left">www.xxxx.com</td>
+<td style="text-align:left">：80</td>
+<td style="text-align:left">/test</td>
+<td style="text-align:left">/index.html</td>
+<td style="text-align:left">?boardID=5&ID=24618</td>
+<td style="text-align:left">#name</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>URL中协议</li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:left">http</th>
+<th style="text-align:left">超文本传输协议</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">https</td>
+<td style="text-align:left">用安全套字层传送的超文本传输协议</td>
+</tr>
+<tr>
+<td style="text-align:left">ftp</td>
+<td style="text-align:left">文件传输协议</td>
+</tr>
+<tr>
+<td style="text-align:left">mailto</td>
+<td style="text-align:left">电子邮件地址</td>
+</tr>
+<tr>
+<td style="text-align:left">ldap</td>
+<td style="text-align:left">轻型目录访问协议搜索</td>
+</tr>
+<tr>
+<td style="text-align:left">file</td>
+<td style="text-align:left">当地电脑/网上分享的文件</td>
+</tr>
+<tr>
+<td style="text-align:left">news</td>
+<td style="text-align:left">Usenet新闻组</td>
+</tr>
+<tr>
+<td style="text-align:left">gopher</td>
+<td style="text-align:left">Gopher协议</td>
+</tr>
+<tr>
+<td style="text-align:left">telnet</td>
+<td style="text-align:left">Telnet协议</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>URL编码
+  1. URL只能用<strong>ASCII</strong>字符集 通过<strong>因特网</strong>发送
+  2. URL编码只能使用 <strong>% 加两位的十六进制数</strong> 替换非ASCII字符
+  3. URL不能包含空格 用<strong>+替换空格</strong>
+  4. 只有字母和数字[<sup>0-9 a-z A-Z]、一些特殊符号[</sup>$-_.+!'()不包括“”]、某些保留字，才可以<strong>不经过编码</strong>直接用于URL</li>
+<li>同源策略SOP</li>
+</ul>
+<p>同源：<strong>域名、协议、端口号</strong> 相同</p>
+<p>同源策略：浏览器的行为，为了保护<strong>本地数据不被JavaScript代码获取回来的数据污染</strong></p>
+<p>原因：如果没有同源设计策略，那么在A.com网站加载过的js脚本，就能在没有加载过这个脚本的B.com上的页面随意执行并被读取，可能造成页面混乱、被破坏、数据窃取…不安全行为，如前端跨域安全</p>
+<p><img src="HTTP协议.assets/image-20260428205518818.png" alt="image-20260428205518818" loading="lazy"></p>
+<h2>相关知识</h2>
+<ul>
+<li>curl</li>
+</ul>
+<p>一种<strong>命令行工具</strong></p>
+<p>作用：发出网络请求，得到和提取数据，显示在"标准输出"（stdout）上面。</p>
+<p>Curl不只是一个编程用的函数库，这个命令本身，就是一个无比有用的网站开发工具。
+  它支持多种协议</p>
+<p>用于网站开发：</p>
+<ol>
+<li>查看网页源码
+     直接在curl命令后加上网址，就可以看到网页源码。</li>
+</ol>
+<p>> 以网址www.sina.com为例</p>
+<ol>
+<li>显示头信息
+     <code>-i</code>参数可以显示http response的头信息，连同网页代码一起。</li>
+<li>显示通信过程
+     <code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。</li>
+<li>发送表单信息
+     发送表单信息有<strong>GET和POST</strong>两种方法。</li>
+</ol>
+<p>GET方法相对简单，只要把数据附在网址后面就行。</p>
+<p>>curl example.com/form.cgi?data=xxx</p>
+<p>POST方法必须把数据和网址分开，curl就要用到--data参数。</p>
+<p>> curl -X POST --data "data=xxx" example.com/form.cgi</p>
+<p>如果数据没有经过表单编码，还可以让curl编码，参数是<code>--data-urlencode</code>。</p>
+<ol>
+<li>HTTP动词
+     curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。</li>
+<li>cookie
+     使用<code>--cookie</code>参数，可以让curl发送cookie。</li>
+</ol>
+<p>> curl --cookie "name=xxx" www.example.com</p>
+<p>具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。
+  <code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。</p>
+<ol>
+<li>HTTP认证
+     有些网域需要HTTP认证，这时curl需要用到<code>--user</code>参数。</li>
+</ol>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

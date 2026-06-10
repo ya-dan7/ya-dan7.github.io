@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>队列的表示和操作的实现 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">📊 数据结构</span>
+        <h1>队列的表示和操作的实现</h1>
+        <div class="post-meta">
+          <span>📁 数据结构</span>
+          <span>📄 132 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>队列的表示和操作的实现</h1>
+<h3>队列的顺序表示和实现</h3>
+<ul>
+<li>队列的顺序表示</li>
+</ul>
+<pre><code class="language-c++">#define MAXQSIZE 100//最大队列长度
+Typedef struct{
+    QElemType *base;//初始化的动态分配存储空间
+    int front;//头指针，若队列不空，指向队列头元素
+    int rear;//尾指针，若队列不空，指向队列尾元素的下一个位置
+}SqQueue;</code></pre>
+<ul>
+<li>队列的顺序实现</li>
+</ul>
+<p><img src="队列的表示和操作的实现.assets/image-20260419155605287.png" alt="image-20260419155605287" loading="lazy"></p>
+<p>rear=MAXQSIZE时，发生溢出：</p>
+<ol>
+<li>front=0：真溢出</li>
+<li>front!=0：假溢出</li>
+</ol>
+<ul>
+<li>处理：将队空间设想成循环的表，当rear为maxqsize时，若<strong>向量的开始端空着</strong>，又可从头使用空着的空间</li>
+<li>base[0]接在base[MAXQSIZE-1]之后，若rear+1==M，则令rear=0</li>
+<li>实现方法：利用模（mod）运算</li>
+<li>插入元素：<code>Q.base[Q.rear]=x;</code></li>
+</ul>
+<p>​                   <code>Q.rear=(Q.rear+1)%MAXQSIZE;</code></p>
+<p><img src="队列的表示和操作的实现.assets/image-20260419160400496.png" alt="" loading="lazy"></p>
+<p>队空、队满：front==rear</p>
+<ul>
+<li>解决判断方法：少用一个元素空间</li>
+</ul>
+<p><img src="队列的表示和操作的实现.assets/image-20260419162534916.png" alt="image-20260419162534916" loading="lazy"></p>
+<ul>
+<li>循环队列的操作
+  * 队列 的初始化</li>
+</ul>
+<pre><code class="language-c++">Status InitQueue(SqQueue &amp;Q){
+    Q.base=new QElemType[MAXQSIZE]//分配数组空间0~MAXQSIZE
+    if(!Q.base)exit(OVERFLOW);//存储分配失败
+    Q.front=Q.rear=0;//头指针尾指针置为0，队列为空
+    return OK;
+}</code></pre>
+<ul>
+<li>* 求队列的长度</li>
+</ul>
+<pre><code class="language-c++">    int QueueLength(SqQueue Q){
+        return((Q.rear-Q.front+MAXQSIZE)%MAXQSIZE);
+    }</code></pre>
+<ul>
+<li>循环队列入队</li>
+</ul>
+<pre><code class="language-c++">    Status EnQueue(SqQueue&amp;Q,QElemType e){
+        if((Q.rear+1)%MAXQSIZE==Q.front)return ERROR;//队满
+        Q.base[Q.rear]=e;//新元素加入队尾
+        Q.rear=(Q.rear+1)%MAXQSIZE;//尾指针后移
+        return OK;
+    }</code></pre>
+<ul>
+<li>循环队列出队</li>
+</ul>
+<pre><code class="language-c++">    Status DeQueue(SqQueue&amp;Q,QElemType&amp;e){
+        if(Q.front==Q.rear)return ERROR;//队空
+        e=Q.base[Q.front];//保存队头元素
+        Q.front=(Q.front+1)%MAXQSIZE;//队头指针+1
+        return OK;
+    }</code></pre>
+<ul>
+<li>取队头元素</li>
+</ul>
+<pre><code class="language-c++">    SElemType GetHead(SqQueue Q){
+        if(Q.front!=Q.rear){//队列不为空
+            return Q.base[Q.front];//返回队头指针元素的值，队头指针不变
+        }
+    }</code></pre>
+<h3>队列的链式表示和实现</h3>
+<p>若用户无法估计所有队列的长度，则宜采用链队列</p>
+<ul>
+<li>链队列的类型定义</li>
+</ul>
+<pre><code class="language-c++">  #define MAXQSIZE 100//最大队列长度
+  typedef struct Qnode{
+      QElemType data;
+      struct Qnode *next;
+  }QNode,*QueuePtr;
+  typedef struct{
+      QueuePtr front;//队头指针
+      QueuePtr rear;//队尾指针
+  }LinkQueue;</code></pre>
+<p><img src="队列的表示和操作的实现.assets/image-20260419171859363.png" alt="image-20260419171859363" loading="lazy"></p>
+<ul>
+<li>链队列的操作</li>
+<li>链队列初始化</li>
+</ul>
+<pre><code class="language-c++">    Status InitQueue(LinkQueue&amp;Q){
+        Q.front=Q.rear=(QueuePtr)malloc(sizeof(QNode));
+        if(!Q.front)exit(OVERRFLOW);
+        Q.front-&gt;next=NULL;
+        return OK;
+    }</code></pre>
+<ul>
+<li>销毁链队列</li>
+</ul>
+<pre><code class="language-c++">    Status DestroyQueue(LinkQueue&amp;Q){
+        while(Q.front){
+            p.Q.front-&gt;next;delete Q.front;Q.front;Q.front=p;
+        }
+        return OK;
+    }</code></pre>
+<ul>
+<li>将元素e入队</li>
+</ul>
+<pre><code class="language-c++">    Statue EnQueue(LinkQueue&amp;Q,QElemType e){
+        p=(QueuePtr)malloc(sizeof(QNode));
+        if(!p)exit(OVERFLOW);
+        p-&gt;data=e;p-&gt;next=NULL;
+        Q.rear-&gt;next=p;
+        Q.rear=p;
+        return OK;
+    }</code></pre>
+<ul>
+<li>链队列出队</li>
+</ul>
+<pre><code class="language-c++">    Status DeQueue(LinkQueue&amp;Q,QElemType&amp;e){
+        if(Q.front==Q.rear)return ERROR;
+        p=Q.front-&gt;next;
+        e=p-&gt;data;
+        Q.front-&gt;next=p-&gt;next;
+        if(Q.rear==p)Q.rear=Q.front;
+        delete p;
+        return OK;
+    }</code></pre>
+<ul>
+<li>求链队列的队头元素</li>
+</ul>
+<pre><code class="language-c++">    Status GetHead(LinkQueue Q,QElemType &amp;e){
+        if(Q.front==Q.rear)return ERROR;
+        e=Q.front-&gt;next-&gt;data;
+        return OK;
+    }</code></pre>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

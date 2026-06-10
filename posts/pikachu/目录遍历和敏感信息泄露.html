@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>目录遍历和敏感信息泄露 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>目录遍历和敏感信息泄露</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 12 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>目录遍历</h1>
+<p>../</p>
+<p>在web功能设计中,很多时候我们会要将需要访问的文件定义成<strong>变量</strong>，从而让前端的功能便的更加灵活。</p>
+<p>当用户发起一个前端的请求时，便会将请求的这个文件的值<sup class="footnote-ref"><a href="#fn-比如文件名称" id="fnref-比如文件名称">[比如文件名称]</a></sup>传递到后台，后台再执行其对应的文件。</p>
+<p>在这个过程中，如果后台没有对前端传进来的值进行严格的安全考虑，则攻击者可能会通过<strong>“../”</strong>这样的手段让后台打开或者执行一些其他的文件。 从而导致后台服务器上其他目录的文件结果被遍历出来，形成目录遍历漏洞。</p>
+<ul>
+<li>区分敏感信息泄露:如果通过不带参数的url<sup class="footnote-ref"><a href="#fn-比如：http://xxxx/doc" id="fnref-比如：http://xxxx/doc">[比如：http://xxxx/doc]</a></sup>列出了doc文件夹里面所有的文件。</li>
+</ul>
+<h1>敏感信息</h1>
+<p>由于后台人员的疏忽或者不当的设计，导致不应该被前端用户看到的数据被轻易的访问到。 比如：
+---通过访问url下的目录，可以直接列出目录下的文件列表
+---输入错误的url参数后报错信息里面包含操作系统、中间件、开发语言的版本或其他信息
+---前端的源码（html,css,js）里面包含了敏感信息<sup class="footnote-ref"><a href="#fn-后台登录地址、内网接口信息、甚至账号密码等" id="fnref-后台登录地址、内网接口信息、甚至账号密码等">[后台登录地址、内网接口信息、甚至账号密码等]</a></sup></p>
+<p>因此,在web应用的开发上，除了要进行安全的代码编写，也需要注意对敏感信息的合理处理。</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

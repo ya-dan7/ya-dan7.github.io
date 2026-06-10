@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不安全的URL重定向 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>不安全的URL重定向</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 5 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>不安全的URL重定向</h1>
+<p>可能发生在一切执行了url地址跳转的地方。</p>
+<p>如果后端采用了前端传进来的<sup class="footnote-ref"><a href="#fn-可能是用户传参,或者之前预埋在前端页面的url地址" id="fnref-可能是用户传参,或者之前预埋在前端页面的url地址">[可能是用户传参,或者之前预埋在前端页面的url地址]</a></sup>参数作为了跳转的目的地,而又没有做判断的话,就可能发生"跳错对象"的问题。</p>
+<p>url跳转比较直接的危害是:
+钓鱼,攻击者使用漏洞方的域名<sup class="footnote-ref"><a href="#fn-比如一个比较出名的公司域名往往会让用户放心的点击" id="fnref-比如一个比较出名的公司域名往往会让用户放心的点击">[比如一个比较出名的公司域名往往会让用户放心的点击]</a></sup>做掩盖,而最终跳转的确是钓鱼网站</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

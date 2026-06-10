@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📒 笔记博客</title>
+<meta name="description" content="数据结构 · Web安全 · CTF · 效率工具">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">首页</a></li>
+      <li><a href="#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="#cat-ds">📊 数据结构</a></li>
+      <li><a href="#cat-web">🌐 Web 基础</a></li>
+      <li><a href="#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <section class="hero">
+    <h1>📒 个人笔记博客</h1>
+    <p>数据结构 · Web安全 · CTF · 效率工具</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">48</span><span class="stat-label">篇笔记</span></div>
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">个分类</span></div>
+    </div>
+  </section>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchBox" placeholder="搜索笔记..." autocomplete="off">
+  </div>
+
+  <div class="categories">
+    <button class="cat-btn active" data-cat="all">全部</button>
+    <button class="cat-btn" data-cat="basic">🖥️ 电脑技巧</button>
+    <button class="cat-btn" data-cat="ds">📊 数据结构</button>
+    <button class="cat-btn" data-cat="web">🌐 Web 基础</button>
+    <button class="cat-btn" data-cat="pikachu">🎯 Pikachu靶场</button>
+    <button class="cat-btn" data-cat="ctfshow">🚩 CTF 刷题</button>
+  </div>
+
+  <div id="postContainer">
+    <section id="cat-ctfshow"><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px">🚩 CTF 刷题<span style="font-size:.8rem;color:var(--text-lighter);font-weight:400">10 篇</span></h2><div class="post-grid">
+            <a href="posts/ctfshow/萌新.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>萌新</h3>
+                <p>萌新 密码 1. 53316C6B5A6A42684D3256695A44566A4E47526A4D5459774C5556375A6D49324D32566C4D4449354F4749345A6A526B4F48303D 16进制：h…</p>
+                <div class="card-meta">📄 2026-06-01-mengxin.md</div>
+            </a>
+            <a href="posts/ctfshow/web.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web</h3>
+                <p>web 1. SQL注入 1、登录框：弱口令or万能密码 2、用常见字典爆一下，爆不出来就算了，毕竟题目大概不会考字典容量 3、测试万能密码 admin' or 1=1，直接就进去了，有点丝滑，居然没有换个')、&quot;)、--+、-- -、;%…</p>
+                <div class="card-meta">📄 web.md</div>
+            </a>
+            <a href="posts/ctfshow/web1.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web1</h3>
+                <p>web1 !image-20260518201346633(web1.assets/image-20260518201346633.png) &lt;img src=&quot;web1.assets/image-20260518201404377.png…</p>
+                <div class="card-meta">📄 web1.md</div>
+            </a>
+            <a href="posts/ctfshow/web2.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web2</h3>
+                <p>web2 永远不要相信前端，所有的验证必须在后端（服务器端）完成。 - 有效操作：后端服务器检查请求头的合法性、验证 Session/Cookie、在数据库层面鉴权等。这些操作用户无法直接修改，因为代码运行在服务器上。 - 前端的作用：只能…</p>
+                <div class="card-meta">📄 web2.md</div>
+            </a>
+            <a href="posts/ctfshow/web3.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web3</h3>
+                <p>web3 TODO 📝 只有一句话，需补充完整解题过程 抓包。</p>
+                <div class="card-meta">📄 web3.md</div>
+            </a>
+            <a href="posts/ctfshow/web4.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web4</h3>
+                <p>web4 robots.txt： 一个放在网站根目录下的文本文件。 作用：告诉互联网上的“爬虫”（搜索引擎的机器人）哪些页面可以抓取，哪些不能。虽然它主要是给机器看的，但人类也可以直接访问它来获取信息。 具体操作步骤 构造一个 URL 来访…</p>
+                <div class="card-meta">📄 web4.md</div>
+            </a>
+            <a href="posts/ctfshow/web5.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web5</h3>
+                <p>web5 答案（Flag）藏在一个 PHP 文件的“源码备份”里。 在 CTF中，==“源码泄露”==是一种非常经典的题型。 1. .phps源码泄露 - .phps文件： PHP 源代码文件的一种扩展名。 通常，PHP 脚本文件是以 .p…</p>
+                <div class="card-meta">📄 web5.md</div>
+            </a>
+            <a href="posts/ctfshow/web6.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>web6</h3>
+                <p>web6 直接下载源码包 出题人往往会在某个角落（比如 robots.txt或者页面注释）留下源码包的地址。 - 操作：尝试访问 http://your-url/web.tar.gz、http://your-url/www.zip或 htt…</p>
+                <div class="card-meta">📄 web6.md</div>
+            </a>
+            <a href="posts/ctfshow/Base64编码隐藏.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>Base64编码隐藏</h3>
+                <p>Base64编码隐藏 !image-20260513194402688(Base64编码隐藏.assets/image-20260513194402688.png) 核心在于==“隐藏”==。 既然是“Base64编码隐藏”，Flag 通常…</p>
+                <div class="card-meta">📄 Base64编码隐藏.md</div>
+            </a>
+            <a href="posts/ctfshow/HTTP头注入.html" class="post-card">
+                <span class="card-cat">🚩 CTF 刷题</span>
+                <h3>HTTP头注入</h3>
+                <p>HTTP头注入 !image-20260513203618801(HTTP头注入.assets/image-20260513203618801.png) 攻击本质：应用程序未对用户输入的HTTP头部字段进行严格过滤或转义，导致攻击者可以通过…</p>
+                <div class="card-meta">📄 HTTP头注入.md</div>
+            </a></div></section><section id="cat-pikachu"><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px">🎯 Pikachu靶场<span style="font-size:.8rem;color:var(--text-lighter);font-weight:400">14 篇</span></h2><div class="post-grid">
+            <a href="posts/pikachu/php反序列化.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>php反序列化</h3>
+                <p>php反序列化 序列化serialize() 把一个对象变成可以传输的字符串 反序列化unserialize() 把被序列化的字符串还原为对象,然后在接下来的代码中继续使用 序列化和反序列化本身没有问题,但是如果反序列化的内容是用户可以控制…</p>
+                <div class="card-meta">📄 php反序列化.md</div>
+            </a>
+            <a href="posts/pikachu/SQL注入漏洞.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>SQL注入漏洞</h3>
+                <p>SQL注入漏洞 开发人员在构建代码时，没有对输入边界进行安全考虑，导致攻击着可以通过合法的输入点提交一些精心 构造的语句，从而欺骗后台数据库对其进行执行，导致数据库信息泄漏的一种漏洞。 攻击流程 1. 注入点探测 自动：web漏洞扫描，自动…</p>
+                <div class="card-meta">📄 SQL注入漏洞.md</div>
+            </a>
+            <a href="posts/pikachu/SSRF.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>SSRF</h3>
+                <p>SSRF 由于服务端提供了从其他服务器应用获取数据的功能,但又没有对目标地址做严格过滤与限制 导致攻击者可以传入任意的地址来让后端服务器对其发起请求,并返回对该目标地址请求的数据 数据流:攻击者-----服务器----目标地址 根据后台使用…</p>
+                <div class="card-meta">📄 SSRF.md</div>
+            </a>
+            <a href="posts/pikachu/XXE.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>XXE</h3>
+                <p>XXE 1. XML声明 &lt;?xml version = &quot;1.0&quot;? 2. 文档类型定义DTD &lt; !DOCTYPE note &lt;!--定义此文档是note类型的文档-- &lt; !ENTITY entity-name SYSTEM&quot;URL/…</p>
+                <div class="card-meta">📄 XXE.md</div>
+            </a>
+            <a href="posts/pikachu/不安全的URL重定向.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>不安全的URL重定向</h3>
+                <p>不安全的URL重定向 可能发生在一切执行了url地址跳转的地方。 如果后端采用了前端传进来的^可能是用户传参,或者之前预埋在前端页面的url地址参数作为了跳转的目的地,而又没有做判断的话,就可能发生&quot;跳错对象&quot;的问题。 url跳转比较直接的…</p>
+                <div class="card-meta">📄 不安全的URL重定向.md</div>
+            </a>
+            <a href="posts/pikachu/不安全的文件上传漏洞.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>不安全的文件上传漏洞</h3>
+                <p>不安全的文件上传漏洞 很多web站点都有文件上传接口，比如: 1. 注册时上传头像图片(比jpg.png.gif等); 2. 上传文件附件(doc,xls等) 而在后台开发时并没有对上传的文件功能进行安全考虑或者采用了有缺陷的措施，导致攻击…</p>
+                <div class="card-meta">📄 不安全的文件上传漏洞.md</div>
+            </a>
+            <a href="posts/pikachu/不安全的文件下载.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>不安全的文件下载</h3>
+                <p>不安全的文件下载和上传 很多网站都会提供文件下载功能，即用户可以通过点击下载链接，下载到链接所对应的文件。 但是，如果文件下载功能设计不当，则可能导致攻击者可以通过构造文件路径，从而获取到后台服务器上的其他的敏感文件。(任意文件下载) ht…</p>
+                <div class="card-meta">📄 不安全的文件下载.md</div>
+            </a>
+            <a href="posts/pikachu/文件包含漏洞.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>文件包含漏洞</h3>
+                <p>文件包含漏洞 在web后台开发中，程序员为了提高效率以及让代码看起来更加简洁，会使用“包含”函数功能^比如把一系列功能函数都写进fuction.php中，当某个文件需要调用的时候就直接在文件头写上一句&lt;?php include fuctio…</p>
+                <div class="card-meta">📄 文件包含漏洞.md</div>
+            </a>
+            <a href="posts/pikachu/暴力破解.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>暴力破解</h3>
+                <p>暴力破解 基于表单的暴力破解 连续性尝试+字典+自动化 有效字典： 常用账号密码（弱口令） 被脱裤后账号密码 指定字符使用工具按照指定规则排列组合算法 存在暴力破解漏洞： 复杂密码 安全验证码 对尝试登录判断和限制 双因素认证 测试流程： …</p>
+                <div class="card-meta">📄 暴力破解.md</div>
+            </a>
+            <a href="posts/pikachu/目录遍历和敏感信息泄露.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>目录遍历和敏感信息泄露</h3>
+                <p>目录遍历 ../ 在web功能设计中,很多时候我们会要将需要访问的文件定义成变量，从而让前端的功能便的更加灵活。 当用户发起一个前端的请求时，便会将请求的这个文件的值^比如文件名称传递到后台，后台再执行其对应的文件。 在这个过程中，如果后台…</p>
+                <div class="card-meta">📄 目录遍历和敏感信息泄露.md</div>
+            </a>
+            <a href="posts/pikachu/越权漏洞.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>越权漏洞</h3>
+                <p>越权漏洞 由于没有用户权限进行严格的判断 导致低权限的账号(比如普通用户)可以去完成高权限账号(比如超级管理员)范围内的操作。 平行越权： A用户和B用户属于同一级别用户，但各自不能操作对方个人信息， 平行越权操作：A用户如果越权操作B用户…</p>
+                <div class="card-meta">📄 越权漏洞.md</div>
+            </a>
+            <a href="posts/pikachu/跨站脚本漏洞-XSS.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>跨站脚本漏洞（XSS）</h3>
+                <p>跨站脚本漏洞（XSS） 发生在web前端 可以用来进行钓鱼攻击、钓鱼攻击、前端js挖矿、用户cookie获取。甚至可以结合浏览器自身的漏洞对用户主机进行远程控制等 !image-20260521192209681(跨站脚本漏洞（XSS）.a…</p>
+                <div class="card-meta">📄 跨站脚本漏洞（XSS）.md</div>
+            </a>
+            <a href="posts/pikachu/跨站请求伪造-CSRF.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>跨站请求伪造（CSRF）</h3>
+                <p>跨站请求伪造（CSRF） 攻击者会伪造一个请求^一般是链接欺骗目标用户进行点击，用户一旦点击了这个请求，整个攻击也就完成了。所以CSRF攻击也被称为&quot;one click&quot;攻击。 判断是否存在CSRF漏洞： 判断其对关键信息^比如密码等敏感信…</p>
+                <div class="card-meta">📄 跨站请求伪造（CSRF）.md</div>
+            </a>
+            <a href="posts/pikachu/远程命令-代码执行-RCE.html" class="post-card">
+                <span class="card-cat">🎯 Pikachu靶场</span>
+                <h3>远程命令、代码执行（RCE）</h3>
+                <p>远程命令、代码执行（RCE） 可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。 exec&quot;ping&quot; 远程系统命令执行 在ip输入127.0.0.1 &amp; ifconfig exec&quot;evel&quot; 远程代码执行 用户…</p>
+                <div class="card-meta">📄 远程命令、代码执行（RCE）.md</div>
+            </a></div></section><section id="cat-web"><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px">🌐 Web 基础<span style="font-size:.8rem;color:var(--text-lighter);font-weight:400">9 篇</span></h2><div class="post-grid">
+            <a href="posts/web/HTTP协议.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>HTTP协议</h3>
+                <p>前置技能（HTTP协议） 一、HTTP协议简介 什么是HTTP协议： 协议：计算机通信网络中两台计算机之间进行通信所必须共同遵守的规定或规则 HTTP协议：Web服务器和客户端直接进行数据传输的规则，无状态^无记忆的应用层 HTTPS^安全…</p>
+                <div class="card-meta">📄 HTTP协议.md</div>
+            </a>
+            <a href="posts/web/Linux必备系统命令.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>Linux必备系统命令</h3>
+                <p>Linux必备系统命令 Linux基本常识 Linux简介 开源、免费、多用户、多任务、多线程、多CPU 的 操作系统 Linux目录结构 !image-20260428213523213(Linux必备系统命令.assets/image-…</p>
+                <div class="card-meta">📄 Linux必备系统命令.md</div>
+            </a>
+            <a href="posts/web/Web安全总览.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>Web安全总览</h3>
+                <p>Web安全总览 协议基础 HTTP协议如何工作： HTTP协议定义了Web客户端如何从Web服务器请求Web页面，以及服务器如何把Web页面传送给客户端。 客户端连接到Web服务器 一个HTTP客户端^通常是浏览器与Web服务器的HTTP端…</p>
+                <div class="card-meta">📄 Web安全总览.md</div>
+            </a>
+            <a href="posts/web/前端基础-CSS-JavaScript.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>前端基础：CSS、JavaScript</h3>
+                <p>前端基础：CSS、JavaScript CSS 层叠样式表^英文全称:Cascading Style Sheets是一种用来表现HTML^标准通用标记语言的一个应用或XML^标准通用标记语言的一个子集等文件样式的计算机语言。 CSS能够对网…</p>
+                <div class="card-meta">📄 前端基础：CSS、JavaScript.md</div>
+            </a>
+            <a href="posts/web/前端基础-HTML.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>前端基础：HTML</h3>
+                <p>前端基础：HTML !image-20260509151004093(前端基础：HTML.assets/image-20260509151004093.png) !image-20260509151026723(前端基础：HTML.asse…</p>
+                <div class="card-meta">📄 前端基础：HTML.md</div>
+            </a>
+            <a href="posts/web/数据库必备基本操作.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>数据库必备基本操作</h3>
+                <p>数据库必备基本操作 数据库基本知识 数据库概念 数据库：按照一定的数据结构（数据的组织形式/数据之间的联系）存放计算机数据的仓库，通过数据库提供的多种方法来管理其中的数据 数据库管理系统（DBMS）：操纵和管理数据库的大型软件，用于建立、使…</p>
+                <div class="card-meta">📄 数据库必备基本操作.md</div>
+            </a>
+            <a href="posts/web/漏洞原理-一句话木马.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>漏洞原理&amp;一句话木马</h3>
+                <p>漏洞原理&amp;一句话木马 TODO 📝 本文只有漏洞原理部分，还需补充： - 一句话木马的定义和常见写法（PHP/ASP/JSP） - 常用连接工具（蚁剑、冰蝎、哥斯拉） - 绕过方式详解（前端绕过、MIME绕过、扩展名绕过、内容绕过） 文件…</p>
+                <div class="card-meta">📄 漏洞原理&一句话木马.md</div>
+            </a>
+            <a href="posts/web/渗透工具.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>渗透工具</h3>
+                <p>渗透工具 BurpSuite Proxy--拦截HTTP/S的代理服务器，作为一个在浏览器和目标应用程序之间的中间人，允许拦截，查看，修改在两个方向上的原始数据流。 Intruder-定制的高度可配置的工具，对web应用程序进行自动化攻击^…</p>
+                <div class="card-meta">📄 渗透工具.md</div>
+            </a>
+            <a href="posts/web/网站运作原理.html" class="post-card">
+                <span class="card-cat">🌐 Web 基础</span>
+                <h3>网站运作原理</h3>
+                <p>网站运作原理 Web App WebApp(或Web应用程序)运行于网络和标准浏览器上，基于网页技术开发实现特定功能的应用。 前端:HTML,CSS,JavaScript 后端:Java，Python,PHP 数据库:MySQL,Oracl…</p>
+                <div class="card-meta">📄 网站运作原理.md</div>
+            </a></div></section><section id="cat-basic"><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px">🖥️ 电脑技巧<span style="font-size:.8rem;color:var(--text-lighter);font-weight:400">2 篇</span></h2><div class="post-grid">
+            <a href="posts/basic/typora使用.html" class="post-card">
+                <span class="card-cat">🖥️ 电脑技巧</span>
+                <h3>typora使用</h3>
+                <p>标题1 标题 引用 有序列表： 1. 2. 3. 无序列表： - - 计划： - x 吃饭^chi - 代码块：c++ int main{ return 0; } 数学公式：$$$$ $$ \frac{\partial f}{\partia…</p>
+                <div class="card-meta">📄 typora使用.md</div>
+            </a>
+            <a href="posts/basic/电脑技巧与效率工具.html" class="post-card">
+                <span class="card-cat">🖥️ 电脑技巧</span>
+                <h3>电脑技巧与效率工具</h3>
+                <p>电脑美化 --- 卸载软件 卸载方式 1. 直接拖入回收站（但只删除了快捷方式） 2. 属性中找到安装目录右击删除（但无法删彻底注册表和其余文件） 3. 使用电脑自带卸载功能 4. 第三方卸载软件：==geek== ==HiBit==（有备…</p>
+                <div class="card-meta">📄 电脑技巧与效率工具.md</div>
+            </a></div></section><section id="cat-ds"><h2 style="font-size:1.4rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px">📊 数据结构<span style="font-size:.8rem;color:var(--text-lighter);font-weight:400">13 篇</span></h2><div class="post-grid">
+            <a href="posts/ds/串.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>串</h3>
+                <p>串（string）^零个或多个任意字符组成的有序序列 &lt;img src=&quot;串.assets/image-20260419190927258.png&quot; 串的定义-几个术语 子串：串中任意个连续字符组成的子序列称为该串的子串 例如，&quot;abcde…</p>
+                <div class="card-meta">📄 串.md</div>
+            </a>
+            <a href="posts/ds/广义表.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>广义表</h3>
+                <p>广义表（列表） 是n=0个元素a~0~、a~1~、a~2~……a~n-1~的有限序列，其中每个a~i~是原子广义表 广义表通常记作：LS=(a~1~,a~2~,...,a~n~) LS为表名，n为表长，a~i~为表元素 大写:广义表 小写:…</p>
+                <div class="card-meta">📄 广义表.md</div>
+            </a>
+            <a href="posts/ds/数组.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>数组</h3>
+                <p>数组 --- 数组：按照一定格式排列起来的、具有相同类型的数据元素的集合 一维数组：线性表中的数据元素为非结构的简单元素^线性结构，定长的线性表 ​ 声明格式：数据类型 变量名称长度； 二维数组：一维数组中的数据元素又是一维数组结构 ​ 声…</p>
+                <div class="card-meta">📄 数组.md</div>
+            </a>
+            <a href="posts/ds/图.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>图</h3>
+                <p>图 TODO 📝 本章内容未完成，还需补充： - 图的存储结构（邻接矩阵、邻接表、十字链表、邻接多重表） - 图的遍历（DFS、BFS） - 图的应用（最小生成树、最短路径、拓扑排序、关键路径） !image-20260521162549…</p>
+                <div class="card-meta">📄 图.md</div>
+            </a>
+            <a href="posts/ds/二叉树的性质和存储结构.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>二叉树的性质和存储结构</h3>
+                <p>二叉树的性质和存储结构 性质： 1. 在二叉树的第i层上至多有2^i-1^个结点（i=1）、至少1个 2. 深度为k的二叉树至多有2^k^-1个结点（k=1）、至少k个 3. 对任何一棵二叉树T，如果其叶子树为n~0~，度为2的结点数为n~…</p>
+                <div class="card-meta">📄 二叉树的性质和存储结构.md</div>
+            </a>
+            <a href="posts/ds/哈夫曼树及应用.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>哈夫曼树及应用</h3>
+                <p>哈夫曼树及应用 !image-20260519172516444(哈夫曼树及应用.assets/image-20260519172516444.png) !image-20260519172802610(哈夫曼树及应用.assets/ima…</p>
+                <div class="card-meta">📄 哈夫曼树及应用.md</div>
+            </a>
+            <a href="posts/ds/树和二叉树的定义.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>树和二叉树的定义</h3>
+                <p>树和二叉树的定义 &lt;img src=&quot;树和二叉树的定义.assets/image-20260423110413306.png&quot; &lt;img src=&quot;树和二叉树的定义.assets/image-20260423110525640.png&quot; -…</p>
+                <div class="card-meta">📄 树和二叉树的定义.md</div>
+            </a>
+            <a href="posts/ds/树和二叉树的抽象数据类型定义.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>树和二叉树的抽象数据类型定义</h3>
+                <p>树和二叉树的抽象数据类型定义 二叉树的抽象数据类型定义</p>
+                <div class="card-meta">📄 树和二叉树的抽象数据类型定义.md</div>
+            </a>
+            <a href="posts/ds/树和森林.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>树和森林</h3>
+                <p>树和森林 树 !image-20260514170836687(树和森林.assets/image-20260514170836687.png) 树(Tree)是n^n≥0个结点的有限集。 若n=0：空树 若n0： 有且仅有一个特定的称为=…</p>
+                <div class="card-meta">📄 树和森林.md</div>
+            </a>
+            <a href="posts/ds/线索二叉树.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>线索二叉树</h3>
+                <p>线索二叉树 n个结点的二叉树：一共2n个指针域，n-1个用来指示左右孩子^根结点不是孩子，==n+1个指针域为空== 利用二叉链表中的空指针域: 某结点的==左孩子==为空，则将空的左孩子指针域改为指向其==前驱== 某结点的==右孩子==…</p>
+                <div class="card-meta">📄 线索二叉树.md</div>
+            </a>
+            <a href="posts/ds/遍历二叉树.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>遍历二叉树</h3>
+                <p>遍历二叉树 遍历：顺着某一条搜索路径巡访二叉树中的结点，使每个结点均被访问^各种处理，如：输出结点信息，修改结点数据值，但不能破坏原来的数据结构（不插入删除）一次，且仅被访问一次（周游） 目的：得到树中所有结点的一个线性排列 遍历方法： !…</p>
+                <div class="card-meta">📄 遍历二叉树.md</div>
+            </a>
+            <a href="posts/ds/队列的定义.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>队列的定义</h3>
+                <p>队列的定义 --- 队列的定义 队列^Queue：一种先进先出^FIFO，First In First Out的线性表。 只能在表尾插入、表头删除 表尾端称为队尾^rear，表头端称为队头^front 生活中的例子：排队——先到先得，后来后…</p>
+                <div class="card-meta">📄 队列的定义.md</div>
+            </a>
+            <a href="posts/ds/队列的表示和操作的实现.html" class="post-card">
+                <span class="card-cat">📊 数据结构</span>
+                <h3>队列的表示和操作的实现</h3>
+                <p>队列的表示和操作的实现 队列的顺序表示和实现 队列的顺序表示 队列的顺序实现 !image-20260419155605287(队列的表示和操作的实现.assets/image-20260419155605287.png) rear=MAX…</p>
+                <div class="card-meta">📄 队列的表示和操作的实现.md</div>
+            </a></div></section>
+  </div>
+
+  <div class="empty-state" id="noResults" style="display:none;">
+    <div class="icon">🔍</div>
+    <p>没有找到匹配的笔记</p>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · 最后更新 2026/6/10</p>
+  </div>
+</footer>
+<script>
+var searchBox=document.getElementById('searchBox'),cards=document.querySelectorAll('.post-card'),
+sections=document.querySelectorAll('[id^="cat-"]'),noResults=document.getElementById('noResults');
+searchBox.addEventListener('input',function(){var q=this.value.toLowerCase(),found=!1;cards.forEach(function(c){
+var m=!q||c.textContent.toLowerCase().includes(q);c.style.display=m?'':'none';if(m)found=!0});
+sections.forEach(function(s){s.style.display=Array.from(s.querySelectorAll('.post-card'))
+.some(function(c){return c.style.display!=='none'})?'':'none'});
+noResults.style.display=found||!q?'none':''});
+var btns=document.querySelectorAll('.cat-btn');btns.forEach(function(b){b.addEventListener('click',function(){
+btns.forEach(function(x){x.classList.remove('active')});this.classList.add('active');
+var cat=this.dataset.cat;sections.forEach(function(s){s.style.display=(cat==='all'||s.id==='cat-'+cat)?'':'none'});
+searchBox.value='';cards.forEach(function(c){c.style.display=''});noResults.style.display='none'})});
+</script>
+</body>
+</html>

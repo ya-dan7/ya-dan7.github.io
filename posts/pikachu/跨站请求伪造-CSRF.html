@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨站请求伪造（CSRF） — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>跨站请求伪造（CSRF）</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 35 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>跨站请求伪造（CSRF）</h1>
+<p>攻击者会伪造一个请求<sup class="footnote-ref"><a href="#fn-一般是链接" id="fnref-一般是链接">[一般是链接]</a></sup>欺骗目标用户进行点击，用户一旦点击了这个请求，整个攻击也就完成了。所以CSRF攻击也被称为"one click"攻击。</p>
+<ul>
+<li>判断是否存在CSRF漏洞：</li>
+</ul>
+<p>判断其对关键信息[<sup>比如密码等敏感信息]的操作[</sup>增删改]是否容易被伪造。</p>
+<ol>
+<li>对目标网站增删改的地方标记，观察逻辑，判断是否可以被伪造</li>
+</ol>
+<p>> 修改管理员账号不用验证旧密码
+     >
+     > 对敏感信息修改没有使用安全的token验证</p>
+<ol>
+<li>确认凭证的有效期<sup class="footnote-ref"><a href="#fn-提高CSRF被利用效率" id="fnref-提高CSRF被利用效率">[提高CSRF被利用效率]</a></sup></li>
+</ol>
+<p>> 虽然退出关闭浏览器，但Cookie仍然有效，或session没有及时过期，使CSRF简单</p>
+<ul>
+<li>与XSS区别：</li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:left">CSRF</th>
+<th style="text-align:left">XSS</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">借用户的权限攻击，没有拿到用户的权限</td>
+<td style="text-align:left">直接盗取用户权限</td>
+</tr>
+</tbody>
+</table>
+<h3>CSRF（GET）</h3>
+<p>没有token+GET<sup class="footnote-ref"><a href="#fn-在URL里，POST在对话体中" id="fnref-在URL里，POST在对话体中">[在URL里，POST在对话体中]</a></sup></p>
+<blockquote>/pikachu/vul/csrf/csrfget/csrf_get_edit.php?sex=girl&phonenum=12345678922&add=beijing&email=lucy%40pikachu.com&submit=submit</blockquote>
+<p>直接修改信息，前面补全协议</p>
+<h3>Token</h3>
+<p>每次请求，都增加一个随机码<sup class="footnote-ref"><a href="#fn-要足够长、随机，不易伪造" id="fnref-要足够长、随机，不易伪造">[要足够长、随机，不易伪造]</a></sup>，后台每次对随机码验证</p>
+<blockquote>/pikachu/vul/csrf/csrftoken/token_get_edit.php?sex=girl&phonenum=12345678922&add=beijing+xxx&email=lucy%40pikachu.com&<mark>token=383626a103a560173a225264938</mark>&submit=</blockquote>
+<p><img src="跨站请求伪造（CSRF）.assets/image-20260522191612978.png" alt="image-20260522191612978" loading="lazy"></p>
+<h3>防范措施</h3>
+<h5>增加token验证(常用的做法)：</h5>
+<p>1，对关键操作增加<mark>token</mark>参数，token值必须<mark>随机</mark>，每次都不一样;</p>
+<h5>关于安全的会话管理(避免会话被利用):</h5>
+<p>1，不要在客户端端保存敏感信息(比如身份认证信息);</p>
+<p>2，测试直接关闭，退出时，会话过期机制</p>
+<p>3，设置<mark>会话过期机制</mark>，比如15分钟内无操作，则自动登录超时</p>
+<h5>访问控制安全管理:</h5>
+<p>1，敏感信息的修改时需要对身份进行<mark>二次认证</mark>，比如修改账号时，需要判断旧密码;</p>
+<p>2，敏感信息的修改使用<mark>post</mark>，而不是get;</p>
+<p>3，通过http头部中的<mark>referer</mark>来限制原页面</p>
+<h5>增加验证码：</h5>
+<p>一般用在登录(防暴力破解)，也可以用在其他重要信息操作的表单中(需要考虑可用性)</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

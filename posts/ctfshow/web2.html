@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>web2 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>web2</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 10 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <p>web2</p>
+<pre><code>js前台拦截 === 无效操作</code></pre>
+<p><strong>永远不要相信前端，所有的验证必须在后端（服务器端）完成。</strong></p>
+<ul>
+<li><strong>有效操作</strong>：后端服务器检查请求头的合法性、验证 Session/Cookie、在数据库层面鉴权等。这些操作用户无法直接修改，因为代码运行在服务器上。</li>
+<li><strong>前端的作用</strong>：只能用于提升用户体验（比如提前提示“密码太短”），绝不能用于安全防御。</li>
+</ul>
+<p><strong>总结一句话：</strong></p>
+<p><strong>在做 CTF 题或真实开发时，不要被页面的 JS 逻辑迷惑，直接看 HTTP 请求和响应，或者去后端找真正的验证逻辑。</strong></p>
+<p>ctrl u也可以看源代码</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

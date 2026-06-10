@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站运作原理 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🌐 Web 基础</span>
+        <h1>网站运作原理</h1>
+        <div class="post-meta">
+          <span>📁 Web 基础</span>
+          <span>📄 32 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>网站运作原理</h1>
+<h3>Web App</h3>
+<p>WebApp(或Web应用程序)运行于网络和标准浏览器上，基于网页技术开发实现特定功能的应用。
+前端:HTML,CSS,JavaScript</p>
+<p>后端:Java，Python,PHP</p>
+<p>数据库:MySQL,Oracle, MongoDB</p>
+<p>容器: Windows(IIS), Linux(Nginx, Apache)</p>
+<p>协议:TCP, DNS, HTTP, HTTPS</p>
+<p><img src="网站运作原理.assets/image-20260509153106249.png" alt="image-20260509153106249" loading="lazy"></p>
+<p>url: https://time.geekbang.org
+浏览器<strong>输入网址到看到网页</strong></p>
+<p>过程：</p>
+<ul>
+<li>客户输入URL，DNS解析URL得出<strong>IP地址</strong>，根据IP地址找出对应<strong>服务器</strong></li>
+<li>客户机通过<strong>TCP/IP协议</strong>建立到Web服务器的TCP链接</li>
+<li>客户机向Web服务器发送<strong>HTTP请求报文</strong>，请求服务器里资源的资源文档</li>
+<li>Web服务器<strong>接收</strong>到客户机的HTTP请求报文，然后向客户机发出<strong>HTTP响应报文</strong></li>
+</ul>
+<table>
+<thead><tr>
+<th style="text-align:left">请求种类</th>
+<th style="text-align:left">对应过程</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">HTML</td>
+<td style="text-align:left">web服务器会将对应目录下相应的<strong>HTML文档打开</strong>，然后将文档的响应内容发送给客户机</td>
+</tr>
+<tr>
+<td style="text-align:left">PHP</td>
+<td style="text-align:left">web服务器自身是不能处理PHP动态语言脚本文件的，然后就会<strong>寻找并委托PHP应用服务器</strong>，PHP应用服务器会将Web服务器请求的PHP文件<strong>解析成HTML静态代码</strong>，然后将HTML静态代码发送给Web服务器，最后Web服务器会将HTML静态代码发送客户机</td>
+</tr>
+<tr>
+<td style="text-align:left">访问数据库</td>
+<td style="text-align:left">Web服务器会通过<strong>PHP应用服务器</strong>去访问数据库</td>
+</tr>
+</tbody>
+</table>
+<p>客户机解析HTML静态文档
+客户机与服务器断开链接</p>
+<h3>常见Web服务器</h3>
+<ul>
+<li>Apache HTTP Server(简称Apache)是一个开放源代码的网页服务器软件，可以在大多数电脑操作系统中运行，由于其<strong>跨平台和安全性</strong>被广泛使用，是最流行的Web服务器软件之一。</li>
+<li>Nginx是一个网页服务器，它能反向代理HTTP, HTTPS, SMTP, POP3, IMAP的议链接，以及一个<strong>负载均衡器和一个HTTP缓存</strong>。Nginx是一款面向性能设计的HTTP服务器，相较于Apache、lighttpd具有占有内存少，稳定性高等优势。</li>
+<li>IIS 微软公司主推的服务器。</li>
+<li>Lighttpd是一个开源Web服务器软件,具有非常低的内存开销、CPU占用率低、效能好以及丰富的模块等特点。</li>
+<li>Tomcat是Apache软件基金会的Jakarta项目中的一个核心项目，由Apache、Sun和其他一些公司及个人共同开发而成。Tomcat技术先进、性能稳定，而且免费，因而深受Java爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web应用服务器。</li>
+</ul>
+<h3>框架</h3>
+<ul>
+<li>Web应用框架是一种开发框架，用来支持动态网站、网络应用程序及网络服务的开发。其类型有<strong>基于请求的和基于组件</strong>的两种框架</li>
+<li>有助于减轻网页开发时共通性活动的工作负荷，例如许多框架提供数据库访问接口、标准样板以及会话管理等，可提升代码的可再用性</li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

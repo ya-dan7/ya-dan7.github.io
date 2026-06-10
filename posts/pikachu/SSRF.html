@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSRF — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>SSRF</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 15 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>SSRF</h1>
+<p>由于服务端<strong>提供了从其他服务器应用获取数据的功能</strong>,但又没有对目标地址做严格过滤与限制</p>
+<p>导致攻击者可以传入任意的地址来让后端服务器对其发起请求,并返回对该目标地址请求的数据</p>
+<p>数据流:攻击者----->服务器---->目标地址</p>
+<p>根据后台使用的函数的不同,对应的影响和利用方法又有不一样</p>
+<pre><code class="language-c++">PHP中下面函数的使用不当会导致SSRF:
+file_get_contents()
+fsockopen()
+curl_exec()</code></pre>
+<p>如果一定要通过后台服务器远程去对用户指定("或者预埋在前端的请求")的地址进行资源请求,<strong>则请做好目标地址的过滤</strong>。</p>
+<h3>curl</h3>
+<p>在URL里把域改成别的网址，对同一个内网里的服务器进行扫描</p>
+<h3>file_get_content</h3>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

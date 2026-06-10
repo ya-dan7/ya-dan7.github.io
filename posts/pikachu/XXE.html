@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XXE — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>XXE</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 28 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>XXE</h1>
+<ol>
+<li>XML声明</li>
+</ol>
+<p><?xml version = "1.0"?></p>
+<ol>
+<li>文档类型定义DTD</li>
+</ol>
+<p>< !DOCTYPE note [ <!--定义此文档是note类型的文档-- ></p>
+<p>< !ENTITY entity-name SYSTEM"URL/URL"> <!--外部实体声明-- ></p>
+<p>]]] ></p>
+<ol>
+<li>文档元素
+   <note>
+   <to>Dave</to>
+   <from>Tom</from></li>
+</ol>
+<p><head>Reminder</head></p>
+<p><body>You are a good man</body>
+   </note></p>
+<ul>
+<li>DTD:Document Type Definition 文档类型定义，用来为XML文档<strong>定义语义约束</strong>。</li>
+</ul>
+<ol>
+<li>DTD内部声明</li>
+</ol>
+<p>< !DOCTYPE 根元素[元素声明] ></p>
+<ol>
+<li>.DTD外部引用</li>
+</ol>
+<p>< !DOCTYPE 根元素名称 SYSTEM "外部DTD的URI" ></p>
+<ol>
+<li>引用公共DTD</li>
+</ol>
+<p>< !DOCTYPE 根元素名称 PUBLIC"DTD标识名“"公用DTD的URI ”></p>
+<p><img src="XXE.assets/image-20260523173515173.png" alt="image-20260523173515173" loading="lazy"></p>
+<p>外部引用可以支持http,file,ftp等协议</p>
+<p>如果一个接口支持接收xmI数据，且没有对xml数据做任何安全上的措施，就可能导致XXE漏洞</p>
+<ul>
+<li>simplexml_load_string()
+  函数转换形式良好的XML 字符串为 SimpleXMLElement对象
+  在PHP里面解析xml用的是libxml,其在≥2.9.0的版本中,默认是禁止解析xml外部实体内容的。
+  XXE漏洞发生在应用程序解析XML输入时，<strong>没有禁止外部实体的加载</strong>，导致攻击者可以构造一个恶意的XML。</li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暴力破解 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🎯 Pikachu靶场</span>
+        <h1>暴力破解</h1>
+        <div class="post-meta">
+          <span>📁 Pikachu靶场</span>
+          <span>📄 47 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>暴力破解</h1>
+<h3>基于表单的暴力破解</h3>
+<p>连续性尝试+字典+自动化</p>
+<ul>
+<li>有效字典：
+  * 常用账号密码（弱口令）
+  * 被脱裤后账号密码
+  * 指定字符使用工具按照指定规则排列组合算法</li>
+<li>存在暴力破解漏洞：
+  * 复杂密码
+  * 安全验证码
+  * 对尝试登录判断和限制
+  * 双因素认证</li>
+<li>测试流程：</li>
+</ul>
+<ol>
+<li>确认登录接口脆弱性</li>
+</ol>
+<p>尝试登录-抓包-观察</p>
+<ol>
+<li>对字典优化</li>
+</ol>
+<p>根据注册提示信息</p>
+<p>管理后台：admin/administrator/root</p>
+<p>xxx/yyy“用户名或密码错误”，admin/yyy“密码错误”，则用户名正确</p>
+<ol>
+<li>工具自动化</li>
+</ol>
+<p>intruder里</p>
+<table>
+<thead><tr>
+<th style="text-align:left">sniper</th>
+<th style="text-align:left">只有一个</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">battering</td>
+<td style="text-align:left">一样</td>
+</tr>
+<tr>
+<td style="text-align:left">pitchfork</td>
+<td style="text-align:left">一一对应</td>
+</tr>
+<tr>
+<td style="text-align:left">cluster bomb attack</td>
+<td style="text-align:left">交叉组合</td>
+</tr>
+</tbody>
+</table>
+<p>可以把username or password is not exists填入setting-grep match排除错误选项</p>
+<p>也可以根据相应包长度</p>
+<h3>验证码绕过</h3>
+<ul>
+<li>on client</li>
+</ul>
+<p>查看网页源代码：JavaScript做的前端提示错误---没有用</p>
+<p>验证码不输入-后台没有提示验证码输入错误</p>
+<ul>
+<li>常见问题：</li>
+</ul>
+<p>使用前端js（纸老虎</p>
+<p>将验证码在cookie泄露，易获取</p>
+<p>验证码在前端源代码泄露</p>
+<ul>
+<li>on server</li>
+<li>常见问题：</li>
+</ul>
+<p>验证码在后台不过期，可长期使用<sup class="footnote-ref"><a href="#fn-同一个验证码多次提及，不提示验证码错误" id="fnref-同一个验证码多次提及，不提示验证码错误">[同一个验证码多次提及，不提示验证码错误]</a></sup></p>
+<p>验证码校验不严格，有逻辑错误</p>
+<p>验证码太简单/有规律</p>
+<h3>防范措施</h3>
+<ul>
+<li>设计安全验证码<sup class="footnote-ref"><a href="#fn-安全流程、复杂可用图形" id="fnref-安全流程、复杂可用图形">[安全流程、复杂可用图形]</a></sup></li>
+<li>对认证错误提交计数并限制</li>
+<li>双因素认证</li>
+</ul>
+<p>token</p>
+<ol>
+<li>将token以“</li>
+</ol>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>web4 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>web4</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 32 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>web4</h1>
+<pre><code>总有人把后台地址写入robots，帮黑阔大佬们引路。</code></pre>
+<h3>robots.txt：</h3>
+<p>一个放在网站根目录下的文本文件。</p>
+<p>作用：告诉互联网上的“爬虫”（搜索引擎的机器人）哪些页面可以抓取，哪些不能。虽然它主要是给机器看的，但人类也可以直接访问它来获取信息。</p>
+<h3>具体操作步骤</h3>
+<p>构造一个 URL 来访问这个文件：</p>
+<ol>
+<li><strong>获取基础网址</strong>： Host 头：<code>fc64e695-f4ae-4cb2-8915-3c0a4abb5be9.challenge.ctf.show</code></li>
+<li><strong>拼接路径</strong>： 在后面加上<code>/robots.txt</code></li>
+</ol>
+<p>完整的 URL 应该是：<code>http://fc64e695-f4ae-4cb2-8915-3c0a4abb5be9.challenge.ctf.show/robots.txt</code></p>
+<ol>
+<li><strong>访问并查看</strong>： 用浏览器打开这个链接，或者用 Burp Suite 重放请求。</li>
+</ol>
+<h3>预期结果</h3>
+<p>你很可能会看到类似这样的内容：</p>
+<pre><code>User-agent: *
+Disallow: /admin/
+Disallow: /login.php
+Disallow: /flag_123456.txt</code></pre>
+<p>或者更直接一点：</p>
+<pre><code>User-agent: *
+Allow: /admin</code></pre>
+<p>这里面提到的 <code>/admin</code>、<code>/login.php</code>等路径，就是出题人留的“礼物”。</p>
+<p>把这些路径拼接到域名后面再去访问，很可能就能找到真正的后台登录框或者 Flag 文件。</p>
+<h3>总结</h3>
+<p><strong>信息收集</strong>题。</p>
+<p>考的是“基础的信息泄露（目录扫描/robots协议）”。</p>
+<p>访问一下那个 <code>robots.txt</code>，如果里面有个路径，就直接去访问那个路径，Flag 大概率就在那里。</p>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

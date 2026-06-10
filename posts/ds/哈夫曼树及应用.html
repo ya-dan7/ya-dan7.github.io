@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哈夫曼树及应用 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">📊 数据结构</span>
+        <h1>哈夫曼树及应用</h1>
+        <div class="post-meta">
+          <span>📁 数据结构</span>
+          <span>📄 34 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>哈夫曼树及应用</h1>
+<p><img src="哈夫曼树及应用.assets/image-20260519172516444.png" alt="image-20260519172516444" loading="lazy"></p>
+<p><img src="哈夫曼树及应用.assets/image-20260519172802610.png" alt="image-20260519172802610" loading="lazy"></p>
+<h3>哈夫曼树的基本概念</h3>
+<ul>
+<li>路径：从树中一个结点到另一个结点之间的<strong>分支</strong>构成这两个结点间的路径</li>
+<li>结点的路径长度：两结点间路径上的<strong>分支数</strong></li>
+</ul>
+<p><img src="哈夫曼树及应用.assets/image-20260519173234918.png" alt="image-20260519173234918" loading="lazy"></p>
+<ul>
+<li>树的路径长度：从树根到每一个结点的路径长度之和<sup class="footnote-ref"><a href="#fn-记作TL" id="fnref-记作TL">[记作TL]</a></sup></li>
+</ul>
+<p><img src="哈夫曼树及应用.assets/image-20260519173436259.png" alt="image-20260519173436259" loading="lazy"></p>
+<p>结点数目相同的二叉树中，完全二叉树是路径长度最短的二叉树<sup class="footnote-ref"><a href="#fn-但不只有完全二叉树" id="fnref-但不只有完全二叉树">[但不只有完全二叉树]</a></sup></p>
+<ul>
+<li>权：将树中结点赋给一个有<strong>含义</strong>的数值，该数值称为<strong>结点的权</strong></li>
+<li>结点的带权路径长度（WPL）：从<strong>根</strong>结点到该结点之间的<strong>路径长度</strong>与该结点的<strong>权</strong>的<strong>乘积</strong></li>
+<li>树的带权路径长度：树中所有<strong>叶子</strong>结点的<strong>带权路径长度之和</strong></li>
+</ul>
+<p>哈夫曼树：带权路径长度最短的树<sup class="footnote-ref"><a href="#fn-度相同" id="fnref-度相同">[度相同]</a></sup></p>
+<ul>
+<li>满二叉树不一定是哈夫曼树</li>
+<li>哈夫曼树中 权越大的叶子 离根越近</li>
+<li>具有相同带权结点的哈夫曼树 不唯一</li>
+</ul>
+<h3>哈夫曼树的构造算法</h3>
+<p>哈夫曼算法</p>
+<ol>
+<li>构造森林全是根</li>
+<li>选用两小造新树</li>
+<li>删除两小添新人</li>
+<li>重复2、3剩单根</li>
+</ol>
+<ul>
+<li>结点度数为0/2</li>
+<li>n个叶子结点的哈夫曼树中共有2n-1个结点<sup class="footnote-ref"><a href="#fn-n-1次合并，多n-1个结点" id="fnref-n-1次合并，多n-1个结点">[n-1次合并，多n-1个结点]</a></sup></li>
+</ul>
+<p><img src="哈夫曼树及应用.assets/image-20260521161829741.png" alt="image-20260521161829741" loading="lazy"></p>
+<h3>哈夫曼树构造算法实现</h3>
+<p>顺序存储结构——一维结构数组</p>
+<pre><code class="language-c++">typedef struct{
+    int weight;
+    int parent,lch,rch;
+}HTNode,*HuffmanTree;</code></pre>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>

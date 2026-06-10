@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>树和二叉树的定义 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">📊 数据结构</span>
+        <h1>树和二叉树的定义</h1>
+        <div class="post-meta">
+          <span>📁 数据结构</span>
+          <span>📄 36 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>树和二叉树的定义</h1>
+<p><img src="树和二叉树的定义.assets/image-20260423110413306.png" alt="" loading="lazy"></p>
+<p><img src="树和二叉树的定义.assets/image-20260423110525640.png" alt="" loading="lazy"></p>
+<hr>
+<h2>树的定义</h2>
+<p><strong>树</strong><sup class="footnote-ref"><a href="#fn-Tree" id="fnref-Tree">[Tree]</a></sup>：n(n>=0)个结点的<strong>有限集</strong>（递归）</p>
+<ul>
+<li>n=0：<strong>空树</strong></li>
+<li>n>0:
+  1. <strong>根</strong>[<sup>Root]的结点：<strong>有且仅有</strong>一个特定的
+  2. 根的<strong>子树[</sup>SubTree]</strong>：<strong>其余结点</strong>可分为m(m>=0)个互不相交的<strong>有限集T1,T2,T3,...,Tm</strong>，其中每一个集合本身又是一棵树<img src="树和二叉树的定义.assets/image-20260423111610461.png" alt="image-20260423111610461" loading="lazy"></li>
+</ul>
+<hr>
+<h2>树的基本术语</h2>
+<p><img src="树和二叉树的定义.assets/image-20260423191253695.png" alt="image-20260423191253695" loading="lazy"></p>
+<ul>
+<li>有序树：树中结点的各子树从左至右有次序</li>
+<li>无序树：树中结点的各子树无次序</li>
+<li>森林：m（m>=0）棵互不相交的树的集合<img src="树和二叉树的定义.assets/image-20260423191859621.png" alt="" loading="lazy">
+  * 把根结点删除，树->森林<sup class="footnote-ref"><a href="#fn-一棵树≈一个特殊的森林" id="fnref-一棵树≈一个特殊的森林">[一棵树≈一个特殊的森林]</a></sup>
+  * 给森林各子树加上一个双亲节点，森林->树</li>
+</ul>
+<h4>树结构和线性结构的比较</h4>
+<table>
+<thead><tr>
+<th style="text-align:left">线性结构</th>
+<th style="text-align:left">树结构</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">第一个数据元素</td>
+<td style="text-align:left">无前驱</td>
+<td style="text-align:left">根结点（只有一个）</td>
+<td style="text-align:left">无双亲</td>
+</tr>
+<tr>
+<td style="text-align:left">最后一个数据元素</td>
+<td style="text-align:left">无后继</td>
+<td style="text-align:left">叶子结点（可以有多个）</td>
+<td style="text-align:left">无孩子</td>
+</tr>
+<tr>
+<td style="text-align:left">其他数据元素</td>
+<td style="text-align:left">一个前驱一个后继</td>
+<td style="text-align:left">其他结点—中间结点</td>
+<td style="text-align:left">一个双亲，多个孩子</td>
+</tr>
+<tr>
+<td style="text-align:left">一对一</td>
+<td style="text-align:left">一对多</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>二叉树的定义</h2>
+<p>n（n>=0）个结点的有限集，是空集（n=0）/一个<strong>根结点</strong>及<strong>两棵互不相交</strong>的<strong>左子树和右子树</strong>的二叉树</p>
+<ul>
+<li>特点：
+  1. 每个结点<strong>最多两个孩子</strong><sup class="footnote-ref"><a href="#fn-不存在度>2的结点" id="fnref-不存在度>2的结点">[不存在度>2的结点]</a></sup>
+  2. 子树<mark><strong>有左右之分</strong></mark>，次序不能颠倒
+  3. 二叉树可以是空集合，根可以有空的左/右子树</li>
+<li>二叉树不是树的特殊情况，他们是两个概念</li>
+<li><img src="树和二叉树的定义.assets/image-20260425191320543.png" alt="image-20260425191320543" loading="lazy"><img src="树和二叉树的定义.assets/image-20260425191408349.png" alt="image-20260425191408349" loading="lazy"></li>
+<li>两层、三层<img src="树和二叉树的定义.assets/image-20260425191619400.png" alt="image-20260425191619400" loading="lazy"><img src="树和二叉树的定义.assets/image-20260425191712822.png" alt="image-20260425191712822" loading="lazy"></li>
+<li>二叉树的五种基本形态<img src="树和二叉树的定义.assets/image-20260425191817446.png" alt="image-20260425191817446" loading="lazy"></li>
+</ul>
+
+      </div>
+    </article>
+  </div>
+</main>
+<footer class="footer">
+  <div class="container">
+    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>
