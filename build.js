@@ -13,7 +13,7 @@ const NOTES_DIR = 'F:/notes/my-personal-notes/n';
 const OUTPUT_DIR = __dirname;
 const POSTS_DIR = path.join(OUTPUT_DIR, 'posts');
 const SITE_TITLE = '📒 笔记博客';
-const SITE_DESC = '数据结构 · Web安全 · CTF · 效率工具';
+const SITE_DESC = '信息安全';
 const CATEGORIES = {
     '基本':     { name: '电脑技巧',   emoji: '🖥️', slug: 'basic' },
     '数据结构': { name: '数据结构',   emoji: '📊', slug: 'ds' },
@@ -397,7 +397,7 @@ function pageTemplate(title, body, depth) {
 </main>
 <footer class="footer">
   <div class="container">
-    <p>📒 个人学习笔记 · Powered by plain HTML & CSS</p>
+    <p>📒 鸭蛋的学习笔记 · Powered by plain HTML & CSS</p>
   </div>
 </footer>
 </body>
@@ -433,7 +433,7 @@ function indexTemplate(body, postCount, catCount) {
 </nav>
 <main class="container">
   <section class="hero">
-    <h1>📒 个人笔记博客</h1>
+    <h1>📒 鸭蛋的笔记博客</h1>
     <p>${SITE_DESC}</p>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">${postCount}</span><span class="stat-label">篇笔记</span></div>
@@ -462,7 +462,7 @@ function indexTemplate(body, postCount, catCount) {
 </main>
 <footer class="footer">
   <div class="container">
-    <p>📒 个人学习笔记 · 最后更新 ${new Date().toLocaleDateString('zh-CN')}</p>
+    <p>📒 鸭蛋的学习笔记 · 最后更新 ${new Date().toLocaleDateString('zh-CN')}</p>
   </div>
 </footer>
 <script>
