@@ -38,8 +38,8 @@
 <h2>数据库基本知识</h2>
 <ul>
 <li>数据库概念</li>
-<li>数据库：按照一定的<strong>数据结构</strong>（数据的组织形式/数据之间的联系）存放计算机数据的仓库，通过数据库提供的多种方法来管理其中的数据
-  * 数据库管理系统（DBMS）：操纵和管理数据库的大型软件，用于<strong>建立、使用、维护数据库</strong>，如MySQL、Oracle、SQL Server</li>
+<li>数据库：按照一定的<strong>数据结构</strong>（数据的组织形式/数据之间的联系）存放计算机数据的仓库，通过数据库提供的多种方法来管理其中的数据</li>
+<li>数据库管理系统（DBMS）：操纵和管理数据库的大型软件，用于<strong>建立、使用、维护数据库</strong>，如MySQL、Oracle、SQL Server</li>
 <li>数据库分类</li>
 <li>关系型数据库（SQL）</li>
 </ul>
@@ -55,9 +55,9 @@
 <li>非关系型数据库（NoSQL、Not Only SQL）</li>
 </ul>
 <ol>
-<li>采用<strong>键值</strong>存储数据（key、value）
-    2. 分布式<sup class="footnote-ref"><a href="#fn-工作内容分给很多人干" id="fnref-工作内容分给很多人干">[工作内容分给很多人干]</a></sup>
-    3. 严格上不是数据库，而是数据结构化存储方法的集合</li>
+<li>采用<strong>键值</strong>存储数据（key、value）</li>
+<li>分布式<sup class="footnote-ref"><a href="#fn-工作内容分给很多人干" id="fnref-工作内容分给很多人干">[工作内容分给很多人干]</a></sup></li>
+<li>严格上不是数据库，而是数据结构化存储方法的集合</li>
 </ol>
 <p>优点：海量数据的维护和处理非常轻松</p>
 <p>缺点：数据之间没有关系，不能保证数据的完整性、安全性</p>
@@ -91,12 +91,12 @@
 <h2>SQL命令基础</h2>
 <ul>
 <li>数据库</li>
-<li>连接数据库：mysql <mark>-u</mark>username <mark>-p</mark>password<mark>;</mark>
-  * 创建数据库：create database 数据库名<mark>;</mark>
-  * 删除数据库：drop database 数据库名<mark>;</mark>
-  * 选择数据库：use 数据库名<mark>;</mark>
-  * 查询系统数据库：show databases<mark>;</mark>
-  * 查看数据库本地存放位置：show variables like '%datadir%'<mark>;</mark></li>
+<li>连接数据库：mysql <mark>-u</mark>username <mark>-p</mark>password<mark>;</mark></li>
+<li>创建数据库：create database 数据库名<mark>;</mark></li>
+<li>删除数据库：drop database 数据库名<mark>;</mark></li>
+<li>选择数据库：use 数据库名<mark>;</mark></li>
+<li>查询系统数据库：show databases<mark>;</mark></li>
+<li>查看数据库本地存放位置：show variables like '%datadir%'<mark>;</mark></li>
 <li>数据类型</li>
 </ul>
 <p>数值类型：</p>
@@ -212,24 +212,24 @@
 <p>select * from users order by id desc；</p>
 <ul>
 <li>常用的数据库常量</li>
-<li>select @@tmpdir查看临时目录
-  * select @@datadir数据存放位置
-  * select @@basedir数据库服务所在位置
-  * select @@version查看版本号
-  * select @@hostname查看当前用户名</li>
+<li>select @@tmpdir查看临时目录</li>
+<li>select @@datadir数据存放位置</li>
+<li>select @@basedir数据库服务所在位置</li>
+<li>select @@version查看版本号</li>
+<li>select @@hostname查看当前用户名</li>
 <li>常用数据库函数</li>
-<li>select char（97）；——返回ASCII码对应的字符
-  * select char（‘a’）；——返回字符对应的ASCII码
-  * select if（1=1,3,2）；——如果逻辑表达式为真，返回1；假，返回2
-  * select mid（‘admin’，1,1）；——截取字符串
-  * select substr（‘admin’，1,1）；——截取字符串
-  * select length（‘aaaaa’）；——返回字符串长度
-  * select left（‘abcdefg’，2）——从左往右截取两个字符
-  * select right（‘abcdefg’，2）——从右往左截取两个字符
-  * user（）——获取登录用户名
-  * version（）——获取当前版本号
-  * database（）——获取当前数据库
-  * sleep（）——休眠</li>
+<li>select char（97）；——返回ASCII码对应的字符</li>
+<li>select char（‘a’）；——返回字符对应的ASCII码</li>
+<li>select if（1=1,3,2）；——如果逻辑表达式为真，返回1；假，返回2</li>
+<li>select mid（‘admin’，1,1）；——截取字符串</li>
+<li>select substr（‘admin’，1,1）；——截取字符串</li>
+<li>select length（‘aaaaa’）；——返回字符串长度</li>
+<li>select left（‘abcdefg’，2）——从左往右截取两个字符</li>
+<li>select right（‘abcdefg’，2）——从右往左截取两个字符</li>
+<li>user（）——获取登录用户名</li>
+<li>version（）——获取当前版本号</li>
+<li>database（）——获取当前数据库</li>
+<li>sleep（）——休眠</li>
 </ul>
 
       </div>

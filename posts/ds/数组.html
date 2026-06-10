@@ -96,16 +96,16 @@
 <li>对称矩阵：</li>
 </ol>
 <ul>
-<li>特点：n*n的矩阵中 a<sub>ij</sub>=a<sub>ji</sub><img src="数组.assets/image-20260421110746956.png" alt="" loading="lazy">
-     * 存储方法：只存储下|上三角[<sup>包括主对角线]，共占用$\frac{n(n+1)}{2}$个元素空间
-     * a<sub>ij</sub>被放到哪里？前面有x个元素[</sup>前面 i-1 行（以行序为主序）+j ]，就被放在数组x下标</li>
+<li>特点：n*n的矩阵中 a<sub>ij</sub>=a<sub>ji</sub><img src="数组.assets/image-20260421110746956.png" alt="" loading="lazy"></li>
+<li>存储方法：只存储下|上三角<sup class="footnote-ref"><a href="#fn-包括主对角线" id="fnref-包括主对角线">[包括主对角线]</a></sup>，共占用$\frac{n(n+1)}{2}$个元素空间</li>
+<li>a<sub>ij</sub>被放到哪里？前面有x个元素<sup class="footnote-ref"><a href="#fn-前面 i-1 行（以行序为主序）+j " id="fnref-前面 i-1 行（以行序为主序）+j ">[前面 i-1 行（以行序为主序）+j ]</a></sup>，就被放在数组x下标</li>
 </ul>
 <ol>
 <li>三角矩阵：</li>
 </ol>
 <ul>
-<li>特点：对角线以下|上的数据元素<sup class="footnote-ref"><a href="#fn-不包括对角线" id="fnref-不包括对角线">[不包括对角线]</a></sup>全部为常数a<img src="数组.assets/image-20260421111853702.png" alt="" loading="lazy">
-     * 存储方法：重复元素c共享一个元素存储空间，共占用$\frac{n(n+1)}{2}$+1个元素空间</li>
+<li>特点：对角线以下|上的数据元素<sup class="footnote-ref"><a href="#fn-不包括对角线" id="fnref-不包括对角线">[不包括对角线]</a></sup>全部为常数a<img src="数组.assets/image-20260421111853702.png" alt="" loading="lazy"></li>
+<li>存储方法：重复元素c共享一个元素存储空间，共占用$\frac{n(n+1)}{2}$+1个元素空间</li>
 </ul>
 <ol>
 <li>对角矩阵：</li>

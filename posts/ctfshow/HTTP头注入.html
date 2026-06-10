@@ -48,13 +48,13 @@
 <ul>
 <li>协议转换：https->http</li>
 <li>密码逻辑：虽然题目源码里有 Base64 字符串 <code>Q1RGe2Vhc3lfYnFzZTYOfQ==</code>，但实际上服务器最后只认 <code>User-Agent</code>，密码反而不是最重要的（或者说这是一个误导项，用来迷惑人的）。</li>
-<li>步骤：
-  * proxy
-  * intercept on
-  * HTTP history找到，右键send to repeater，
-  * User-Agent改为ctf-show-brower，
-  * 最后一行加username=admin&password=CTF%7beasy_base64%7d 
-  * send</li>
+<li>步骤：</li>
+<li>proxy</li>
+<li>intercept on</li>
+<li>HTTP history找到，右键send to repeater，</li>
+<li>User-Agent改为ctf-show-brower，</li>
+<li>最后一行加username=admin&password=CTF%7beasy_base64%7d</li>
+<li>send</li>
 </ul>
 
       </div>

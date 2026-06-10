@@ -271,9 +271,10 @@ function splitListItems(text, regex) {
     const lines = text.split('\n');
     let current = null;
     for (const line of lines) {
-        if (regex.test(line)) {
+        const stripped = line.replace(/^\s+/, '');
+        if (regex.test(stripped)) {
             if (current !== null) items.push(current.trim());
-            current = line.replace(regex, '');
+            current = stripped.replace(regex, '');
         } else if (current !== null && line.trim()) {
             current += '\n' + line;
         }
