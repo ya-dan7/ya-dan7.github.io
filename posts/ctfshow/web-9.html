@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>web 9 — 📒 笔记博客</title>
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <a href="../../index.html" class="nav-brand"><span class="icon">N</span> 笔记博客</a>
+    <ul class="nav-links">
+      <li><a href="../../index.html">首页</a></li>
+      <li><a href="../../index.html#cat-basic">🖥️ 电脑技巧</a></li>
+      <li><a href="../../index.html#cat-ds">📊 数据结构</a></li>
+      <li><a href="../../index.html#cat-web">🌐 Web 基础</a></li>
+      <li><a href="../../index.html#cat-pikachu">🎯 Pikachu靶场</a></li>
+      <li><a href="../../index.html#cat-ctfshow">🚩 CTF 刷题</a></li>
+    </ul>
+  </div>
+</nav>
+<main class="container">
+  <div class="post-page">
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <article>
+      <header class="post-header">
+        <span class="post-cat">🚩 CTF 刷题</span>
+        <h1>web 9</h1>
+        <div class="post-meta">
+          <span>📁 CTF 刷题</span>
+          <span>📄 19 行</span>
+        </div>
+      </header>
+      <div class="post-content">
+        <h1>web 9</h1>
+<p>vim泄露</p>
+<h3>信息收集中的文件泄露</h3>
+<ol>
+<li>robots.txt
+   放在网站的跟目录下，用于<strong>限制浏览器的访问</strong>（哪些可以抓取，哪些不能抓取）用于防止黑客，但是任何人可在url中直接通过<mark>/robots.txt</mark>访问，导致网站结构被泄露。
+   可对admin等重要文件设置<strong>密保保护</strong>，或者采取<strong>更换文件名</strong>的方法防御.</li>
+<li>phps
+   存放着<strong>php源码</strong>,可通过尝试访问<mark>/index.phps</mark>读取,或者尝试<strong>扫描工具</strong>扫描读取.</li>
+<li>git
+   当开发人员使用git控制版本时，如果操作不当，可能导致git流入线上环境，导致.git文件夹下的文件被访问，代码泄露，如<mark>.git/index</mark>文件可找到工程所有文件名和sha1文件,在git/objects下载导致危害</li>
+<li>svn
+   源代码管理系统，在管理代码的过程中，会生成一个.svn的隐藏文件，导致源码泄露<sup class="footnote-ref"><a href="#fn-造成原因是在发布代码时没有使用导入功能，而是直接粘贴复制" id="fnref-造成原因是在发布代码时没有使用导入功能，而是直接粘贴复制">[造成原因是在发布代码时没有使用导入功能，而是直接粘贴复制]</a></sup></li>
+<li>vim
+   在使用vim进行编辑时，会产生缓存文件，操作正常，则会删除缓存文件，如果意外退出，缓存文件保留下来，这是可以通过缓存文件来得到原文件
+   以index.php来说，
+   第一次退出后，缓存文件名为 .index.php.swp，
+   第二次退出后，缓存文件名为.index.php.swo,
+   第三次退出后文件名为.index.php.swn</li>
+<li>压缩文件也可能包含文件的源码等，注意rar zip后缀</li>
+</ol>
+
+      </div>
+    </article>
+  </div>
+</main>
+<div class="ocean-waves"></div>
+<footer class="footer">
+  <div class="container">
+    <p>📒 鸭蛋的学习笔记 · Powered by plain HTML & CSS</p>
+  </div>
+</footer>
+</body>
+</html>
