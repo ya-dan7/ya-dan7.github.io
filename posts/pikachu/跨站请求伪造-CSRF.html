@@ -39,12 +39,11 @@
 <ul>
 <li>判断是否存在CSRF漏洞：
   判断其对关键信息[<sup>比如密码等敏感信息]的操作[</sup>增删改]是否容易被伪造。
-  1. 对目标网站增删改的地方标记，观察逻辑，判断是否可以被伪造
-     > 修改管理员账号不用验证旧密码
-     >
-     > 对敏感信息修改没有使用安全的token验证
-  2. 确认凭证的有效期<sup class="footnote-ref"><a href="#fn-提高CSRF被利用效率" id="fnref-提高CSRF被利用效率">[提高CSRF被利用效率]</a></sup>
-     > 虽然退出关闭浏览器，但Cookie仍然有效，或session没有及时过期，使CSRF简单</li>
+<ol><li>对目标网站增删改的地方标记，观察逻辑，判断是否可以被伪造
+> 修改管理员账号不用验证旧密码
+>
+> 对敏感信息修改没有使用安全的token验证</li><li>确认凭证的有效期<sup class="footnote-ref"><a href="#fn-提高CSRF被利用效率" id="fnref-提高CSRF被利用效率">[提高CSRF被利用效率]</a></sup>
+> 虽然退出关闭浏览器，但Cookie仍然有效，或session没有及时过期，使CSRF简单</li></ol></li>
 <li>与XSS区别：</li>
 </ul>
 <table>

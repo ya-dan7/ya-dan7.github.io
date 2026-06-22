@@ -62,11 +62,16 @@ function mdToHTML(md) {
     let inFence = false, fenceLang = '', fenceBuf = [];
     for (let i = 0; i < rawLines.length; i++) {
         const line = rawLines[i];
-        const fenceMatch = line.match(/^[ \t]*`{3,}(\S*)/);
+        const fenceMatch = line.match(/^([ \t]*(?:[*\-+]|\d+\.)\s+)?[ \t]*`{3,}(\S*)/);
         if (fenceMatch) {
             if (!inFence) {
+                // Emit list marker prefix if present before the fence (e.g. "* ```c++")
+                const prefix = fenceMatch[1] || '';
+                if (prefix.trim()) {
+                    outLines.push(prefix.trimEnd());
+                }
                 inFence = true;
-                fenceLang = fenceMatch[1] || '';
+                fenceLang = fenceMatch[2] || '';
                 fenceBuf = [];
             } else {
                 const idx = codeBlocks.length;
@@ -90,7 +95,7 @@ function mdToHTML(md) {
 
     // ── Step 3: Protect inline code ──
     const inlineCodes = [];
-    md = md.replace(/`([^`]+)`/g, (m, code) => {
+    md = md.replace(/`([^`\n]+)`/g, (m, code) => {
         const idx = inlineCodes.length;
         inlineCodes.push(code);
         return `\x00ICODE${idx}\x00`;
@@ -245,8 +250,8 @@ function mdToHTML(md) {
             case 'p':       html += `<p>${b.content}</p>\n`; break;
             case 'hr':      html += `<hr>\n`; break;
             case 'blockquote': html += `<blockquote>${b.content}</blockquote>\n`; break;
-            case 'ul':      html += `<ul>\n${b.items.map(i => `<li>${i}</li>`).join('\n')}\n</ul>\n`; break;
-            case 'ol':      html += `<ol>\n${b.items.map(i => `<li>${i}</li>`).join('\n')}\n</ol>\n`; break;
+            case 'ul':      html += `<ul>\n${b.items.map(i => `<li>${processNestedLists(i)}</li>`).join('\n')}\n</ul>\n`; break;
+            case 'ol':      html += `<ol>\n${b.items.map(i => `<li>${processNestedLists(i)}</li>`).join('\n')}\n</ol>\n`; break;
             case 'table':
                 html += '<table>\n<thead><tr>\n';
                 html += b.header.map((h, j) => `<th style="text-align:${b.aligns[j] || 'left'}">${processInline(h)}</th>`).join('\n');
@@ -292,7 +297,9 @@ function splitListItems(text, regex) {
     let current = null;
     for (const line of lines) {
         const stripped = line.replace(/^\s+/, '');
-        if (regex.test(stripped)) {
+        // Only treat as a new list item if NOT indented (indented = nested content)
+        const isIndented = /^\s+/.test(line) && line.trim() !== '';
+        if (!isIndented && regex.test(stripped)) {
             if (current !== null) items.push(current.trim());
             current = stripped.replace(regex, '');
         } else if (current !== null && line.trim()) {
@@ -301,6 +308,61 @@ function splitListItems(text, regex) {
     }
     if (current !== null) items.push(current.trim());
     return items;
+}
+
+// Detect and wrap nested lists within list item content (indented 1. or * markers)
+function processNestedLists(text) {
+    if (!text) return text;
+    const lines = text.split('\n');
+    const result = [];
+    let i = 0;
+
+    while (i < lines.length) {
+        const line = lines[i];
+        const isSubOL = /^\s+\d+\.\s+/.test(line);
+        const isSubUL = /^\s+[\*\-+]\s+/.test(line);
+
+        if (isSubOL || isSubUL) {
+            const listTag = isSubOL ? 'ol' : 'ul';
+            const markerRe = isSubOL ? /^\s+\d+\.\s+/ : /^\s+[\*\-+]\s+/;
+            const subItems = [];
+
+            while (i < lines.length) {
+                const l = lines[i];
+                const lTrim = l.trim();
+
+                if ((isSubOL && /^\s+\d+\.\s+/.test(l)) || (isSubUL && /^\s+[\*\-+]\s+/.test(l))) {
+                    subItems.push(l.replace(markerRe, ''));
+                    i++;
+                } else if (lTrim === '') {
+                    // Check if next non-blank line continues the sub-list
+                    let peek = i + 1;
+                    while (peek < lines.length && lines[peek].trim() === '') peek++;
+                    const peekLine = peek < lines.length ? lines[peek] : '';
+                    if ((isSubOL && /^\s+\d+\.\s+/.test(peekLine)) || (isSubUL && /^\s+[\*\-+]\s+/.test(peekLine))) {
+                        i++; // skip blank, sub-list continues
+                    } else {
+                        break;
+                    }
+                } else if (/^\s{2,}/.test(l) && subItems.length > 0) {
+                    // Continuation line for last sub-item
+                    subItems[subItems.length - 1] += '\n' + lTrim;
+                    i++;
+                } else {
+                    break;
+                }
+            }
+
+            if (subItems.length > 0) {
+                result.push(`<${listTag}>` + subItems.map(s => `<li>${s}</li>`).join('') + `</${listTag}>`);
+            }
+        } else {
+            result.push(line);
+            i++;
+        }
+    }
+
+    return result.join('\n');
 }
 
 // Process inline formatting (bold, italic, images, links, etc.)

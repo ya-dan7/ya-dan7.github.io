@@ -57,13 +57,12 @@
 <ul>
 <li>一维数组
   <img src="数组.assets/image-20260419201559596.png" alt="" loading="lazy"></li>
-<li>二维数组</li>
-<li>以行序为主序
-    设数组开始存储位置LOC（0,0），存储每个元素需要L个存储单元
-    数组元素a[i] [j]的存储位置是：LOC（i,j）=LOC(0,0)+(i<em> n+j)</em> L
-    <img src="数组.assets/image-20260419202248280.png" alt="" loading="lazy"></li>
-<li>以列序为主序
-    <img src="数组.assets/image-20260419202433954.png" alt="" loading="lazy"></li>
+<li>二维数组
+<ul><li>以行序为主序
+设数组开始存储位置LOC（0,0），存储每个元素需要L个存储单元
+数组元素a[i] [j]的存储位置是：LOC（i,j）=LOC(0,0)+(i<em> n+j)</em> L
+<img src="数组.assets/image-20260419202248280.png" alt="" loading="lazy"></li><li>以列序为主序
+<img src="数组.assets/image-20260419202433954.png" alt="" loading="lazy"></li></ul></li>
 </ul>
 <p><img src="数组.assets/image-20260419202723792.png" alt="" loading="lazy"></p>
 <ul>
@@ -86,20 +85,16 @@
 <p>​                                    不适宜：<strong>值相同</strong>的元素多 呈规律分布、<strong>零</strong>元素多</p>
 <ul>
 <li>矩阵的压缩存储：为多个相同的非零元素<strong>只分配一个存储空间</strong>、对<strong>零元素不分配空间</strong>
-  ​                      如：对称矩阵、对角矩阵、三角矩阵、稀疏矩阵<sup class="footnote-ref"><a href="#fn-非零元素个数较少（<5%）" id="fnref-非零元素个数较少（<5%）">[非零元素个数较少（<5%）]</a></sup>
-  1. 对称矩阵：</li>
-<li>特点：n*n的矩阵中 a<sub>ij</sub>=a<sub>ji</sub><img src="数组.assets/image-20260421110746956.png" alt="" loading="lazy"></li>
-<li>存储方法：只存储下|上三角<sup class="footnote-ref"><a href="#fn-包括主对角线" id="fnref-包括主对角线">[包括主对角线]</a></sup>，共占用$\frac{n(n+1)}{2}$个元素空间</li>
-<li>a<sub>ij</sub>被放到哪里？前面有x个元素<sup class="footnote-ref"><a href="#fn-前面 i-1 行（以行序为主序）+j " id="fnref-前面 i-1 行（以行序为主序）+j ">[前面 i-1 行（以行序为主序）+j ]</a></sup>，就被放在数组x下标
-  2. 三角矩阵：</li>
-<li>特点：对角线以下|上的数据元素<sup class="footnote-ref"><a href="#fn-不包括对角线" id="fnref-不包括对角线">[不包括对角线]</a></sup>全部为常数a<img src="数组.assets/image-20260421111853702.png" alt="" loading="lazy"></li>
-<li>存储方法：重复元素c共享一个元素存储空间，共占用$\frac{n(n+1)}{2}$+1个元素空间
-  3. 对角矩阵：</li>
-<li>特点：n*n方阵中，所有非零元素都集中在对角线带状区域，区域外全为0<img src="数组.assets/image-20260421112713567.png" alt="" loading="lazy"></li>
-<li>存储方法：以对角线的顺序存储<img src="数组.assets/image-20260421112959752.png" alt="" loading="lazy">
-  4. 稀疏矩阵<sup class="footnote-ref"><a href="#fn-超过95%是零元素" id="fnref-超过95%是零元素">[超过95%是零元素]</a></sup>：</li>
-<li>顺序存储结构
-       1. 三元组顺序表ijv<sup class="footnote-ref"><a href="#fn-有序的双下标法" id="fnref-有序的双下标法">[有序的双下标法]</a></sup><img src="数组.assets/image-20260421150259971.png" alt="image-20260421150259971" loading="lazy"></li>
+  ​                      如：对称矩阵、对角矩阵、三角矩阵、稀疏矩阵[<sup>非零元素个数较少（<5%）]
+<ol><li>对称矩阵：
+<em> 特点：n</em>n的矩阵中 a<sub>ij</sub>=a<sub>ji</sub><img src="数组.assets/image-20260421110746956.png" alt="" loading="lazy">
+* 存储方法：只存储下|上三角[</sup>包括主对角线]，共占用$\frac{n(n+1)}{2}$个元素空间
+* a<sub>ij</sub>被放到哪里？前面有x个元素[<sup>前面 i-1 行（以行序为主序）+j ]，就被放在数组x下标</li><li>三角矩阵： 
+* 特点：对角线以下|上的数据元素[</sup>不包括对角线]全部为常数a<img src="数组.assets/image-20260421111853702.png" alt="" loading="lazy">
+* 存储方法：重复元素c共享一个元素存储空间，共占用$\frac{n(n+1)}{2}$+1个元素空间</li><li>对角矩阵：
+<em> 特点：n</em>n方阵中，所有非零元素都集中在对角线带状区域，区域外全为0<img src="数组.assets/image-20260421112713567.png" alt="" loading="lazy">
+* 存储方法：以对角线的顺序存储<img src="数组.assets/image-20260421112959752.png" alt="" loading="lazy"></li><li>稀疏矩阵[<sup>超过95%是零元素]：
+* 顺序存储结构</li><li>三元组顺序表ijv[</sup>有序的双下标法]<img src="数组.assets/image-20260421150259971.png" alt="image-20260421150259971" loading="lazy"></li></ol></li>
 </ul>
 <table>
 <thead><tr>

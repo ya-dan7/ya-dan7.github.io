@@ -46,38 +46,14 @@
 </ul>
 <h2>Linux常用命令</h2>
 <ul>
-<li>文件处理命令</li>
-<li>ls---显示当前目录下所有文件</li>
-<li>ls -l列表形式展示文件</li>
-<li>ls -a显示所有文件（包括隐藏文件）</li>
-<li>ls -h按字节的形式展示文件大小</li>
-<li>mkdir---创建目录</li>
-<li>mkdir -p递归创建子目录</li>
-<li>cd---切换目录</li>
-<li>cd 目录1 计入目录1文件夹</li>
-<li>cd ..回退到上一级目录</li>
-<li>cd /root相对路径 cd /root/1绝对路径</li>
-<li>touch---创建文件 touch 1.txt</li>
-<li>vi---创建直接写入
-    ESC后输入：/要搜索的---查找
-    ：wq保存退出 ：q不保存退出</li>
-<li>cp---复制文件
-    > cp 1.txt 2.txt
-    >
-    > cp 1.txt 2/</li>
-<li>cp -r递归复制其子目录内所有内容</li>
-<li>mv---剪切文件</li>
-<li>pwd---显示当前目录</li>
-<li>rm---删除文件</li>
-<li>rm -r递归删除<strong>子目录</strong>所有内容</li>
-<li>rm -f<strong>强制</strong>删除</li>
-<li>rm -rf /*删库跑路</li>
-<li>cat---显示文件内容</li>
-<li>cat -n 显示<strong>行号</strong></li>
-<li>tac <strong>逆序</strong>显示文件内容</li>
-<li>more/less 一页一页的 80% 按回车键继续展示</li>
-<li>head -n显示前n行</li>
-<li>tail -n后n行 tail -f动态显示后n行</li>
+<li>文件处理命令
+<ul><li>ls---显示当前目录下所有文件</li><li>ls -l列表形式展示文件</li><li>ls -a显示所有文件（包括隐藏文件）</li><li>ls -h按字节的形式展示文件大小</li><li>mkdir---创建目录</li><li>mkdir -p递归创建子目录</li><li>cd---切换目录</li><li>cd 目录1 计入目录1文件夹</li><li>cd ..回退到上一级目录</li><li>cd /root相对路径 cd /root/1绝对路径</li><li>touch---创建文件 touch 1.txt</li><li>vi---创建直接写入
+ESC后输入：/要搜索的---查找
+：wq保存退出 ：q不保存退出</li><li>cp---复制文件
+> cp 1.txt 2.txt
+>
+> cp 1.txt 2/</li><li>cp -r递归复制其子目录内所有内容</li><li>mv---剪切文件</li><li>pwd---显示当前目录</li><li>rm---删除文件</li><li>rm -r递归删除<strong>子目录</strong>所有内容</li><li>rm -f<strong>强制</strong>删除
+<em> rm -rf /</em>删库跑路</li><li>cat---显示文件内容</li><li>cat -n 显示<strong>行号</strong></li><li>tac <strong>逆序</strong>显示文件内容</li><li>more/less 一页一页的 80% 按回车键继续展示</li><li>head -n显示前n行 </li><li>tail -n后n行 tail -f动态显示后n行</li></ul></li>
 <li>文件搜索命令
   find 查找文件或目录
   find -name
@@ -104,32 +80,30 @@
   chmod -R u+rwx 文件/文件夹（所有者）
   > chmod -R u-r 1/
   chmod -R g+rwx 文件/文件夹（文件所在组）
-  chmod -R o+rwx 文件/文件夹（其他用户）</li>
-<li>授予用户、组、其他人对文件或文件夹可读r可写w可执行x
-    chmod -R +777 文件/文件夹
-    二进制权限：
-    rwx=111=4+2+1=7
-    r-x=101=4+0+1=5
-    rw-=110=4+2+0=6
-    r--=100=4+0+0=4</li>
-<li>压缩解压命令</li>
-<li>gzip 压缩、解压缩<strong>.gz</strong>文件
-    gzip<文件> 压缩文件
-    > gzip 1.txt
-    gunzip/gzip -d<文件> 解压文件
-    > gzip -d 1.txt</li>
-<li>zip 压缩、解压缩<strong>zip</strong>文件<sup class="footnote-ref"><a href="#fn-可以文件夹" id="fnref-可以文件夹">[可以文件夹]</a></sup>
-    zip -r<压缩后文件名><目录> 打包目录
-    > zip -r test.zip test/
-    unzip <zip压缩文件></li>
-<li>tar 打包和压缩目录（保留源文件）
-    tar -zcf<压缩后文件；名><被压缩目录> 打包
-    > tar -zcf 2.tar.gz 2.txt
-    tar -zxvf 压缩包文件名 解压
-    > tar -zxvf 2.tar.gz
-    -f 制定文件名
-    -v 显示详细信息
-    -z 打包/解包的同时压缩/解压（放在选项的前面）</li>
+  chmod -R o+rwx 文件/文件夹（其他用户）
+<ul><li>授予用户、组、其他人对文件或文件夹可读r可写w可执行x
+chmod -R +777 文件/文件夹
+二进制权限：
+rwx=111=4+2+1=7
+r-x=101=4+0+1=5
+rw-=110=4+2+0=6
+r--=100=4+0+0=4</li></ul></li>
+<li>压缩解压命令
+<ul><li>gzip 压缩、解压缩<strong>.gz</strong>文件
+gzip<文件> 压缩文件
+> gzip 1.txt
+gunzip/gzip -d<文件> 解压文件
+> gzip -d 1.txt</li><li>zip 压缩、解压缩<strong>zip</strong>文件<sup class="footnote-ref"><a href="#fn-可以文件夹" id="fnref-可以文件夹">[可以文件夹]</a></sup>
+zip -r<压缩后文件名><目录> 打包目录
+> zip -r test.zip test/
+unzip <zip压缩文件></li><li>tar 打包和压缩目录（保留源文件）
+tar -zcf<压缩后文件；名><被压缩目录> 打包
+> tar -zcf 2.tar.gz 2.txt
+tar -zxvf 压缩包文件名 解压
+> tar -zxvf 2.tar.gz
+-f 制定文件名
+-v 显示详细信息
+-z 打包/解包的同时压缩/解压（放在选项的前面）</li></ul></li>
 <li>网络命令
   ping 测试网络连通性
   > ping baidu.com

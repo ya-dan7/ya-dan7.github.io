@@ -71,16 +71,9 @@
 <p>实体是一个实际情况</p>
 <ul>
 <li><strong>HTTP请求方法</strong>
-  1. GET[<sup>查]：请求指定的<strong>页面信息</strong>，并<strong>返回实体主体</strong>
-  2. POST[</sup>z增]：向指定资源<strong>提交数据</strong>进行<strong>处理请求</strong>(比如提交表单或者上传文件)。<strong>数据被包含在请求体中</strong>。
-     POST请求可能会导致<strong>新的资源的建立或已有资源的修改</strong>。
-  3. HEAD：向服务器索要与GET请求相一致的响应，只不过<strong>响应体将不会被返回</strong>。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。（扫描端口）
-  4. PUT[<sup>增]：向指定资源位置上<strong>传其最新内容</strong>（可用post替代，一般此方法被禁用）
-  5. DELETE[</sup>删]：请求服务器<strong>删除</strong>Request-URL所标识的资源
-  6. OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向Web服务器发送“*”的请求来测试服务器的功能性（设置服务器配置文件把危险方法禁用）
-  7. TRACE：回显服务器收到的请求，主要用于测试或者诊断
-  8. CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器
-     get和post区别</li>
+<ol><li>GET[<sup>查]：请求指定的<strong>页面信息</strong>，并<strong>返回实体主体</strong></li><li>POST[</sup>z增]：向指定资源<strong>提交数据</strong>进行<strong>处理请求</strong>(比如提交表单或者上传文件)。<strong>数据被包含在请求体中</strong>。
+POST请求可能会导致<strong>新的资源的建立或已有资源的修改</strong>。</li><li>HEAD：向服务器索要与GET请求相一致的响应，只不过<strong>响应体将不会被返回</strong>。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。（扫描端口）</li><li>PUT[<sup>增]：向指定资源位置上<strong>传其最新内容</strong>（可用post替代，一般此方法被禁用）</li><li>DELETE[</sup>删]：请求服务器<strong>删除</strong>Request-URL所标识的资源</li><li>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向Web服务器发送“*”的请求来测试服务器的功能性（设置服务器配置文件把危险方法禁用）</li><li>TRACE：回显服务器收到的请求，主要用于测试或者诊断</li><li>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器
+get和post区别</li></ol></li>
 </ul>
 <table>
 <thead><tr>
@@ -422,10 +415,7 @@
 </table>
 <ul>
 <li>URL编码
-  1. URL只能用<strong>ASCII</strong>字符集 通过<strong>因特网</strong>发送
-  2. URL编码只能使用 <strong>% 加两位的十六进制数</strong> 替换非ASCII字符
-  3. URL不能包含空格 用<strong>+替换空格</strong>
-  4. 只有字母和数字[<sup>0-9 a-z A-Z]、一些特殊符号[</sup>$-_.+!'()不包括“”]、某些保留字，才可以<strong>不经过编码</strong>直接用于URL</li>
+<ol><li>URL只能用<strong>ASCII</strong>字符集 通过<strong>因特网</strong>发送</li><li>URL编码只能使用 <strong>% 加两位的十六进制数</strong> 替换非ASCII字符</li><li>URL不能包含空格 用<strong>+替换空格</strong></li><li>只有字母和数字[<sup>0-9 a-z A-Z]、一些特殊符号[</sup>$-_.+!'()不包括“”]、某些保留字，才可以<strong>不经过编码</strong>直接用于URL</li></ol></li>
 <li>同源策略SOP
   同源：<strong>域名、协议、端口号</strong> 相同
   同源策略：浏览器的行为，为了保护<strong>本地数据不被JavaScript代码获取回来的数据污染</strong>
@@ -440,29 +430,23 @@
   Curl不只是一个编程用的函数库，这个命令本身，就是一个无比有用的网站开发工具。
   它支持多种协议
   用于网站开发：
-  1. 查看网页源码
-     直接在curl命令后加上网址，就可以看到网页源码。
-     > 以网址www.sina.com为例
-  2. 显示头信息
-     <code>-i</code>参数可以显示http response的头信息，连同网页代码一起。
-  3. 显示通信过程
-     <code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。
-  4. 发送表单信息
-     发送表单信息有<strong>GET和POST</strong>两种方法。
-     GET方法相对简单，只要把数据附在网址后面就行。
-     >curl example.com/form.cgi?data=xxx
-     POST方法必须把数据和网址分开，curl就要用到--data参数。
-     > curl -X POST --data "data=xxx" example.com/form.cgi
-  如果数据没有经过表单编码，还可以让curl编码，参数是<code>--data-urlencode</code>。
-  5. HTTP动词
-     curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。
-  6. cookie
-     使用<code>--cookie</code>参数，可以让curl发送cookie。
-     > curl --cookie "name=xxx" www.example.com
-  具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。
-  <code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。
-  7. HTTP认证
-     有些网域需要HTTP认证，这时curl需要用到<code>--user</code>参数。</li>
+<ol><li>查看网页源码
+直接在curl命令后加上网址，就可以看到网页源码。
+> 以网址www.sina.com为例</li><li>显示头信息
+<code>-i</code>参数可以显示http response的头信息，连同网页代码一起。</li><li>显示通信过程
+<code>-v</code>参数可以显示一次http通信的整个过程，包括端口连接和http request头信息。</li><li>发送表单信息
+发送表单信息有<strong>GET和POST</strong>两种方法。
+GET方法相对简单，只要把数据附在网址后面就行。
+>curl example.com/form.cgi?data=xxx
+POST方法必须把数据和网址分开，curl就要用到--data参数。
+> curl -X POST --data "data=xxx" example.com/form.cgi
+如果数据没有经过表单编码，还可以让curl编码，参数是<code>--data-urlencode</code>。</li><li>HTTP动词
+curl默认的HTTP动词是GET，使用<code>-X</code>参数可以支持其他动词。</li><li>cookie
+使用<code>--cookie</code>参数，可以让curl发送cookie。
+> curl --cookie "name=xxx" www.example.com
+具体的cookie的值，可以从http response头信息的<code>Set-Cookie</code>字段中得到。
+<code>-c cookie-file</code>可以保存服务器返回的cookie到文件，<code>-b cookie-file</code>可以使用这个文件作为cookie信息，进行后续的请求。</li><li>HTTP认证
+有些网域需要HTTP认证，这时curl需要用到<code>--user</code>参数。</li></ol></li>
 </ul>
 
       </div>

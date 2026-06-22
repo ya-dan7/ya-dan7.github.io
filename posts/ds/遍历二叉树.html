@@ -157,8 +157,7 @@
 <ol>
 <li>将<strong>根结点进队</strong></li>
 <li><strong>队不空</strong>时循环：从队列中<strong>出列一个结点*p</strong>，访问它;
-   * 若它有左孩子结点，将左孩子结点进队;
-   * 若它有右孩子结点，将右孩子结点进队。</li>
+<ul><li>若它有左孩子结点，将左孩子结点进队;</li><li>若它有右孩子结点，将右孩子结点进队。</li></ul></li>
 </ol>
 <p>队列类型定义：</p>
 <pre><code class="language-c++">typedef struct{
@@ -196,9 +195,8 @@
 <h3>二叉树遍历算法的应用——复制二叉树</h3>
 <ul>
 <li>空树：递归结束</li>
-<li>否则，申请新结点空间，复制根结点</li>
-<li>递归复制左子树</li>
-<li>递归复制右子树</li>
+<li>否则，申请新结点空间，复制根结点
+<ul><li>递归复制左子树</li><li>递归复制右子树</li></ul></li>
 </ul>
 <pre><code class="language-c++">int Copy(BiTree T,BiTree &amp;NewT){
     if(T==NULL){//如果是空树，返回0

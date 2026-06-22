@@ -43,26 +43,21 @@
 <p>而在后台开发时并没有对上传的文件功能进行安全考虑或者采用了有缺陷的措施，导致攻击者可以通过一些手段绕过安全措施从而上传一些恶意文件<sup class="footnote-ref"><a href="#fn-如:一句话木马" id="fnref-如:一句话木马">[如:一句话木马]</a></sup>从而通过对该恶意文件的访问来控制整个web后台。</p>
 <ul>
 <li>测试流程
-  1. 对文件上传的地方按要求上传文件，查看返回结果[<sup>路径、提示]
-  2. <strong>尝试</strong>上传不同类型的“恶意”文件[</sup>比如xx.php文件，分析结果]
-  3. 查看<strong>html</strong>源码，看是否通过js在前端做了上传限制，可以绕过
-  4. 尝试不同方式<strong>绕过</strong>：黑白名单绕过/MIME类型绕过/目录0x00截断绕过
-  5. <strong>猜测/结合其他漏洞</strong><sup class="footnote-ref"><a href="#fn-比如敏感信息泄露" id="fnref-比如敏感信息泄露">[比如敏感信息泄露]</a></sup>得到木马路径，连接测试</li>
+<ol><li>对文件上传的地方按要求上传文件，查看返回结果[<sup>路径、提示]</li><li><strong>尝试</strong>上传不同类型的“恶意”文件[</sup>比如xx.php文件，分析结果]</li><li>查看<strong>html</strong>源码，看是否通过js在前端做了上传限制，可以绕过</li><li>尝试不同方式<strong>绕过</strong>：黑白名单绕过/MIME类型绕过/目录0x00截断绕过</li><li><strong>猜测/结合其他漏洞</strong><sup class="footnote-ref"><a href="#fn-比如敏感信息泄露" id="fnref-比如敏感信息泄露">[比如敏感信息泄露]</a></sup>得到木马路径，连接测试</li></ol></li>
 <li>client check
   前端限制，直接删除onchange内容，即可绕过限制</li>
-<li>MIME type</li>
-<li>MIME：多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。
-    每个MIME类型：数据的大类别<sup class="footnote-ref"><a href="#fn-声音audio、图象image等" id="fnref-声音audio、图象image等">[声音audio、图象image等]</a></sup>+定义具体的种类。
-    常见的MIME类型：
-    超文本标记语言文本.html.html text/html
-    普通文本.txt text/plain
-    RTF文本.f application/rtf
-    GIF图形.gif image/gif
-    JPEG图形.ipeg..jpg image/jpeg</li>
-<li>$_FILES()：
-    从客户计算机向远程服务器上传文件。
-    第一个参数是表单的input name，第二个下标可以是"name"，"type","size"，"tmp_name"或
-    error"。</li>
+<li>MIME type
+<ul><li>MIME：多用途互联网邮件扩展类型。是设定某种扩展名的文件用一种应用程序来打开的方式类型，当该扩展名文件被访问的时候，浏览器会自动使用指定应用程序来打开。多用于指定一些客户端自定义的文件名，以及一些媒体文件打开方式。
+每个MIME类型：数据的大类别<sup class="footnote-ref"><a href="#fn-声音audio、图象image等" id="fnref-声音audio、图象image等">[声音audio、图象image等]</a></sup>+定义具体的种类。
+常见的MIME类型：
+超文本标记语言文本.html.html text/html
+普通文本.txt text/plain
+RTF文本.f application/rtf
+GIF图形.gif image/gif
+JPEG图形.ipeg..jpg image/jpeg</li><li>$_FILES()：
+从客户计算机向远程服务器上传文件。
+第一个参数是表单的input name，第二个下标可以是"name"，"type","size"，"tmp_name"或
+error"。</li></ul></li>
 </ul>
 <table>
 <thead><tr>
@@ -101,11 +96,10 @@
 <li>与文件包含漏洞结合
   在文件上传漏洞中制作复合恶意图片，在文件包含漏洞的URL里改成该恶意文件</li>
 <li>防范措施
-  1. 不在前端使用js实施上传限制策略
-  2. 通过服务器对上传文件限制：</li>
-<li>多条件<strong>组合检查</strong><sup class="footnote-ref"><a href="#fn-文件大小、路径、扩展名、文件类型、文件完整性" id="fnref-文件大小、路径、扩展名、文件类型、文件完整性">[文件大小、路径、扩展名、文件类型、文件完整性]</a></sup></li>
-<li>对上传的文件在服务器上存储时进行<strong>重命名</strong><sup class="footnote-ref"><a href="#fn-指定合理命名规则" id="fnref-指定合理命名规则">[指定合理命名规则]</a></sup></li>
-<li>对服务器端上传文件的目录进行<strong>权限控制</strong><sup class="footnote-ref"><a href="#fn-比如只读" id="fnref-比如只读">[比如只读]</a></sup>，限制执行权限带来的危害</li>
+<ol><li>不在前端使用js实施上传限制策略</li><li>通过服务器对上传文件限制：
+* 多条件<strong>组合检查</strong>[<sup>文件大小、路径、扩展名、文件类型、文件完整性]
+* 对上传的文件在服务器上存储时进行<strong>重命名</strong>[</sup>指定合理命名规则]
+* 对服务器端上传文件的目录进行<strong>权限控制</strong><sup class="footnote-ref"><a href="#fn-比如只读" id="fnref-比如只读">[比如只读]</a></sup>，限制执行权限带来的危害</li></ol></li>
 </ul>
 
       </div>

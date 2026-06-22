@@ -30,7 +30,7 @@
         <h1>树和森林</h1>
         <div class="post-meta">
           <span>📁 数据结构</span>
-          <span>📄 123 行</span>
+          <span>📄 119 行</span>
         </div>
       </header>
       <div class="post-content">
@@ -40,60 +40,62 @@
 <p>树(Tree)是n<sup class="footnote-ref"><a href="#fn-n≥0" id="fnref-n≥0">[n≥0]</a></sup>个结点的有限集。</p>
 <ul>
 <li>若n=0：空树</li>
-<li>若n>0：</li>
-<li>有且仅有一个特定的称为<mark>根</mark>(Root)的结点</li>
-<li>其余结点可分为m(m≥0)个互不相交的有限集T1,T2,T3,....Tm，</li>
+<li>若n>0：
+<ul><li>有且仅有一个特定的称为<mark>根</mark>(Root)的结点</li><li>其余结点可分为m(m≥0)个互不相交的有限集T1,T2,T3,...,Tm，</li></ul></li>
 </ul>
 <h3>森林</h3>
 <p><img src="树和森林.assets/image-20260514171032593.png" alt="image-20260514171032593" loading="lazy"></p>
-<p>是m(m≥0)棵互不相交的树的集合。
-### 树的存储结构</p>
-<ol>
-<li>双亲表示法
-   实现:
-   定义结构数组
-   存放树的结点（每个结点含两个域）:
-   * 数据域:存放结点本身信息。
-   * 双亲域:指示本结点的<strong>双亲结点在数组中的位置</strong>。
-   <img src="树和森林.assets/image-20260514171704650.png" alt="image-20260514171704650" loading="lazy"><img src="树和森林.assets/image-20260514171825197.png" alt="image-20260514171825197" loading="lazy"></li>
-</ol>
-<p>r=0，n=10</p>
+<p>是m(m≥0)棵互不相交的树的集合。</p>
+<h3>树的存储结构</h3>
+<h4>1. 双亲表示法</h4>
+<p>实现: 定义结构数组存放树的结点（每个结点含两个域）:</p>
+<ul>
+<li>数据域:存放结点本身信息。</li>
+<li>双亲域:指示本结点的<strong>双亲结点在数组中的位置</strong>。</li>
+</ul>
+<p><img src="树和森林.assets/image-20260514171704650.png" alt="image-20260514171704650" loading="lazy"><img src="树和森林.assets/image-20260514171825197.png" alt="image-20260514171825197" loading="lazy"></p>
+<p>r=0, n=10</p>
 <ul>
 <li>特点：找双亲容易，找孩子难</li>
-<li>``<code>c++
-  typedef struct PTNode{
-      TElemType data;
-      int parent;//双亲位置域
-  }PTNode;
-&lt;!--CODEBLOCK_0--&gt;
-  #define MAX_TREE_SIZE 100
-  typedef struct{
-      PTNode nodes[MAX_TREE_SIZE];
-      int r,n;//根结点的位置和结点个数
-  }PTree;
-&lt;!--CODEBLOCK_1--&gt;
-   typedef struct CTNode{
-       int child;
-       struct CTNode *next;
-   }*ChildPtr;
-&lt;!--CODEBLOCK_2--&gt;
-   typedef struct{
-       TElemType data;
-       ChildPtr firstchild;//孩子链表头指针
-   }CTBox
-&lt;!--CODEBLOCK_3--&gt;
-   typedef struct{
-       CTBox nodes[MAX_TREE_SIZE];
-       int n,r;//结点数、根结点的位置
-   }CTree;
-&lt;!--CODEBLOCK_4--&gt;
-   typedef struct CSNode{
-       ElemType data;
-       struct CSNode *firstchild,*nextsibling;
-   }CSNode,*CSTree;
-</code>``
-   <img src="树和森林.assets/image-20260519161204428.png" alt="image-20260519161204428" loading="lazy"></li>
 </ul>
+<p><strong>结点结构：</strong></p>
+<pre><code class="language-c++">typedef struct PTNode{
+    TElemType data;
+    int parent;//双亲位置域
+}PTNode;</code></pre>
+<p><img src="树和森林.assets/image-20260514172116011.png" alt="image-20260514172116011" loading="lazy"></p>
+<p><strong>树结构：</strong></p>
+<pre><code class="language-c++">#define MAX_TREE_SIZE 100
+typedef struct{
+    PTNode nodes[MAX_TREE_SIZE];
+    int r,n;//根结点的位置和结点个数
+}PTree;</code></pre>
+<h4>2. 孩子链表</h4>
+<p>把每个结点的孩子结点排列起来，看成是一个<strong>线性表</strong>，用单链表存储，则n个结点有n个孩子链表(叶子的孩子链表为空表)。而n个头指针又组成一个线性表，用顺序表(含n个元素的结构数组)存储。</p>
+<p><img src="树和森林.assets/image-20260514172930847.png" alt="image-20260514172930847" loading="lazy"></p>
+<p>孩子结点结构：|child|next|</p>
+<pre><code class="language-c++">typedef struct CTNode{
+    int child;
+    struct CTNode *next;
+}*ChildPtr;</code></pre>
+<p>双亲结点结构：|data|firstchild|</p>
+<pre><code class="language-c++">typedef struct{
+    TElemType data;
+    ChildPtr firstchild;//孩子链表头指针
+}CTBox;</code></pre>
+<p>树结构：</p>
+<pre><code class="language-c++">typedef struct{
+    CTBox nodes[MAX_TREE_SIZE];
+    int n,r;//结点数、根结点的位置
+}CTree;</code></pre>
+<p>特点：找孩子容易，找双亲难</p>
+<h4>3. 孩子兄弟表示法<sup class="footnote-ref"><a href="#fn-二叉树表示法，二叉链表表示法" id="fnref-二叉树表示法，二叉链表表示法">[二叉树表示法，二叉链表表示法]</a></sup></h4>
+<p>实现：用二叉链表作树的存储结构，链表中每个结点的两个指针域分别指向其<mark>第一个孩子结点</mark>和<mark>下一个兄弟结点</mark></p>
+<pre><code class="language-c++">typedef struct CSNode{
+    ElemType data;
+    struct CSNode *firstchild,*nextsibling;
+}CSNode,*CSTree;</code></pre>
+<p><img src="树和森林.assets/image-20260519161204428.png" alt="image-20260519161204428" loading="lazy"></p>
 <h3>树与二叉树的转换</h3>
 <p>树->二叉树，利用二叉树的算法实现对树的操作</p>
 <p>树和二叉树都可以用二叉链表作存储结构：以<mark>二叉链表</mark>作媒介</p>
@@ -101,56 +103,41 @@
 <p>一棵树对应唯一的一棵二叉树</p>
 <ul>
 <li>树->二叉树（<strong>兄弟相连留长子</strong>）
-  1. 加线：在兄弟之间加一连线
-  2. 抹线：对每个结点，除了左孩子外，去除与其余孩子之间的关系
-  3. 旋转：以树的根结点为轴心，将整树顺时针转45°
-     <img src="树和森林.assets/image-20260519163549339.png" alt="image-20260519163549339" loading="lazy"></li>
+<ol><li>加线：在兄弟之间加一连线</li><li>抹线：对每个结点，除了左孩子外，去除与其余孩子之间的关系</li><li>旋转：以树的根结点为轴心，将整树顺时针转45°
+<img src="树和森林.assets/image-20260519163549339.png" alt="image-20260519163549339" loading="lazy"></li></ol></li>
 <li>二叉树->树（左孩右右连双亲，去掉原来右孩线）
-  1. 加线：p结点是双亲结点的左孩子：p的右孩子、右孩子的右孩子……沿分支找到所有的右孩子，都与p的双亲用线连起来
-  2. 抹线：抹掉原二叉树中双亲与右孩子之间的连线
-  3. 调整：将结点按层次排列，形成树结构
-     <img src="树和森林.assets/image-20260519164242658.png" alt="image-20260519164242658" loading="lazy"></li>
+<ol><li>加线：p结点是双亲结点的左孩子：p的右孩子、右孩子的右孩子……沿分支找到所有的右孩子，都与p的双亲用线连起来</li><li>抹线：抹掉原二叉树中双亲与右孩子之间的连线</li><li>调整：将结点按层次排列，形成树结构
+<img src="树和森林.assets/image-20260519164242658.png" alt="image-20260519164242658" loading="lazy"></li></ol></li>
 </ul>
 <h3>森林与二叉树的转换</h3>
 <ul>
 <li>森林->二叉树（树变二叉根相连）
-  1. 各棵树->二叉树
-  2. 每棵树的根结点用线相连
-  3. 以第一棵树根结点为二叉树的根，再以根结点为轴心，顺时针旋转，构成二叉树型结构
-     <img src="树和森林.assets/image-20260519165406944.png" alt="image-20260519165406944" loading="lazy"></li>
+<ol><li>各棵树->二叉树</li><li>每棵树的根结点用线相连</li><li>以第一棵树根结点为二叉树的根，再以根结点为轴心，顺时针旋转，构成二叉树型结构
+<img src="树和森林.assets/image-20260519165406944.png" alt="image-20260519165406944" loading="lazy"></li></ol></li>
 <li>二叉树->森林（去掉全部右孩线，孤立二叉再还原）
-  1. 抹线：将二叉树中根结点与右孩子连线，及沿右分支搜索到的所有右孩子间连线全部抹掉，变成孤立的二叉树
-  2. 还原：孤立的二叉树还原成树
-     <img src="树和森林.assets/image-20260519170012247.png" alt="image-20260519170012247" loading="lazy"></li>
+<ol><li>抹线：将二叉树中根结点与右孩子连线，及沿右分支搜索到的所有右孩子间连线全部抹掉，变成孤立的二叉树</li><li>还原：孤立的二叉树还原成树
+<img src="树和森林.assets/image-20260519170012247.png" alt="image-20260519170012247" loading="lazy"></li></ol></li>
 </ul>
 <h3>树和森林的遍历</h3>
 <ol>
 <li>树的遍历（三种方式）
-   * 先根（次序）遍历：
-     树不空：先访问根结点，然后依次先根遍历各棵子树
-   *  后根遍历：
-     树不空：先依次后根遍历各棵子树，然后访问根结点
-   * 层次遍历：
-     树不空：自上而下自左而右访问树中每个结点
-     <img src="树和森林.assets/image-20260519171253934.png" alt="image-20260519171253934" loading="lazy"></li>
+<ul><li>先根（次序）遍历：
+树不空：先访问根结点，然后依次先根遍历各棵子树</li><li>后根遍历：
+树不空：先依次后根遍历各棵子树，然后访问根结点</li><li>层次遍历：
+树不空：自上而下自左而右访问树中每个结点
+<img src="树和森林.assets/image-20260519171253934.png" alt="image-20260519171253934" loading="lazy"></li></ul></li>
 <li>森林的遍历
-   把森林看作三部分：
-   * 第一棵树的根结点
-   * 第一棵树的子树森林
-   * 其他树构成的森林
-     <img src="树和森林.assets/image-20260519171313792.png" alt="image-20260519171313792" loading="lazy">
-     * 先序遍历：
-       森林不空：</li>
-<li>访问森林中第一棵树的根结点</li>
-<li><strong>先序遍历</strong>森林中第一棵树的子树森林</li>
-<li><strong>先序遍历</strong>森林中其余树构成的森林
-          依次从左至右对森林中每一棵树进行先根遍历
-     * 中序遍历：
-       森林不空：</li>
-<li><strong>中序遍历</strong>森林中第一棵树的子树森林</li>
-<li>访问森林中第一棵树的根结点</li>
-<li><strong>中序遍历</strong>森林中其余树构成的森林
-          依次从左至右对森林中每一棵树进行后根遍历</li>
+    把森林看作三部分：
+<ul><li>第一棵树的根结点</li><li>第一棵树的子树森林</li><li>其他树构成的森林
+<img src="树和森林.assets/image-20260519171313792.png" alt="image-20260519171313792" loading="lazy"></li><li><strong>先序遍历</strong> — 森林不空：
+1. 访问森林中第一棵树的根结点<br>
+2. <strong>先序遍历</strong>森林中第一棵树的子树森林<br>
+3. <strong>先序遍历</strong>森林中其余树构成的森林
+（依次从左至右对森林中每一棵树进行先根遍历）</li><li><strong>中序遍历</strong> — 森林不空：
+1. <strong>中序遍历</strong>森林中第一棵树的子树森林<br>
+2. 访问森林中第一棵树的根结点<br>
+3. <strong>中序遍历</strong>森林中其余树构成的森林
+（依次从左至右对森林中每一棵树进行后根遍历）</li></ul></li>
 </ol>
 
       </div>
